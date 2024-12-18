@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import Markdown from "react-markdown";
 import readingTime from "reading-time";
 
-export default function Page({ params }: { params: { slug: string}}){
+export default function Page({ params }: { params: Promise<{ slug: string}> }){
     const [slug, setSlug] = useState<string>('')
     const [post, setPost] = useState<Post | null>(null)
 
