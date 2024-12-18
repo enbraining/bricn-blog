@@ -5,7 +5,7 @@ import fs from 'fs';
 import matter from 'gray-matter';
 import path from 'path';
 
-const postsDirectory = path.join(process.cwd(), 'posts');
+const postsDirectory = path.join(process.cwd(), 'public/posts');
 
 export async function getPost(slug: string){
     const allPosts = await getAllPosts()
