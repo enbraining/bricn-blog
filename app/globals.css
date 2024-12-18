@@ -19,3 +19,24 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.markdown-content h1, h2, h3, h4 {
+    font-weight: 500;
+    margin: 1rem 0;
+}
+
+.markdown-content h1 {
+    font-size: xx-large;
+}
+
+.markdown-content h2 {
+    font-size: x-large;
+}
+
+.markdown-content h3 {
+    font-size: larger;
+}
+
+.markdown-content h4 {
+    font-size: large;
+}

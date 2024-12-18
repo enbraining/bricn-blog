@@ -1,7 +1,7 @@
 import { IconAt, IconBriefcase, IconSchool } from '@tabler/icons-react';
-import ExternalLink from './components/ExternalLink';
+import LineLink from '../components/LineLink';
 
-export default function Home() {
+export default function Page() {
   return (
         <div className="text-2xl">
             <div className="flex items-center gap-x-3 mb-5">
@@ -28,8 +28,10 @@ export default function Home() {
                     </div>
                 </li>
             </ul>
-            <div className='mt-3'>
-                <ExternalLink href={'/profile'}>자세히 보기</ExternalLink>
+            <div className='mt-10 grid gap-y-2'>
+                <LineLink type='GITHUB' href={'https://github.com/enbraining'}>Github</LineLink>
+                <LineLink type='LINKEDIN' href={'https://linkedin.com/in/enbraining'}>LinkedIn</LineLink>
+                <LineLink type='SOLVEDAC' href={'https://solved.ac/profile/enbraining'}>Solved.ac</LineLink>
             </div>
         </div>
   );
