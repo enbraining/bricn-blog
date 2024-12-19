@@ -1,6 +1,6 @@
 export function getFourMonthsAgoMonday(): Date {
     const now = new Date();
-    now.setMonth(now.getMonth() - 6);
+    now.setMonth(now.getMonth() - 12);
 
     const firstDayOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
 

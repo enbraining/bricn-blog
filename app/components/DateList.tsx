@@ -10,12 +10,12 @@ export const DateList = () => {
   const dates = getDatesBetween(startDate, today);
 
   return (
-    <div className="grid grid-flow-col w-fit grid-rows-7 gap-1">
+    <div className="grid grid-flow-col w-fit grid-rows-7 gap-[0.2rem]">
       {dates.map((date, index) => {
         const hasPost = posts.some((post: Post) => post.date.slice(0, 10) == date.slice(0, 10));
         return (
           <div key={index}>
-            {hasPost ? <div className="bg-blue-600 w-4 h-4 rounded-sm" /> : <div className="bg-neutral-300 w-4 h-4 rounded-sm" />}
+            {hasPost ? <div className="bg-blue-600 w-[0.75rem] h-[0.75rem] rounded-sm" /> : <div className="border bg-neutral-100 w-[0.75rem] h-[0.75rem] rounded-sm" />}
           </div>
         );
       })}
