@@ -10,6 +10,7 @@
         "lint": "next lint"
     },
     "dependencies": {
+        "@giscus/react": "^3.0.0",
         "@tabler/icons-react": "^3.26.0",
         "@types/styled-components": "^5.1.34",
         "contentlayer": "^0.3.4",

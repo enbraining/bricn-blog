@@ -1,5 +1,6 @@
 "use client"
 
+import GiscusComment from "@/app/components/GiscusComment";
 import { IconCalendarWeek, IconStopwatch } from "@tabler/icons-react";
 import { allPosts, Post } from 'contentlayer/generated';
 import dayjs from "dayjs";
@@ -59,6 +60,7 @@ export default function Page({ params }: { params: Promise<{ slug: string}> }){
                 className={"markdown-content"}>
                     {post?.body.raw || ""}
             </Markdown>
+            <GiscusComment />
         </div>
     )
 }
