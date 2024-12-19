@@ -42,7 +42,7 @@ export default function Page({ params }: { params: Promise<{ slug: string}> }){
             <h1 className="text-4xl font-medium text-neutral-700 mb-12">{post?.title}</h1>
             <Markdown
                 components={{
-                    code({ node, inline, className, children, ...props }) {
+                    code({ inline, className, children, ...props }) {
                       const match = /language-(\w+)/.exec(className || '');
                       return !inline && match ? (
                         <SyntaxHighlighter {...props} language={match[1]} PreTag="div">
