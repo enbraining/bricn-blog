@@ -13,7 +13,7 @@ export default function Page(){
             <ul className="space-y-4">
             {
                 posts.map((post: Post) =>
-                    <li key={post.slug}>
+                    <li key={post.url}>
                         <Link href={post.url}>
                             <div className="flex gap-x-8">
                                 <div className="flex gap-x-1 items-center text-neutral-600">
@@ -22,7 +22,7 @@ export default function Page(){
                                 </div>
                                 <div className="flex gap-x-1 items-center text-neutral-600">
                                     <IconStopwatch size={18} stroke={2} />
-                                    <p>{`${readingTime(post.body.raw.length).minutes + 1 | 0}분`}</p>
+                                    <p>{`${readingTime(post.body.raw || "").minutes + 1 | 0}분`}</p>
                                 </div>
                             </div>
                             <h1 className="text-xl font-medium text-neutral-700">{post.title}</h1>
