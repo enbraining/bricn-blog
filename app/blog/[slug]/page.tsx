@@ -44,20 +44,33 @@ export default function Page({ params }: { params: Promise<{ slug: string}> }){
             <Markdown
                 components={{
                     code({ inline, className, children, ...props }) {
-                      const match = /language-(\w+)/.exec(className || '');
-                      return !inline && match ? (
-                        <SyntaxHighlighter {...props} language={match[1]} PreTag="div">
-                          {String(children).replace(/\n$/, '')}
+                    const match = /language-(\w+)/.exec(className || '');
+
+                    if (!inline && match) {
+                        return (
+                        <SyntaxHighlighter
+                            {...props}
+                            language={match[1]}
+                            PreTag="div"
+                        >
+                            {String(children).replace(/\n$/, '')}
                         </SyntaxHighlighter>
-                      ) : (
-                        <code {...props} className={className}>
-                          {children}
+                        );
+                    } else {
+                        return (
+                        <code
+                            {...props}
+                            className={`${className || ''} inline-code text-[#905]`}
+                        >
+                            {children}
                         </code>
-                      );
+                        );
+                    }
                     },
-                  }}
+                }}
                 remarkPlugins={[gfm]}
-                className={"markdown-content"}>
+                className="markdown-content"
+            >
                     {post?.body.raw || ""}
             </Markdown>
             <GiscusComment />

@@ -18,7 +18,7 @@ export default function Page(){
                 posts.map((post: Post) =>
                     <li key={post.url}>
                         <Link href={post.url}>
-                            <div className="flex gap-x-8">
+                            <div className="flex gap-x-4">
                                 <div className="flex gap-x-1 items-center text-neutral-600">
                                     <IconCalendarWeek size={18} stroke={2} />
                                     <p>{dayjs(post.date).format('YYYY년 MM월 DD일')}</p>
@@ -28,7 +28,7 @@ export default function Page(){
                                     <p>{`${readingTime(post.body.raw || "").minutes + 1 | 0}분`}</p>
                                 </div>
                             </div>
-                            <h1 className="text-xl font-medium text-neutral-700">{post.title}</h1>
+                            <h1 className="text-xl text-neutral-700">{post.title}</h1>
                         </Link>
                     </li>
                 )
