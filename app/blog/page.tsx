@@ -6,7 +6,10 @@ import Link from "next/link";
 import readingTime from "reading-time";
 
 export default function Page(){
-    const posts = allPosts
+    const posts = allPosts.sort((a: Post, b: Post) => {
+        if (a.date > b.date) return -1;
+        else return 1;
+    })
 
     return (
         <div>

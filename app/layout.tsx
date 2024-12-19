@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import LocalFont from "next/font/local";
+import Footer from "./components/Footer";
 import Header from "./components/Header";
 import "./globals.css";
 
@@ -23,8 +24,11 @@ export default function RootLayout({
         className={`antialiased ${localFont.className}`}
       >
         <div className='lg:mx-[12rem] md:mx-[6rem] mx-[1rem]'>
-            <Header />
-            {children}
+            <div className="min-h-[92vh]">
+                <Header />
+                {children}
+            </div>
+            <Footer />
         </div>
       </body>
     </html>

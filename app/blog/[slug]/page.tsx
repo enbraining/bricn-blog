@@ -5,7 +5,10 @@ import { allPosts, Post } from 'contentlayer/generated';
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 import Markdown from "react-markdown";
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { white } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import readingTime from "reading-time";
+import gfm from 'remark-gfm';
 
 export default function Page({ params }: { params: Promise<{ slug: string}> }){
     const [slug, setSlug] = useState<string>('')
@@ -21,8 +24,8 @@ export default function Page({ params }: { params: Promise<{ slug: string}> }){
 
     useEffect(() => {
         if (!slug) return;
-
-        setPost(allPosts.find((post: Post) => post.url.replace(/^\/blog\//, "") === slug))
+        const fetchPost = allPosts.find((post: Post) => post.url.replace(/^\/blog\//, "") === slug)
+        setPost(fetchPost)
     }, [slug]);
 
     return (
@@ -38,7 +41,27 @@ export default function Page({ params }: { params: Promise<{ slug: string}> }){
                 </div>
             </div>
             <h1 className="text-4xl font-medium text-neutral-700 mb-12">{post?.title}</h1>
-            <Markdown className={"markdown-content"}>{post?.body.raw || ""}</Markdown>
+            <Markdown
+                components={{
+                    code({ node, inline, className, children, ...props }) {
+                      const match = /language-(\w+)/.exec(className || '');
+                      return !inline && match ? (
+                        // !inline && match 조건에 맞으면 하이라이팅
+                        <SyntaxHighlighter {...props} style={white} language={match[1]} PreTag="div">
+                          {String(children).replace(/\n$/, '')}
+                        </SyntaxHighlighter>
+                      ) : (
+                        // 안 맞다면 문자열 형태로 반환
+                        <code {...props} className={className}>
+                          {children}
+                        </code>
+                      );
+                    },
+                  }}
+                remarkPlugins={[gfm]}
+                className={"markdown-content"}>
+                    {post?.body.raw || ""}
+            </Markdown>
         </div>
     )
 }

@@ -1,5 +1,5 @@
 import { IconSun } from '@tabler/icons-react';
-import Link from 'next/link';
+import HoverLink from './HoverLink';
 
 export default function Header(){
     return (
@@ -12,15 +12,4 @@ export default function Header(){
             </div>
         </header>
     )
-}
-
-function HoverLink({ href, children }: { href: string; children: React.ReactNode }) {
-    return (
-        <Link
-            href={href}
-            className="text-start text-base hover:text-neutral-900 text-neutral-500"
-        >
-            {children}
-        </Link>
-    );
 }
