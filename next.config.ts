@@ -4,6 +4,9 @@ import { withContentlayer } from 'next-contentlayer';
 const nextConfig: NextConfig = {
   outputFileTracingExcludes: {
     "*": ["./public/posts/**/*"]
+  },
+  compiler: {
+    styledComponents: true
   }
 };
 

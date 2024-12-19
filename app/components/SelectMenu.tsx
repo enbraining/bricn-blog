@@ -5,6 +5,6 @@ export default function SelectMenu({ children, setMenu, menu, initialMenu }: {
     setMenu: (type: "LINK" | "CERTIFICATION") => void }
 ) {
     return (
-        <div className={`border-b py-2 bg-white ${menu == initialMenu ? 'bg-[#ddd] border-neutral-400' : 'hover:bg-neutral-100 hover:border-neutral-300'}`} onClick={() => setMenu(initialMenu)}>{children}</div>
+        <div className={`border-b py-2 ${menu === initialMenu ? 'bg-neutral-200 border-neutral-400' : 'hover:bg-neutral-100 bg-white border-neutral-200'}`} onClick={() => setMenu(initialMenu)}>{children}</div>
     )
 }
