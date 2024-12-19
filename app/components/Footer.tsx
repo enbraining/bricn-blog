@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import HoverLink from './HoverLink';
 
 export default function Footer(){

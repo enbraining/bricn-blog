@@ -66,6 +66,9 @@ importers:
       '@types/react-dom':
         specifier: ^19
         version: 19.0.2(@types/react@19.0.1)
+      '@types/react-syntax-highlighter':
+        specifier: ^15.5.13
+        version: 15.5.13
       eslint:
         specifier: ^9
         version: 9.17.0(jiti@1.21.7)
@@ -795,6 +798,9 @@ packages:
     resolution: {integrity: sha512-c1s+7TKFaDRRxr1TxccIX2u7sfCnc3RxkVyBIUA2lCpyqCF+QoAwQ/CBg7bsMdVwP120HEH143VQezKtef5nCg==}
     peerDependencies:
       '@types/react': ^19.0.0
+
+  '@types/react-syntax-highlighter@15.5.13':
+    resolution: {integrity: sha512-uLGJ87j6Sz8UaBAooU0T6lWJ0dBmjZgN1PZTrj05TNql2/XpC6+4HhMT5syIdFUUt+FASfCeLLv4kBygNU+8qA==}
 
   '@types/react@19.0.1':
     resolution: {integrity: sha512-YW6614BDhqbpR5KtUYzTA+zlA7nayzJRA9ljz9CQoxthR0sDisYZLuvSMsil36t4EH/uAt8T52Xb4sVw17G+SQ==}
@@ -3665,6 +3671,10 @@ snapshots:
   '@types/parse5@6.0.3': {}
 
   '@types/react-dom@19.0.2(@types/react@19.0.1)':
+    dependencies:
+      '@types/react': 19.0.1
+
+  '@types/react-syntax-highlighter@15.5.13':
     dependencies:
       '@types/react': 19.0.1
 

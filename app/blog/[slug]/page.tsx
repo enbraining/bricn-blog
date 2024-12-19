@@ -6,7 +6,6 @@ import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 import Markdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { white } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import readingTime from "reading-time";
 import gfm from 'remark-gfm';
 
@@ -46,12 +45,10 @@ export default function Page({ params }: { params: Promise<{ slug: string}> }){
                     code({ node, inline, className, children, ...props }) {
                       const match = /language-(\w+)/.exec(className || '');
                       return !inline && match ? (
-                        // !inline && match 조건에 맞으면 하이라이팅
-                        <SyntaxHighlighter {...props} style={white} language={match[1]} PreTag="div">
+                        <SyntaxHighlighter {...props} language={match[1]} PreTag="div">
                           {String(children).replace(/\n$/, '')}
                         </SyntaxHighlighter>
                       ) : (
-                        // 안 맞다면 문자열 형태로 반환
                         <code {...props} className={className}>
                           {children}
                         </code>
