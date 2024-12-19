@@ -1,4 +1,5 @@
 import { IconAt, IconBriefcase, IconSchool } from '@tabler/icons-react';
+import { DateList } from './components/DateList';
 import ExternalLink from './components/ExternalLink';
 
 export default function Home() {
@@ -30,6 +31,9 @@ export default function Home() {
             </ul>
             <div className='mt-3'>
                 <ExternalLink href={'/profile'}>자세히 보기</ExternalLink>
+            </div>
+            <div className='mt-8 border p-4 rounded-sm bg-neutral-50'>
+                <DateList />
             </div>
         </div>
   );
