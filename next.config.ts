@@ -1,7 +1,11 @@
 import type { NextConfig } from "next";
+import { withContentlayer } from 'next-contentlayer';
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  outputFileTracingExcludes: {
+    "*": ["./public/posts/**/*"]
+  }
 };
 
-export default nextConfig;
+const wrappedConfig = withContentlayer(nextConfig);
+export default wrappedConfig;

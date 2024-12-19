@@ -1,31 +1,20 @@
-"use client"
-
-import { getAllPosts } from "@/lib/posts";
 import { IconCalendarWeek, IconStopwatch } from '@tabler/icons-react';
 
+import { allPosts, Post } from 'contentlayer/generated';
 import dayjs from "dayjs";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import readingTime from "reading-time";
-import { Post } from "../type/post";
 
 export default function Page(){
-    const [posts, setPosts] = useState<Post[]>([])
-
-    useEffect(() => {
-        const fetchPosts = async () => {
-            setPosts(await getAllPosts())
-        }
-        fetchPosts()
-    }, [])
+    const posts = allPosts
 
     return (
         <div>
             <ul className="space-y-4">
             {
-                posts.map((post) =>
+                posts.map((post: Post) =>
                     <li key={post.slug}>
-                        <Link href={`/blog/${post.slug}`}>
+                        <Link href={post.url}>
                             <div className="flex gap-x-8">
                                 <div className="flex gap-x-1 items-center text-neutral-600">
                                     <IconCalendarWeek size={18} stroke={2} />
@@ -33,7 +22,7 @@ export default function Page(){
                                 </div>
                                 <div className="flex gap-x-1 items-center text-neutral-600">
                                     <IconStopwatch size={18} stroke={2} />
-                                    <p>{`${readingTime(post.content).minutes + 1 | 0}분`}</p>
+                                    <p>{`${readingTime(post.body.raw.length).minutes + 1 | 0}분`}</p>
                                 </div>
                             </div>
                             <h1 className="text-xl font-medium text-neutral-700">{post.title}</h1>

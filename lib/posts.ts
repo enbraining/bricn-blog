@@ -1,11 +1,9 @@
 "use server"
 
 import { Post } from '@/app/type/post';
-import fs from 'fs';
+import { promises as fs } from 'fs';
 import matter from 'gray-matter';
 import path from 'path';
-
-const postsDirectory = path.join(process.cwd(), 'public/posts');
 
 export async function getPost(slug: string){
     const allPosts = await getAllPosts()
@@ -13,12 +11,12 @@ export async function getPost(slug: string){
 }
 
 export async function getAllPosts() {
-  const fileNames = fs.readdirSync(postsDirectory);
+  const fileNames = await fs.readdir('/public/posts');
 
-  return fileNames.map((fileName) => {
+  return await Promise.all(fileNames.map(async (fileName) => {
     const slug = fileName.replace(/\.md$/, '');
-    const filePath = path.join(postsDirectory, fileName);
-    const fileContents = fs.readFileSync(filePath, 'utf8');
+    const filePath = path.join('./public/posts', fileName)
+    const fileContents = await fs.readFile(filePath, 'utf8');
     const { data, content } = matter(fileContents);
 
     return {
@@ -26,5 +24,5 @@ export async function getAllPosts() {
       ...data,
       content,
     };
-  }) as Post[];
+  })) as Post[];
 }
