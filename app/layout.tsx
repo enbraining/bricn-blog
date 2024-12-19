@@ -23,7 +23,7 @@ export default function RootLayout({
       <body
         className={`antialiased ${localFont.className}`}
       >
-        <div className='lg:mx-[12rem] md:mx-[6rem] mx-[1rem]'>
+        <div className='lg:mx-[16rem] md:mx-[6rem] mx-[1rem]'>
             <div className="min-h-[92vh]">
                 <Header />
                 {children}
