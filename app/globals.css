@@ -3,55 +3,86 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+	--background: #ffffff;
+	--foreground: #171717;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+	color: var(--foreground);
+	background: var(--background);
+	font-family: Arial, Helvetica, sans-serif;
 }
 
 .markdown-content {
-    overflow-wrap: break-word;
+	overflow-wrap: break-word;
 }
 
-.markdown-content h1, h2, h3, h4 {
-    font-weight: 500;
-    margin: 1rem 0;
+.markdown-content ul {
+	list-style-type: disc;
+	margin: 1rem 0;
+	list-style-position: inside;
+}
+
+.markdown-content a {
+	padding: 0.25rem 0;
+	display: inline-block;
+	color: #222288;
+	text-underline-position: above;
+}
+
+.markdown-content p {
+	margin-bottom: 1rem;
+}
+
+.markdown-content blockquote p {
+	margin-bottom: 0;
+}
+
+.markdown-content blockquote {
+	background-color: #f0f0f0;
+	padding: 1rem;
+	margin: 1rem 0;
+	border-radius: 0.25rem;
+}
+
+.markdown-content h1,
+h2,
+h3,
+h4 {
+	font-weight: 500;
+	margin: 3rem 0 1rem 0;
 }
 
 .markdown-content h1 {
-    font-size: xx-large;
+	font-size: xx-large;
 }
 
 .markdown-content h2 {
-    font-size: x-large;
+	font-size: x-large;
 }
 
 .markdown-content h3 {
-    font-size: larger;
+	font-size: larger;
 }
 
 .markdown-content h4 {
-    font-size: large;
+	font-size: large;
 }
 
 @media screen and (max-width: 768px) {
-    .markdown-content h1 {
-        font-size: large;
-    }
+	.markdown-content h1 {
+		font-size: large;
+	}
 
-    .markdown-content h2 {
-        font-size: medium;
-    }
+	.markdown-content h2 {
+		font-size: medium;
+	}
 
-    .markdown-content h3 {
-        font-size: smaller;
-    }
+	.markdown-content h3 {
+		font-size: smaller;
+	}
 
-    .markdown-content h4 {
-        font-size: small;
-    }
+	.markdown-content h4 {
+		font-size: small;
+	}
 }
