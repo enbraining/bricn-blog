@@ -1,7 +1,6 @@
 import { IconCalendarWeek, IconStopwatch } from "@tabler/icons-react";
 
 import { Post, allPosts } from "contentlayer/generated";
-import dayjs from "dayjs";
 import Link from "next/link";
 import readingTime from "reading-time";
 import { formatYearMonthDay } from "../lib/date";
