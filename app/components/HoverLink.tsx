@@ -7,7 +7,7 @@ export default function HoverLink({
 	return (
 		<Link
 			href={href}
-			className="text-start text-base hover:text-neutral-900 text-neutral-500"
+			className="text-start text-base hover:text-headerHover text-header"
 		>
 			{children}
 		</Link>

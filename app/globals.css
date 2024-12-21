@@ -3,8 +3,29 @@
 @tailwind utilities;
 
 :root {
+	--title-color: rgb(38 38 38);
+	--subtitle-color: rgb(100 100 100);
+	--icon-color: rgb(163 163 163);
+	--line-color: rgb(200 200 200);
+    --hover-color: rgb(240 240 240);
+    --selected-color: rgb(229 229 229);
+    --header-hover-color: rgb(23 23 23);
+    --header-color: rgb(115 115 115);
 	--background: #ffffff;
 	--foreground: #171717;
+}
+
+[data-theme="dark"] {
+	--title-color: rgb(229 229 229);
+	--subtitle-color: rgb(150 150 150);
+	--icon-color: rgb(212 212 212);
+	--line-color: rgb(100 100 100);
+    --hover-color: rgb(30 30 30);
+    --selected-color: rgb(30 30 30);
+    --header-hover-color: rgb(220 220 220);
+    --header-color: rgb(180 180 180);
+	--background: #171717;
+	--foreground: #ffffff;
 }
 
 body {
@@ -39,16 +60,19 @@ body {
 }
 
 .markdown-content > blockquote {
-	background-color: #f0f0f0;
+	background-color: rgb(240, 240, 240);
+    color: rgb(120 120 120);
 	padding: 1rem;
 	margin: 1rem 0;
 	border-radius: 0.25rem;
 }
 
-.markdown-content > :where(h1,
-h2,
-h3,
-h4) {
+[data-theme="dark"] .markdown-content > blockquote {
+    background-color: rgb(34, 34, 34);
+    color: rgb(160 160 160);
+}
+
+.markdown-content > :where(h1, h2, h3, h4) {
 	font-weight: 500;
 	margin: 3rem 0 1rem 0;
 }

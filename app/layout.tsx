@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ThemeProvider } from "next-themes";
 import LocalFont from "next/font/local";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
@@ -19,15 +20,17 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="en">
+		<html lang="en" suppressHydrationWarning>
 			<body className={`antialiased ${localFont.className}`}>
-				<div className="lg:mx-[16rem] md:mx-[6rem] mx-[1rem]">
-					<div className="min-h-[92vh]">
-						<Header />
-						{children}
+				<ThemeProvider>
+					<div className="lg:mx-[16rem] md:mx-[6rem] mx-[1rem]">
+						<div className="min-h-[92vh]">
+							<Header />
+							{children}
+						</div>
+						<Footer />
 					</div>
-					<Footer />
-				</div>
+				</ThemeProvider>
 			</body>
 		</html>
 	);

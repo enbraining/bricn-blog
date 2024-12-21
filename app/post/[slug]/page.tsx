@@ -1,14 +1,12 @@
 "use client";
 
-import GiscusComment from "@/app/components/GiscusComment";
+import GiscusComment from "@/app/components/content/GiscusComment";
+import MarkdownContent from "@/app/components/content/MarkdownContent";
 import { formatYearMonthDay } from "@/app/lib/date";
 import { IconCalendarWeek, IconStopwatch } from "@tabler/icons-react";
 import { Post, allPosts } from "contentlayer/generated";
 import { useEffect, useState } from "react";
-import Markdown from "react-markdown";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import readingTime from "reading-time";
-import gfm from "remark-gfm";
 
 export default function Page({
 	params,
@@ -35,45 +33,19 @@ export default function Page({
 	return (
 		<div>
 			<div className="flex gap-x-8 mb-4">
-				<div className="flex gap-x-1 items-center text-neutral-600">
+				<div className="flex gap-x-1 items-center text-subtitle">
 					<IconCalendarWeek size={18} stroke={2} />
 					<p>{formatYearMonthDay(post?.date)}</p>
 				</div>
-				<div className="flex gap-x-1 items-center text-neutral-600">
+				<div className="flex gap-x-1 items-center text-subtitle">
 					<IconStopwatch size={18} stroke={2} />
 					<p>{`${(readingTime(post?.body.raw || "").minutes + 1) | 0}분`}</p>
 				</div>
 			</div>
-			<h1 className="text-4xl font-medium text-neutral-700 mb-12">
+			<h1 className="text-4xl font-medium text-title mb-12">
 				{post?.title}
 			</h1>
-			<Markdown
-				components={{
-					code({ inline, className, children, ...props }) {
-						const match = /language-(\w+)/.exec(className || "");
-
-						if (!inline && match) {
-							return (
-								<SyntaxHighlighter {...props} language={match[1]} PreTag="div">
-									{String(children).replace(/\n$/, "")}
-								</SyntaxHighlighter>
-							);
-						}
-						return (
-							<code
-								{...props}
-								className={`${className || ""} inline-code text-[#905]`}
-							>
-								{children}
-							</code>
-						);
-					},
-				}}
-				remarkPlugins={[gfm]}
-				className="markdown-content"
-			>
-				{post?.body.raw || ""}
-			</Markdown>
+            <MarkdownContent content={post?.body.raw || ""} />
 			<GiscusComment />
 		</div>
 	);

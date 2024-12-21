@@ -11,7 +11,7 @@ export default function SelectMenu({
 }) {
 	return (
 		<div
-			className={`border-b py-2 ${menu === initialMenu ? "bg-neutral-200 border-neutral-400" : "hover:bg-neutral-100 bg-white border-neutral-200"}`}
+			className={`border-b py-2 ${menu === initialMenu ? "bg-selected border-neutral-400" : "hover:bg-hover border-line"}`}
 			onClick={() => setMenu(initialMenu)}
 		>
 			{children}

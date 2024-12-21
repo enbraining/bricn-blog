@@ -8,12 +8,12 @@ export default function ExternalLink({
 	return (
 		<Link
 			href={href}
-			className="group text-base flex items-center text-neutral-600"
+			className="group text-base flex items-center text-subtitle"
 		>
-			<p className="group-hover:underline decoration-neutral-400 underline-offset-4">
+			<p className="group-hover:underline decoration-subtitle underline-offset-4">
 				{children}
 			</p>
-			<IconExternalLink size={20} stroke={2} className="ml-1" />
+			<IconExternalLink size={20} stroke={2} className="ml-1 text-icon" />
 		</Link>
 	);
 }

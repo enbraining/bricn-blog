@@ -1,10 +1,10 @@
 import {
-	IconBrandGithubCopilot,
-	IconBrandLinkedin,
-	IconChessBishop,
-	IconCode,
-	IconExternalLink,
-	IconQuestionMark,
+    IconBrandGithubCopilot,
+    IconBrandLinkedin,
+    IconChessBishop,
+    IconCode,
+    IconExternalLink,
+    IconQuestionMark,
 } from "@tabler/icons-react";
 import Link from "next/link";
 
@@ -33,7 +33,7 @@ export default function LineLink({
 	return (
 		<Link
 			href={href}
-			className="group gap-x-2 text-base flex items-center text-neutral-600 border rounded-lg py-4 px-5"
+			className="group gap-x-2 text-base flex items-center text-subtitle border border-line rounded-lg py-4 px-5"
 		>
 			{selectIcon}
 			<p className="group-hover:underline decoration-neutral-400 underline-offset-4">
