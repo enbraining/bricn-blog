@@ -7,7 +7,7 @@ date: "2024-12-19"
 
 아래의 의존성을 추가해주었다.
 
-```js
+```java
 implementation("org.apache.httpcomponents.client5:httpclient5:5.3.1")
 ```
 
