@@ -2,7 +2,6 @@
 
 import { useCallback, useState } from "react";
 import LineLink from "../components/LineLink";
-import LineTitle from "../components/LineTitle";
 import Myself from "../components/Myself";
 import SelectMenu from "../components/SelectMenu";
 
