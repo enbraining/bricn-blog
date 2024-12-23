@@ -45,10 +45,10 @@ export default function Page() {
 					</div>
 				) : (
 					<div className="mt-5 grid gap-y-2">
-						<LineTitle
+						{/* <LineTitle
 							content="전자산업기사"
 							date="2024년 4차 과정평가형자격 합격자 발표 예정"
-						/>
+						/> */}
 					</div>
 				)}
 			</div>

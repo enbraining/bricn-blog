@@ -10,10 +10,10 @@ export default {
   theme: {
     extend: {
       colors: {
-        title: "var(--title-color)",
+        title: "var(--primary-color)",
         icon: "var(--icon-color)",
         line: "var(--line-color)",
-        subtitle: "var(--subtitle-color)",
+        subtitle: "var(--secondary-color)",
         hover: "var(--hover-color)",
         selected: "var(--selected-color)",
         headerHover: "var(--header-hover-color)",
