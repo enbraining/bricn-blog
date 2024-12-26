@@ -31,7 +31,6 @@
 body {
 	color: var(--foreground);
 	background: var(--background);
-	font-family: Arial, Helvetica, sans-serif;
 }
 
 .markdown-content {
@@ -42,6 +41,12 @@ body {
 	list-style-type: disc;
 	margin: 1rem 0;
 	list-style-position: inside;
+}
+
+.markdown-content > ol {
+    list-style-type: decimal;
+    margin: 1rem 0;
+    list-style-position: inside;
 }
 
 .markdown-content p:has(> a) {

@@ -46,12 +46,9 @@ export default function Page() {
 				) : (
                     <div className="grid gap-y-2 mt-5">
                             <LineTitle
-                                content="정보처리산업기사"
-                                date="공부중"
-                            />
-                            <LineTitle
                                 content="전자산업기사"
                                 date="2024년 4차 과정평가형자격 합격"
+                                href="/post/electronics-industry-engineer"
                             />
                     </div>
 				)}
