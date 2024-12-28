@@ -16,7 +16,7 @@ export default function Page() {
 				{projects.map((project: Project) => (
 					<li key={project.url}>
 						<Link href={project.url.replace(/projects\//gi, "")}>
-							<div className="text-subtitle">
+							<div className="text-secondary">
 								<div className="flex gap-x-2 items-center">
 									<IconUsers size={18} stroke={2} />
 									<p>{project.team || "개인"}</p>
@@ -28,7 +28,7 @@ export default function Page() {
 									<p>{formatYearMonth(project.endDate)}</p>
 								</div>
 							</div>
-							<h1 className="text-xl text-title">{project.title}</h1>
+							<h1 className="text-xl text-primary">{project.title}</h1>
 						</Link>
 					</li>
 				))}

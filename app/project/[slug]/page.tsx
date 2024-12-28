@@ -35,18 +35,18 @@ export default function Page({
 	return (
 		<div>
 			<div className="mb-4">
-				<div className="flex gap-x-2 items-center text-subtitle">
+				<div className="flex gap-x-2 items-center text-secondary">
 					<IconUsers size={18} stroke={2} />
 					<p>{project?.team || "개인"}</p>
 				</div>
-				<div className="flex gap-x-2 items-center text-subtitle">
+				<div className="flex gap-x-2 items-center text-secondary">
 					<IconCalendarWeek size={18} stroke={2} />
 					<p>{formatYearMonth(project?.startDate)}</p>
 					<p>–</p>
 					<p>{formatYearMonth(project?.endDate)}</p>
 				</div>
 			</div>
-			<h1 className="text-4xl font-medium text-title mb-12">
+			<h1 className="text-4xl font-medium text-primary mb-12">
 				{project?.title}
 			</h1>
 			<MarkdownContent content={project?.body.raw || ""} />

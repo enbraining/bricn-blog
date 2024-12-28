@@ -2,12 +2,14 @@ import type { NextConfig } from "next";
 import { withContentlayer } from 'next-contentlayer';
 
 const nextConfig: NextConfig = {
-  outputFileTracingExcludes: {
-    "*": ["./public/posts/**/*"]
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'i.ytimg.com',
+      },
+    ],
   },
-  compiler: {
-    styledComponents: true
-  }
 };
 
 const wrappedConfig = withContentlayer(nextConfig);

@@ -28,7 +28,9 @@ export default function MarkdownContent({ content }: { content: string }) {
 						);
 					},
 				}}
-				remarkPlugins={[remarkGfm]}
+				remarkPlugins={[
+                    remarkGfm,
+                ]}
 				className="markdown-content"
 			>
 				{content}

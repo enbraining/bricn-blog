@@ -17,7 +17,7 @@ export default function Page() {
 				{posts.map((post: Post) => (
 					<li key={post.url}>
 						<Link href={post.url.replace(/posts\//gi, "")}>
-							<div className="flex gap-x-4 text-subtitle">
+							<div className="flex gap-x-4 text-secondary">
 								<div className="flex gap-x-1 items-center">
 									<IconCalendarWeek size={18} stroke={2} />
 									<p>{formatYearMonthDay(post.date)}</p>
@@ -27,7 +27,7 @@ export default function Page() {
 									<p>{`${(readingTime(post.body.raw || "").minutes + 1) | 0}분`}</p>
 								</div>
 							</div>
-							<h1 className="text-xl text-title">{post.title}</h1>
+							<h1 className="text-xl text-primary">{post.title}</h1>
 						</Link>
 					</li>
 				))}

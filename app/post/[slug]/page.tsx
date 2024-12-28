@@ -33,16 +33,16 @@ export default function Page({
 	return (
 		<div>
 			<div className="flex gap-x-8 mb-4">
-				<div className="flex gap-x-1 items-center text-subtitle">
+				<div className="flex gap-x-1 items-center text-secondary">
 					<IconCalendarWeek size={18} stroke={2} />
 					<p>{formatYearMonthDay(post?.date)}</p>
 				</div>
-				<div className="flex gap-x-1 items-center text-subtitle">
+				<div className="flex gap-x-1 items-center text-secondary">
 					<IconStopwatch size={18} stroke={2} />
 					<p>{`${(readingTime(post?.body.raw || "").minutes + 1) | 0}분`}</p>
 				</div>
 			</div>
-			<h1 className="text-4xl font-medium text-title mb-12">
+			<h1 className="text-4xl font-medium text-primary mb-12">
 				{post?.title}
 			</h1>
             <MarkdownContent content={post?.body.raw || ""} />

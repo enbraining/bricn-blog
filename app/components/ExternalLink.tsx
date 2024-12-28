@@ -8,7 +8,7 @@ export default function ExternalLink({
 	return (
 		<Link
 			href={href}
-			className="group text-base flex items-center text-subtitle"
+			className="group text-base flex items-center text-secondary"
 		>
 			<p className="group-hover:underline decoration-subtitle underline-offset-4">
 				{children}
