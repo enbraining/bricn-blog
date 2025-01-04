@@ -94,12 +94,12 @@ body {
     list-style-position: inside;
 }
 
-.markdown-content p:has(> a) {
+.markdown-content a {
     text-decoration: underline var(--line-color) 0.7px;
     text-underline-offset: 0.375rem;
 }
 
-.markdown-content p:has(> a:hover):hover {
+.markdown-content a:hover {
     text-decoration-color: var(--primary-color);
 }
 
