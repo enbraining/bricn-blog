@@ -4,7 +4,7 @@ import LocalFont from "next/font/local";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import "./globals.css";
-import GoogleAnalytics from "./lib/googleAnalytics";
+import GoogleAnalytics from "./lib/GoogleAnalytics";
 
 const localFont = LocalFont({
 	src: "../public/fonts/PretendardVariable.woff2",
