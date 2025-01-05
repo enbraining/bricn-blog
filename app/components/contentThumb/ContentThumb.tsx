@@ -19,11 +19,11 @@ export default function ContentThumbnail({
 			? content.url.replace(/posts\//gi, "")
 			: content.url.replace(/projects\//gi, "");
 	return (
-		<li
-			key={content.url}
-			className="border-b py-3 border-line hover:bg-hover hover:pl-2 duration-200"
-		>
-			<Link href={href} className="grid gap-y-2">
+		<li key={content.url}>
+			<Link
+				href={href}
+				className="border-b py-3 border-line hover:bg-hover hover:pl-2 duration-200 grid gap-y-2"
+			>
 				<div>
 					{content.type === "Post" && (
 						<p className="text-sm text-secondary">{content.category}</p>
