@@ -1,6 +1,6 @@
 ---
 title: "Student Management Service"
-startDate: "2023-04"
+date: "2023-04"
 team: "MSG 동아리"
 ---
 

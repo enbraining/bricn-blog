@@ -2,7 +2,7 @@ import Giscus from "@giscus/react";
 import { useTheme } from "next-themes";
 
 export default function GiscusComment() {
-    const { theme } = useTheme();
+	const { theme } = useTheme();
 
 	return (
 		<div className="my-16">

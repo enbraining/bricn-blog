@@ -1,6 +1,6 @@
 ---
 title: "GOGO"
-startDate: "2023-03"
+date: "2023-03"
 endDate: "2024-08"
 team: "GOGO TF"
 ---

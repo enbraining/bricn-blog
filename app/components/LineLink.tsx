@@ -1,10 +1,10 @@
 import {
-    IconBrandGithubCopilot,
-    IconBrandLinkedin,
-    IconChessBishop,
-    IconCode,
-    IconExternalLink,
-    IconQuestionMark,
+	IconBrandGithubCopilot,
+	IconBrandLinkedin,
+	IconChessBishop,
+	IconCode,
+	IconExternalLink,
+	IconQuestionMark,
 } from "@tabler/icons-react";
 import Link from "next/link";
 

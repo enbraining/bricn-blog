@@ -4,12 +4,14 @@ import GiscusComment from "@/app/components/content/GiscusComment";
 import MarkdownContent from "@/app/components/content/MarkdownContent";
 import { formatYearMonth } from "@/app/lib/date";
 import { IconCalendarWeek, IconUsers } from "@tabler/icons-react";
-import { Project, allProjects } from "contentlayer/generated";
+import { type Project, allProjects } from "contentlayer/generated";
 import { useEffect, useState } from "react";
 
 export default function Page({
 	params,
-}: { params: Promise<{ slug: string }> }) {
+}: {
+	params: Promise<{ slug: string }>;
+}) {
 	const [slug, setSlug] = useState<string>("");
 	const [project, setProject] = useState<Project>();
 
@@ -41,7 +43,7 @@ export default function Page({
 				</div>
 				<div className="flex gap-x-2 items-center text-secondary">
 					<IconCalendarWeek size={18} stroke={2} />
-					<p>{formatYearMonth(project?.startDate)}</p>
+					<p>{formatYearMonth(project?.date)}</p>
 					<p>–</p>
 					<p>{formatYearMonth(project?.endDate)}</p>
 				</div>

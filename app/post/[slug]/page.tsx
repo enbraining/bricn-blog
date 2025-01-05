@@ -4,13 +4,15 @@ import GiscusComment from "@/app/components/content/GiscusComment";
 import MarkdownContent from "@/app/components/content/MarkdownContent";
 import { formatYearMonthDay } from "@/app/lib/date";
 import { IconCalendarWeek, IconStopwatch } from "@tabler/icons-react";
-import { Post, allPosts } from "contentlayer/generated";
+import { type Post, allPosts } from "contentlayer/generated";
 import { useEffect, useState } from "react";
 import readingTime from "reading-time";
 
 export default function Page({
 	params,
-}: { params: Promise<{ slug: string }> }) {
+}: {
+	params: Promise<{ slug: string }>;
+}) {
 	const [slug, setSlug] = useState<string>("");
 	const [post, setPost] = useState<Post>();
 
@@ -42,10 +44,8 @@ export default function Page({
 					<p>{`${(readingTime(post?.body.raw || "").minutes + 1) | 0}분`}</p>
 				</div>
 			</div>
-			<h1 className="text-4xl font-medium text-primary mb-12">
-				{post?.title}
-			</h1>
-            <MarkdownContent content={post?.body.raw || ""} />
+			<h1 className="text-4xl font-medium text-primary mb-12">{post?.title}</h1>
+			<MarkdownContent content={post?.body.raw || ""} />
 			<GiscusComment />
 		</div>
 	);
