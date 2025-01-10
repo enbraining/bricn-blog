@@ -1,6 +1,6 @@
 "use client";
 
-import { allProjects } from "@/.contentlayer/generated";
+import { type Project, allProjects } from "@/.contentlayer/generated";
 import Hr from "../components/Hr";
 import LineLink from "../components/LineLink";
 import LineTitle from "../components/LineTitle";
