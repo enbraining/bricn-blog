@@ -36,7 +36,7 @@ export default function RootLayout({
 				)}
 				<ThemeProvider>
 					<div className="lg:mx-[16rem] md:mx-[6rem] mx-[1rem]">
-						<div className="min-h-[92vh]">
+						<div className="min-h-[92vh] mb-8">
 							<Header />
 							{children}
 						</div>

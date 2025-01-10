@@ -1,24 +1,16 @@
-import { IconAt, IconBriefcase, IconSchool } from "@tabler/icons-react";
-import Hr from "./Hr";
+import { IconAt, IconSchool } from "@tabler/icons-react";
 
-export default function Myself() {
+export default function PortfolioMyself() {
 	return (
 		<div>
-			<div className="flex items-end gap-x-3 mb-5">
+			<div className="mb-3 inline-block">
 				<p className="text-2xl font-bold text-primary">김동학</p>
-				<p className="text-base text-secondary">Nest.js, Next.js, C++</p>
+				<p className="text-base text-secondary">Backend Engineer</p>
 			</div>
-			<Hr />
-			<ul className="text-base grid gap-y-2 mt-5">
+			<ul className="text-base grid gap-y-1">
 				<li className="flex gap-x-8 items-center">
 					<IconAt stroke={2} className="text-icon" />
 					<p className="text-secondary">me@bricn.net</p>
-				</li>
-				<li className="flex gap-x-8">
-					<IconBriefcase stroke={2} className="text-icon" />
-					<div>
-						<p className="text-secondary">동아리 깨소금</p>
-					</div>
 				</li>
 				<li className="flex gap-x-8">
 					<IconSchool stroke={2} className="text-icon" />
