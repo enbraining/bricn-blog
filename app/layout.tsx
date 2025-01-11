@@ -4,6 +4,7 @@ import LocalFont from "next/font/local";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import "./globals.css";
+import GoogleAds from "./lib/GoogleAds";
 import GoogleAnalytics from "./lib/GoogleAnalytics";
 
 const localFont = LocalFont({
@@ -36,6 +37,9 @@ export default function RootLayout({
 					</div>
 				</ThemeProvider>
 			</body>
+			{process.env.NEXT_PUBLIC_GOOGLE_PID && (
+				<GoogleAds pid={process.env.NEXT_PUBLIC_GOOGLE_PID} />
+			)}
 		</html>
 	);
 }
