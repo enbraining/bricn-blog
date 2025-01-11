@@ -22,14 +22,6 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en" suppressHydrationWarning>
-			<head>
-				{/* biome-ignore lint/style/useSelfClosingElements: <explanation> */}
-				<script
-					async
-					src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5938651528318065"
-					crossOrigin="anonymous"
-				/>
-			</head>
 			<body className={`antialiased ${localFont.className}`}>
 				{process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS && (
 					<GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS} />

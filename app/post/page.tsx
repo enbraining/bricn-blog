@@ -1,5 +1,6 @@
 import { type Post, allPosts } from "contentlayer/generated";
 import ContentList from "../components/contentThumb/ContentThumbList";
+import GoogleAds from "../lib/GoogleAds";
 
 export default function Page() {
 	const posts = allPosts.sort((a: Post, b: Post) => {
@@ -7,5 +8,10 @@ export default function Page() {
 		return 1;
 	});
 
-	return <ContentList contents={posts} />
+	return (
+		<div>
+			<GoogleAds />
+			<ContentList contents={posts} />
+		</div>
+	);
 }

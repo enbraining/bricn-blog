@@ -2,6 +2,7 @@
 
 import GiscusComment from "@/app/components/content/GiscusComment";
 import MarkdownContent from "@/app/components/content/MarkdownContent";
+import GoogleAds from "@/app/lib/GoogleAds";
 import { formatYearMonthDay } from "@/app/lib/date";
 import { IconCalendarWeek, IconStopwatch } from "@tabler/icons-react";
 import { type Post, allPosts } from "contentlayer/generated";
@@ -34,6 +35,7 @@ export default function Page({
 
 	return (
 		<div>
+            <GoogleAds />
 			<div className="flex gap-x-8 mb-4">
 				<div className="flex gap-x-1 items-center text-secondary">
 					<IconCalendarWeek size={18} stroke={2} />
