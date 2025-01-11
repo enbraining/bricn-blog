@@ -54,7 +54,7 @@ export default function Home() {
 						rel="noopener noreferrer"
 						href={`https://www.youtube.com/watch?v=${video.snippet.resourceId.videoId}`}
 						key={video.id}
-						className="w-64 border border-line rounded-sm"
+						className="w-64 border border-bricn-100 rounded-sm"
 					>
 						<Image
 							width={320}
