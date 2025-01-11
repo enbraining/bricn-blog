@@ -2,6 +2,7 @@
 
 import GiscusComment from "@/app/components/content/GiscusComment";
 import MarkdownContent from "@/app/components/content/MarkdownContent";
+import Seo from "@/app/lib/Seo";
 import { formatYearMonth } from "@/app/lib/date";
 import { IconCalendarWeek, IconUsers } from "@tabler/icons-react";
 import { type Project, allProjects } from "contentlayer/generated";
@@ -33,6 +34,7 @@ export default function Page({
 
 	return (
 		<div>
+            <Seo title={project?.title || ""} description={project?.body.raw.substring(0, 100) || ""} />
 			<div className="mb-4">
 				<div className="flex gap-x-2 items-center text-bricn-200">
 					<IconUsers size={18} stroke={2} />

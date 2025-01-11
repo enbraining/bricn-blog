@@ -1,5 +1,6 @@
 import { type Post, allPosts } from "contentlayer/generated";
 import ContentList from "../components/contentThumb/ContentThumbList";
+import Seo from "../lib/Seo";
 
 export default function Page() {
 	const posts = allPosts.sort((a: Post, b: Post) => {
@@ -9,6 +10,7 @@ export default function Page() {
 
 	return (
 		<div>
+            <Seo title="블로그" />
 			<ContentList contents={posts} />
 		</div>
 	);

@@ -2,6 +2,7 @@
 
 import GiscusComment from "@/app/components/content/GiscusComment";
 import MarkdownContent from "@/app/components/content/MarkdownContent";
+import Seo from "@/app/lib/Seo";
 import { formatYearMonthDay } from "@/app/lib/date";
 import { IconCalendarWeek, IconStopwatch } from "@tabler/icons-react";
 import { type Post, allPosts } from "contentlayer/generated";
@@ -34,6 +35,7 @@ export default function Page({
 
 	return (
 		<div>
+            <Seo title={post?.title || ""} description={post?.body.raw.substring(0, 100) || ""} />
 			<div className="flex gap-x-8 mb-4">
 				<div className="flex gap-x-1 items-center text-bricn-200">
 					<IconCalendarWeek size={18} stroke={2} />
