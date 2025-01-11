@@ -1,6 +1,6 @@
 "use client";
 
-import { Post, Project } from "@/.contentlayer/generated";
+import type { Post, Project } from "@/.contentlayer/generated";
 import ContentThumbnail from "./ContentThumb";
 
 export default function ContentThumbnailList({

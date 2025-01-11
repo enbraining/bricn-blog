@@ -28,7 +28,7 @@ export default function RootLayout({
 					<GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS} />
 				)}
 				<ThemeProvider>
-					<div className="lg:mx-[16rem] md:mx-[6rem] mx-[1rem]">
+					<div className="lg:mx-[10rem] md:mx-[6rem] mx-[1rem]">
 						<div className="min-h-[92vh] mb-8">
 							<Header />
 							{children}

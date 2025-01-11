@@ -5,6 +5,7 @@ import Hr from "../components/Hr";
 import LineLink from "../components/LineLink";
 import LineTitle from "../components/LineTitle";
 import PortfolioMyself from "../components/PortfolioMyself";
+import H1 from "../components/basic/H1";
 import ContentThumbnailList from "../components/contentThumb/ContentThumbList";
 
 export default function Page() {
@@ -36,7 +37,7 @@ export default function Page() {
 					</div>
             </div>
             <div className="mt-12">
-                <h1 className="text-xl font-semibold">자기소개</h1>
+                <h1 className="text-xl font-semibold text-bricn-500">자기소개</h1>
                 <Hr />
                 <div className="grid gap-y-3">
                     <p>아키텍쳐와 함께 하는 개발자 김동학입니다. 많은 패러다임과 서비스들을 접하면서 역량을 키우고 있습니다.</p>
@@ -45,12 +46,12 @@ export default function Page() {
                 </div>
             </div>
             <div className="mt-12">
-                <h1 className="text-xl font-semibold">기술 스택</h1>
+                <H1>기술 스택</H1>
                 <Hr />
                 <p>Next.js, Typescript, AWS, Spring Boot, Java, Kotlin</p>
             </div>
             <div className="mt-12">
-                <h1 className="text-xl font-semibold">자격증 및 외국어</h1>
+                <H1>자격증 및 외국어</H1>
                 <Hr />
                 <div className="grid gap-y-2">
                     <LineTitle
@@ -64,7 +65,7 @@ export default function Page() {
                 </div>
             </div>
             <div className="mt-12">
-                <h1 className="text-xl font-semibold">프로젝트</h1>
+                <H1>프로젝트</H1>
                 <Hr />
                 <ContentThumbnailList contents={projects} />
             </div>

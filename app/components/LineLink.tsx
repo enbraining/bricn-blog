@@ -33,13 +33,11 @@ export default function LineLink({
 	return (
 		<Link
 			href={href}
-			className="group gap-x-2 text-base flex items-center text-secondary border border-line rounded-lg py-3 px-5"
+			className="hover:border-bricn-200 border-bricn-100 gap-x-2 text-base flex items-center border rounded-lg py-3 px-5"
 		>
-			{selectIcon}
-			<p className="group-hover:underline decoration-neutral-400 underline-offset-4">
-				{children}
-			</p>
-			<IconExternalLink size={20} stroke={2} className="ml-auto" />
+			<div className="text-bricn-300">{selectIcon}</div>
+			<p className="text-bricn-400">{children}</p>
+			<IconExternalLink size={20} stroke={2} className="ml-auto text-bricn-400" />
 		</Link>
 	);
 }

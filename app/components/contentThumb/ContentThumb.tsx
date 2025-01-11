@@ -22,16 +22,16 @@ export default function ContentThumbnail({
 		<li key={content.url}>
 			<Link
 				href={href}
-				className="border-b py-3 border-line hover:bg-hover hover:pl-2 duration-200 grid gap-y-2"
+				className="border-b py-3 border-bricn-100 hover:bg-bricn-100 hover:pl-2 duration-200 grid gap-y-2"
 			>
 				<div>
 					{content.type === "Post" && (
-						<p className="text-sm text-secondary">{content.category}</p>
+						<p className="text-sm text-bricn-300">{content.category}</p>
 					)}
-					<h1 className="text-xl text-primary">{content.title}</h1>
+					<h1 className="text-xl text-bricn-500">{content.title}</h1>
 				</div>
 				{content.type === "Post" ? (
-					<div className="flex gap-x-4 text-secondary text-sm">
+					<div className="flex gap-x-4 text-bricn-200 text-sm">
 						<div className="flex gap-x-1 items-center">
 							<IconCalendarWeek size={18} stroke={2} />
 							<p>{formatYearMonthDay(content.date)}</p>
@@ -42,7 +42,7 @@ export default function ContentThumbnail({
 						</div>
 					</div>
 				) : (
-					<div className="text-sm text-secondary flex gap-x-3">
+					<div className="text-sm text-bricn-200 flex gap-x-3">
 						<div className="flex gap-x-2 items-center">
 							<IconUsers size={18} stroke={2} />
 							<p>{content.team || "개인"}</p>
