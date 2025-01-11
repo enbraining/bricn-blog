@@ -25,13 +25,10 @@ export default function Page({
 
 	useEffect(() => {
 		if (!slug) return;
-		const fetchProject = allProjects.find((project: Project) => {
-			console.log(project.url.replace(/^\/project\/projects\//, ""));
-			console.log(project);
-			return project.url.replace(/^\/project\/projects\//, "") === slug;
-		});
+		const fetchProject = allProjects.find((project: Project) =>
+			project.url.replace(/^\/project\/projects\//, "") === slug
+		);
 		setProject(fetchProject);
-		console.log(fetchProject?.body.html);
 	}, [slug]);
 
 	return (
