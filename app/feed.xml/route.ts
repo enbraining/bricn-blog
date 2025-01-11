@@ -1,6 +1,13 @@
 import { allPosts } from "@/.contentlayer/generated";
 import RSS from "rss";
 
+interface Content {
+    title: string;
+    description: string;
+    url: string;
+    date: string;
+}
+
 export async function GET() {
     const feed = new RSS({
         title: 'bricn',
@@ -13,7 +20,7 @@ export async function GET() {
         ttl: 60,
     });
 
-    const allContents = allPosts.map((post) => {
+    const allContents: Content[] = allPosts.map((post) => {
         return {
             "title": post.title,
             "description": post.body.raw.substring(0, 100),
@@ -23,8 +30,7 @@ export async function GET() {
     });
 
     if (allContents) {
-        // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-        allContents.map((post: any) => {
+        allContents.map((post: Content) => {
             feed.item({
                 title: post.title,
                 description: post.description,
