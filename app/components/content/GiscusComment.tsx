@@ -9,7 +9,7 @@ export default function GiscusComment() {
 			<Giscus
 				category="Announcements"
 				categoryId="DIC_kwDONGYlKs4CjueV"
-				repo="enbraining/Bricn"
+				repo="enbraining/bricn-blog"
 				repoId="R_kgDONGYlKg"
 				mapping="pathname"
 				strict="0"
