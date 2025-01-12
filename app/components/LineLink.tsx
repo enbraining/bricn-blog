@@ -1,12 +1,10 @@
-import {
-    IconBrandGithubCopilot,
-    IconBrandLinkedin,
-    IconChessBishop,
-    IconCode,
-    IconExternalLink,
-    IconQuestionMark,
-} from "@tabler/icons-react";
 import Link from "next/link";
+import IconBrandGithubCopilot from "./icons/IconBrandGithubCopilot";
+import IconBrandLinkedIn from "./icons/IconBrandLinkedIn";
+import IconChessBishop from "./icons/IconChessBishop";
+import IconCode from "./icons/IconCode";
+import IconExternalLink from "./icons/IconExternalLink";
+import IconQuestionMark from "./icons/IconQuestionMark";
 
 export default function LineLink({
 	type,
@@ -19,15 +17,15 @@ export default function LineLink({
 }) {
 	const selectIcon =
 		type === "GITHUB" ? (
-			<IconBrandGithubCopilot stroke={2} size={18} />
+			<IconBrandGithubCopilot size={18} />
 		) : type === "LINKEDIN" ? (
-			<IconBrandLinkedin stroke={2} size={18} />
+			<IconBrandLinkedIn size={18} />
 		) : type === "CHESSCOM" ? (
-			<IconChessBishop stroke={2} size={18} />
+			<IconChessBishop size={18} />
 		) : type === "SOLVEDAC" ? (
-			<IconCode stroke={2} size={18} />
+			<IconCode size={18} />
 		) : (
-			<IconQuestionMark stroke={2} size={18} />
+			<IconQuestionMark size={18} />
 		);
 
 	return (
@@ -37,7 +35,7 @@ export default function LineLink({
 		>
 			<div className="text-bricn-300">{selectIcon}</div>
 			<p className="text-bricn-400">{children}</p>
-			<IconExternalLink size={20} stroke={2} className="ml-auto text-bricn-400" />
+			<IconExternalLink size={20} className="ml-auto text-bricn-400" />
 		</Link>
 	);
 }

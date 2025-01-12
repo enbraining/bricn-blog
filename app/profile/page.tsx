@@ -6,7 +6,6 @@ import LineLink from "../components/LineLink";
 import LineTitle from "../components/LineTitle";
 import PortfolioMyself from "../components/PortfolioMyself";
 import H1 from "../components/basic/H1";
-import ContentThumbnailList from "../components/contentThumb/ContentThumbList";
 import Seo from "../lib/Seo";
 
 export default function Page() {
@@ -69,7 +68,7 @@ export default function Page() {
             <div className="mt-12">
                 <H1>프로젝트</H1>
                 <Hr />
-                <ContentThumbnailList contents={projects} />
+                {/* <ContentThumbnailList contents={projects} /> */}
             </div>
 		</div>
 	);

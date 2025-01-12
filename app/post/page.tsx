@@ -1,17 +1,27 @@
-import { type Post, allPosts } from "contentlayer/generated";
-import ContentList from "../components/contentThumb/ContentThumbList";
+"use client"
+
+import { useEffect, useState } from "react";
+import ContentThumbnailList from "../components/contentThumb/ContentThumbList";
 import Seo from "../lib/Seo";
+import type { Post } from "../types/Post";
 
 export default function Page() {
-	const posts = allPosts.sort((a: Post, b: Post) => {
-		if (a.date > b.date) return -1;
-		return 1;
-	});
+    const [posts, setPosts] = useState<Post[]>([])
+
+    useEffect(() => {
+        const fetchPosts = async () => {
+            const fetchPosts = await fetch("/api/post", {
+                next: { revalidate: 10 }
+            }).then(res => res.json())
+            setPosts(fetchPosts.data)
+        }
+        fetchPosts()
+    }, [])
 
 	return (
 		<div>
             <Seo title="블로그" />
-			<ContentList contents={posts} />
+			<ContentThumbnailList contents={posts} />
 		</div>
 	);
 }

@@ -1,60 +1,37 @@
 "use client";
 
-import type { Post, Project } from "@/.contentlayer/generated";
-import {
-    IconCalendarWeek,
-    IconStopwatch,
-    IconUsers,
-} from "@tabler/icons-react";
+
+import { formatYearMonthDay } from "@/app/lib/date";
+import type { Post } from "@/app/types/Post";
 import Link from "next/link";
 import readingTime from "reading-time";
-import { formatYearMonth, formatYearMonthDay } from "../../lib/date";
+import IconCalendarWeek from "../icons/IconCalendarWeek";
+import IconStopwatch from "../icons/IconStopwatch";
 
 export default function ContentThumbnail({
 	content,
-}: { content: Post | Project | undefined }) {
+}: { content: Post }) {
 	if (!content) return null;
-	const href =
-		content.type === "Post"
-			? content.url.replace(/posts\//gi, "")
-			: content.url.replace(/projects\//gi, "");
 	return (
-		<li key={content.url}>
+		// <li key={content.url}>
+        <li key={content.id}>
 			<Link
-				href={href}
+				href={`/post/${content.id}`}
 				className="border-b py-3 border-bricn-100 hover:bg-bricn-100 hover:pl-2 duration-200 grid gap-y-2"
 			>
 				<div>
-					{content.type === "Post" && (
-						<p className="text-sm text-bricn-300">{content.category}</p>
-					)}
 					<h1 className="text-xl text-bricn-500">{content.title}</h1>
 				</div>
-				{content.type === "Post" ? (
-					<div className="flex gap-x-4 text-bricn-200 text-sm">
+				<div className="flex gap-x-4 text-bricn-200 text-sm">
 						<div className="flex gap-x-1 items-center">
-							<IconCalendarWeek size={18} stroke={2} />
-							<p>{formatYearMonthDay(content.date)}</p>
+							<IconCalendarWeek size={18} />
+							<p>{formatYearMonthDay(content.created_at)}</p>
 						</div>
 						<div className="flex gap-x-1 items-center">
-							<IconStopwatch size={18} stroke={2} />
-							<p>{`${(readingTime(content.body.raw || "").minutes + 1) | 0}분`}</p>
+							<IconStopwatch size={18} />
+							<p>{`${(readingTime(content.content).minutes + 1) | 0}분`}</p>
 						</div>
 					</div>
-				) : (
-					<div className="text-sm text-bricn-200 flex gap-x-3">
-						<div className="flex gap-x-2 items-center">
-							<IconUsers size={18} stroke={2} />
-							<p>{content.team || "개인"}</p>
-						</div>
-						<div className="flex gap-x-2 items-center">
-							<IconCalendarWeek size={18} stroke={2} />
-							<p>{formatYearMonth(content.date)}</p>
-							<p>–</p>
-							<p>{formatYearMonth(content.endDate)}</p>
-						</div>
-					</div>
-				)}
 			</Link>
 		</li>
 	);

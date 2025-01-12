@@ -1,5 +1,5 @@
-import { IconExternalLink } from "@tabler/icons-react";
 import Link from "next/link";
+import IconExternalLink from "./icons/IconExternalLink";
 
 export default function ExternalLink({
 	href,
@@ -13,7 +13,7 @@ export default function ExternalLink({
 			<p className="group-hover:underline decoration-subtitle underline-offset-4">
 				{children}
 			</p>
-			<IconExternalLink size={20} stroke={2} className="ml-1 text-bricn-400" />
+			<IconExternalLink size={20} className="ml-1 text-bricn-400" />
 		</Link>
 	);
 }

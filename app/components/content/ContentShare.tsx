@@ -1,7 +1,8 @@
 "use client"
 
-import { IconBrandX, IconCopy } from "@tabler/icons-react";
 import { useCallback } from "react";
+import IconBrandX from "../icons/IconBrandX";
+import IconCopy from "../icons/IconCopy";
 
 export default function ContentShare({ path, title }: { path: string, title: string }) {
     const copyToClipboard = useCallback(async () => {
@@ -24,11 +25,11 @@ export default function ContentShare({ path, title }: { path: string, title: str
         <div className="flex gap-x-2 text-bricn-300">
             {/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
             <div onClick={copyToClipboard} className="cursor-pointer">
-                <IconCopy size={24} stroke={2} />
+                <IconCopy size={24} />
             </div>
             {/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
             <div onClick={onClickShareX} className="cursor-pointer">
-                <IconBrandX size={24} stroke={2} />
+                <IconBrandX size={24} />
             </div>
         </div>
     )

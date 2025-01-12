@@ -1,5 +1,7 @@
-import { IconAt, IconBriefcase, IconSchool } from "@tabler/icons-react";
 import Hr from "./Hr";
+import IconAt from "./icons/IconAt";
+import IconBriefcase from "./icons/IconBriefcase";
+import IconSchool from "./icons/IconSchool";
 
 export default function Myself() {
 	return (
@@ -11,17 +13,17 @@ export default function Myself() {
 			<Hr />
 			<ul className="text-base grid gap-y-2 mt-5">
 				<li className="flex gap-x-8 items-center">
-					<IconAt stroke={2} className="text-bricn-300" />
+					<IconAt size={18} className="text-bricn-300" />
 					<p className="text-bricn-400">me@bricn.net</p>
 				</li>
 				<li className="flex gap-x-8">
-					<IconBriefcase stroke={2} className="text-bricn-300" />
+					<IconBriefcase size={18} className="text-bricn-300" />
 					<div>
 						<p className="text-bricn-400">동아리 깨소금</p>
 					</div>
 				</li>
 				<li className="flex gap-x-8">
-					<IconSchool stroke={2} className="text-bricn-300" />
+					<IconSchool size={18} className="text-bricn-300" />
 					<div>
 						<p className="text-bricn-400">광주소프트웨어마이스터고등학교</p>
 						<p className="text-bricn-400">스마트IoT과 재학</p>

@@ -1,8 +1,10 @@
 "use client";
 
-import { IconMoon, IconSun } from "@tabler/icons-react";
 import { useTheme } from "next-themes";
 import HoverLink from "./HoverLink";
+import { SignToggle } from "./auth/SignToggle";
+import IconMoon from "./icons/IconMoon";
+import IconSun from "./icons/IconSun";
 
 export default function Header() {
 	const { theme, setTheme } = useTheme();
@@ -12,13 +14,21 @@ export default function Header() {
 			<HoverLink href={"/"}>홈</HoverLink>
 			<HoverLink href={"/profile"}>프로필</HoverLink>
 			<HoverLink href={"/post"}>블로그</HoverLink>
-			<HoverLink href={"/project"}>프로젝트</HoverLink>
-			<div className="ml-auto hover:text-headerHover text-header">
-				{theme === "white" ? (
-					<IconSun onClick={() => setTheme("dark")} stroke={2} />
-				) : (
-					<IconMoon onClick={() => setTheme("white")} stroke={2} />
-				)}
+			<div className="ml-auto flex items-center gap-x-6">
+				<SignToggle />
+				<div className="hover:text-headerHover text-header">
+					{theme === "white" ? (
+						// biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
+						<div onClick={() => setTheme("dark")}>
+							<IconSun size={18} />
+						</div>
+					) : (
+						// biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
+						<div onClick={() => setTheme("white")}>
+							<IconMoon size={18} />
+						</div>
+					)}
+				</div>
 			</div>
 		</header>
 	);
