@@ -51,8 +51,8 @@ export default function Page({
                         <p>{formatYearMonth(project?.endDate)}</p>
                     </div>
                 </div>
-                <div className="ml-0 sm:ml-auto">
-                    <ContentShare path={project?.url.replace(/projects\//gi, "") || ""} />
+                <div className="ml-auto">
+                    <ContentShare path={project?.url.replace(/projects\//gi, "") || ""} title={project?.title || ""} />
                 </div>
 			</div>
 			<MarkdownContent content={project?.body.raw || ""} />

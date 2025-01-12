@@ -50,8 +50,8 @@ export default function Page({
                         <p>{`${(readingTime(post?.body.raw || "").minutes + 1) | 0}분`}</p>
                     </div>
                 </div>
-                <div className="ml-0 sm:ml-auto">
-                    <ContentShare path={post?.url.replace(/posts\//gi, "") || ""} />
+                <div className="ml-auto">
+                    <ContentShare path={post?.url.replace(/posts\//gi, "") || ""} title={post?.title || ""} />
                 </div>
 			</div>
 			<MarkdownContent content={post?.body.raw || ""} />
