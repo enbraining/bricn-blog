@@ -39,8 +39,8 @@ export default function Page({
 		<div>
             <Seo title={post?.title || ""} description={post?.body.raw.substring(0, 100) || ""} />
 			<ContentTitle>{post?.title}</ContentTitle>
-			<div className="mt-5 mb-12 flex pb-4 border-b">
-				<div className="flex gap-x-8">
+			<div className="mt-5 mb-12 sm:flex sm:gap-y-0 gap-y-4 grid pb-4 border-b">
+				<div className="sm:flex grid gap-x-8">
                     <div className="flex gap-x-1 items-center text-bricn-200">
                         <IconCalendarWeek size={18} stroke={2} />
                         <p>{formatYearMonthDay(post?.date)}</p>
@@ -50,7 +50,7 @@ export default function Page({
                         <p>{`${(readingTime(post?.body.raw || "").minutes + 1) | 0}분`}</p>
                     </div>
                 </div>
-                <div className="ml-auto">
+                <div className="ml-0 sm:ml-auto">
                     <ContentShare path={post?.url.replace(/posts\//gi, "") || ""} />
                 </div>
 			</div>

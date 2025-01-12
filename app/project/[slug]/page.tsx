@@ -38,8 +38,8 @@ export default function Page({
 		<div>
             <Seo title={project?.title || ""} description={project?.body.raw.substring(0, 100) || ""} />
             <ContentTitle>{project?.title}</ContentTitle>
-			<div className="mt-5 mb-12 flex pb-4 border-b">
-				<div className="flex gap-x-8">
+			<div className="mt-5 mb-12 sm:flex sm:gap-y-0 gap-y-4 grid pb-4 border-b">
+				<div className="sm:flex grid gap-x-8">
                     <div className="flex gap-x-2 items-center text-bricn-200">
                         <IconUsers size={18} stroke={2} />
                         <p>{project?.team || "개인"}</p>
@@ -51,7 +51,7 @@ export default function Page({
                         <p>{formatYearMonth(project?.endDate)}</p>
                     </div>
                 </div>
-                <div className="ml-auto">
+                <div className="ml-0 sm:ml-auto">
                     <ContentShare path={project?.url.replace(/projects\//gi, "") || ""} />
                 </div>
 			</div>
