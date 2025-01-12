@@ -1,11 +1,9 @@
-import { allPosts } from "@/.contentlayer/generated";
 import RSS from "rss";
+import { supabase } from "../lib/supabase";
+import type { Post } from "../types/Post";
 
-interface Content {
-    title: string;
-    description: string;
-    url: string;
-    date: string;
+async function getPosts(){
+    return (await supabase()).from('posts').select('*').order('created_at', { ascending: false })
 }
 
 export async function GET() {
@@ -20,25 +18,14 @@ export async function GET() {
         ttl: 60,
     });
 
-    const allContents: Content[] = allPosts.map((post) => {
-        return {
-            "title": post.title,
-            "description": post.body.raw.substring(0, 100),
-            "url": `https://bricn.net${post.url.replace(/posts\//gi, "")}`,
-            "date": post.date
-        };
-    });
-
-    if (allContents) {
-        allContents.map((post: Content) => {
-            feed.item({
-                title: post.title,
-                description: post.description,
-                url: post.url,
-                date: post.date
-            });
+    (await getPosts()).data?.map((post: Post) => {
+        feed.item({
+            title: post.title,
+            description: post.content.substring(0, 100),
+            url: `https://bricn.net/post/${post.id}`,
+            date: post.created_at
         });
-    }
+    });
 
     return new Response(feed.xml({ indent: true }), {
         headers: {

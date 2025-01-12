@@ -1,6 +1,5 @@
 "use client";
 
-import { type Project, allProjects } from "@/.contentlayer/generated";
 import Hr from "../components/Hr";
 import LineLink from "../components/LineLink";
 import LineTitle from "../components/LineTitle";
@@ -9,11 +8,6 @@ import H1 from "../components/basic/H1";
 import Seo from "../lib/Seo";
 
 export default function Page() {
-    const projects = allProjects.sort((a: Project, b: Project) => {
-		if (a.date > b.date) return -1;
-		return 1;
-	});
-
 	return (
 		<div>
             <Seo title={"프로필"} />
