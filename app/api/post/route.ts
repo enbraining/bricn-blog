@@ -1,5 +1,4 @@
 import { supabase } from "@/app/lib/supabase";
-import type { NextApiResponse } from "next";
 
 async function getPosts(){
     return (await supabase()).from('posts').select('*').order('created_at', { ascending: false })
@@ -22,10 +21,7 @@ export async function GET(){
     })
 }
 
-export async function POST(
-    request: Request,
-    response: NextApiResponse
-){
+export async function POST(request: Request){
     const body = await request.json();
     const post = await createPost(body.title, body.content)
 

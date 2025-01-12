@@ -11,10 +11,6 @@ export default function Page(){
     const [content, setContent] = useState("**Hello world!!!**");
     const [title, setTitle] = useState("");
 
-    if(!session || session.data?.user?.email !== "me@bricn.net") {
-        return <div>403</div>
-    }
-
     const onChangeContent = useCallback((value?: string) => {
         setContent(value || "");
     }, [])
@@ -34,6 +30,10 @@ export default function Page(){
             redirect("/")
         })
     }, [title, content])
+
+    if(!session || session.data?.user?.email !== "me@bricn.net") {
+        return <div>403</div>
+    }
 
     return (
         <div className="grid gap-y-5">
