@@ -15,7 +15,7 @@ export default function ContentShare({ path, title }: { path: string, title: str
 
     const onClickShareX = useCallback(() => {
         const link = `https://bricn.net${path}`;
-        const text = `Bricn | ${title}`
+        const text = `Bricn | ${title}`.replaceAll(" ", "%20");
         const twitterIntent = `https://twitter.com/intent/tweet?text=${text}&url=${link}`;
         window.open(twitterIntent, '_blank');
     }, [path, title])
