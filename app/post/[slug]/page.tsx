@@ -1,5 +1,7 @@
 "use client";
 
+import ContentShare from "@/app/components/content/ContentShare";
+import ContentTitle from "@/app/components/content/ContentTitle";
 import GiscusComment from "@/app/components/content/GiscusComment";
 import MarkdownContent from "@/app/components/content/MarkdownContent";
 import Seo from "@/app/lib/Seo";
@@ -36,17 +38,22 @@ export default function Page({
 	return (
 		<div>
             <Seo title={post?.title || ""} description={post?.body.raw.substring(0, 100) || ""} />
-			<div className="flex gap-x-8 mb-4">
-				<div className="flex gap-x-1 items-center text-bricn-200">
-					<IconCalendarWeek size={18} stroke={2} />
-					<p>{formatYearMonthDay(post?.date)}</p>
-				</div>
-				<div className="flex gap-x-1 items-center text-bricn-200">
-					<IconStopwatch size={18} stroke={2} />
-					<p>{`${(readingTime(post?.body.raw || "").minutes + 1) | 0}분`}</p>
-				</div>
+			<ContentTitle>{post?.title}</ContentTitle>
+			<div className="mt-5 mb-12 flex pb-4 border-b">
+				<div className="flex gap-x-8">
+                    <div className="flex gap-x-1 items-center text-bricn-200">
+                        <IconCalendarWeek size={18} stroke={2} />
+                        <p>{formatYearMonthDay(post?.date)}</p>
+                    </div>
+                    <div className="flex gap-x-1 items-center text-bricn-200">
+                        <IconStopwatch size={18} stroke={2} />
+                        <p>{`${(readingTime(post?.body.raw || "").minutes + 1) | 0}분`}</p>
+                    </div>
+                </div>
+                <div className="ml-auto">
+                    <ContentShare path={post?.url.replace(/posts\//gi, "") || ""} />
+                </div>
 			</div>
-			<h1 className="text-4xl font-medium text-bricn-500 mb-12">{post?.title}</h1>
 			<MarkdownContent content={post?.body.raw || ""} />
 			<GiscusComment />
 		</div>

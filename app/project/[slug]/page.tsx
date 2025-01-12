@@ -1,5 +1,7 @@
 "use client";
 
+import ContentShare from "@/app/components/content/ContentShare";
+import ContentTitle from "@/app/components/content/ContentTitle";
 import GiscusComment from "@/app/components/content/GiscusComment";
 import MarkdownContent from "@/app/components/content/MarkdownContent";
 import Seo from "@/app/lib/Seo";
@@ -35,24 +37,24 @@ export default function Page({
 	return (
 		<div>
             <Seo title={project?.title || ""} description={project?.body.raw.substring(0, 100) || ""} />
-			<div className="mb-4">
-				<div className="flex gap-x-2 items-center text-bricn-200">
-					<IconUsers size={18} stroke={2} />
-					<p>{project?.team || "개인"}</p>
-				</div>
-				<div className="flex gap-x-2 items-center text-bricn-200">
-					<IconCalendarWeek size={18} stroke={2} />
-					<p>{formatYearMonth(project?.date)}</p>
-					<p>–</p>
-					<p>{formatYearMonth(project?.endDate)}</p>
-				</div>
+            <ContentTitle>{project?.title}</ContentTitle>
+			<div className="mt-5 mb-12 flex pb-4 border-b">
+				<div className="flex gap-x-8">
+                    <div className="flex gap-x-2 items-center text-bricn-200">
+                        <IconUsers size={18} stroke={2} />
+                        <p>{project?.team || "개인"}</p>
+                    </div>
+                    <div className="flex gap-x-2 items-center text-bricn-200">
+                        <IconCalendarWeek size={18} stroke={2} />
+                        <p>{formatYearMonth(project?.date)}</p>
+                        <p>–</p>
+                        <p>{formatYearMonth(project?.endDate)}</p>
+                    </div>
+                </div>
+                <div className="ml-auto">
+                    <ContentShare path={project?.url.replace(/projects\//gi, "") || ""} />
+                </div>
 			</div>
-			<div className="flex">
-                <h1 className="text-4xl font-semibold text-bricn-500 mb-12">
-                    {project?.title}
-                </h1>
-                <p className="ml-auto">링크 복사</p>
-            </div>
 			<MarkdownContent content={project?.body.raw || ""} />
 			<GiscusComment />
 		</div>
