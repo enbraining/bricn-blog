@@ -31,7 +31,7 @@ export default function Page(){
         })
     }, [title, content])
 
-    if(!session || session.data?.user?.email !== "me@bricn.net") {
+    if(!session) {
         return <div>403</div>
     }
 
