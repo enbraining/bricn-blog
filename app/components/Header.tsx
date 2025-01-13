@@ -10,10 +10,12 @@ export default function Header() {
 	const { theme, setTheme } = useTheme();
 
 	return (
-		<header className="grid grid-flow-col items-center mt-6 mb-16">
-			<HoverLink href={"/"}>홈</HoverLink>
-			<HoverLink href={"/profile"}>프로필</HoverLink>
-			<HoverLink href={"/post"}>블로그</HoverLink>
+		<header className="flex items-center mt-6 mb-16">
+			<div className="grid grid-flow-col items-center w-2/3">
+				<HoverLink href={"/"}>홈</HoverLink>
+				<HoverLink href={"/profile"}>프로필</HoverLink>
+				<HoverLink href={"/post"}>블로그</HoverLink>
+			</div>
 			<div className="ml-auto flex items-center gap-x-6">
 				<SignToggle />
 				<div className="hover:text-headerHover text-header">

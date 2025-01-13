@@ -13,7 +13,6 @@ export default function ContentThumbnail({
 }: { content: Post }) {
 	if (!content) return null;
 	return (
-		// <li key={content.url}>
         <li key={content.id}>
 			<Link
 				href={`/post/${content.id}`}
