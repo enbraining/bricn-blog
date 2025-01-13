@@ -955,13 +955,11 @@ table {
 
   .markdown-content .highlight pre,
   .markdown-content pre {
-    padding: 1rem;
     overflow: auto;
     font-size: 85%;
     line-height: 1.45;
     color: #1f2328;
-    background-color: #f6f8fa;
-    border-radius: 6px;
+    border-radius: 2px;
   }
 
   .markdown-content pre code,
