@@ -1,7 +1,7 @@
 import { supabase } from "@/app/lib/supabase";
 
 async function getPost(id: string){
-    return (await supabase()).from('posts').select('*').eq('id', id).single();
+    return supabase.from('posts').select('*').eq('id', id).single();
 }
 
 export async function GET(request: Request, { params }: { params: Promise<{ id: string }> }) {

@@ -3,7 +3,7 @@ import { supabase } from "../lib/supabase";
 import type { Post } from "../types/Post";
 
 async function getPosts(){
-    return (await supabase()).from('posts').select('*').order('created_at', { ascending: false })
+    return supabase.from('posts').select('*').order('created_at', { ascending: false })
 }
 
 export async function GET() {

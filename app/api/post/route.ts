@@ -1,11 +1,11 @@
 import { supabase } from "@/app/lib/supabase";
 
 async function getPosts(){
-    return (await supabase()).from('posts').select('*').order('created_at', { ascending: false })
+    return supabase.from('posts').select('*').order('created_at', { ascending: false })
 }
 
 async function createPost(title: string, content: string){
-    return (await supabase()).from('posts').insert({
+    return supabase.from('posts').insert({
         title: title,
         content: content
     }).single()
