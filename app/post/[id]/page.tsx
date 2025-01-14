@@ -1,4 +1,4 @@
-"use client";
+"use server";
 
 import ContentShare from "@/app/components/content/ContentShare";
 import ContentTitle from "@/app/components/content/ContentTitle";
@@ -8,25 +8,15 @@ import IconCalendarWeek from "@/app/components/icons/IconCalendarWeek";
 import IconStopwatch from "@/app/components/icons/IconStopwatch";
 import Seo from "@/app/lib/Seo";
 import { formatYearMonthDay } from "@/app/lib/date";
-import type { Post } from "@/app/types/Post";
-import { useEffect, useState } from "react";
 import readingTime from "reading-time";
 
-export default function Page({
+export default async function Page({
 	params,
 }: {
 	params: Promise<{ id: string }>;
 }) {
-	const [post, setPost] = useState<Post>();
-
-    useEffect(() => {
-        const fetchPost = async () => {
-            const { id } = await params;
-            const fetchPost = await fetch(`/api/post/${id}`).then(res => res.json())
-            setPost(fetchPost)
-        }
-        fetchPost()
-    }, [params])
+    const { id } = await params
+    const post = await fetch(`http://localhost:3000/api/post/${id}`).then(res => res.json())
 
 	return (
 		<div>
