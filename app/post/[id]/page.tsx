@@ -16,7 +16,11 @@ export default async function Page({
 	params: Promise<{ id: string }>;
 }) {
     const { id } = await params
-    const post = await fetch(`http://localhost:3000/api/post/${id}`).then(res => res.json())
+    const isProduction = process.env.NODE_ENV === 'production'
+    const post = await fetch(`${isProduction ?
+        "https://bricn.net" :
+        "http://localhost:3000"
+    }/api/post/${id}`).then(res => res.json())
 
 	return (
 		<div>
