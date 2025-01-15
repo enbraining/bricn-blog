@@ -8,8 +8,8 @@ async function getPosts(){
 
 export async function GET() {
     const feed = new RSS({
-        title: 'bricn',
-        description: "Bricn Blog",
+        title: 'Bricn Blog',
+        description: 'Enbraining\'s tech blog',
         feed_url: 'https://bricn.net/feed.xml',
         site_url: 'https://bricn.net',
         copyright: `Copyright ${new Date().getFullYear().toString()}`,
