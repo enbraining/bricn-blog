@@ -10,6 +10,7 @@ export default function Page(){
 
     const [content, setContent] = useState("**Hello world!!!**");
     const [title, setTitle] = useState("");
+    const [category, setCategory] = useState("");
 
     const onChangeContent = useCallback((value?: string) => {
         setContent(value || "");
@@ -19,17 +20,22 @@ export default function Page(){
         setTitle(e.target.value)
     }, [])
 
+    const onChangeCategory = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+        setCategory(e.target.value)
+    }, [])
+
     const onSubmit = useCallback(() => {
         fetch("/api/post", {
             method: "POST",
             body: JSON.stringify({
                 title: title,
-                content: content
+                content: content,
+                category: category
             }),
         }).then(() => {
             redirect("/")
         })
-    }, [title, content])
+    }, [title, content, category])
 
     if(!session) {
         return <div>403</div>
@@ -37,7 +43,10 @@ export default function Page(){
 
     return (
         <div className="grid gap-y-5">
-            <input placeholder="제목" className="border w-full p-3 text-lg" value={title} onChange={onChangeTitle} />
+            <div className="grid grid-cols-3 gap-x-3">
+                <input placeholder="제목" className="border w-full p-3 text-lg col-span-2" value={title} onChange={onChangeTitle} />
+                <input placeholder="카테고리" className="border w-full p-3 text-lg" value={category} onChange={onChangeCategory} />
+            </div>
             <div className="container">
                 <MDEditor
                     height={600}

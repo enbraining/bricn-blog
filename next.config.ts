@@ -4,6 +4,7 @@ const nextConfig: NextConfig = {
 	images: {
 		remotePatterns: [
 			{
+                // Youtube Thumbnail
 				protocol: "https",
 				hostname: "i.ytimg.com",
 			},

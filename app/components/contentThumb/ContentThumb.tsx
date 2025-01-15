@@ -19,6 +19,7 @@ export default function ContentThumbnail({
 				className="border-b py-3 border-bricn-100 hover:bg-bricn-100 hover:pl-2 duration-200 grid gap-y-2"
 			>
 				<div>
+                    <p className="text-sm text-bricn-300">{content.category}</p>
 					<h1 className="text-xl text-bricn-500">{content.title}</h1>
 				</div>
 				<div className="flex gap-x-4 text-bricn-200 text-sm">

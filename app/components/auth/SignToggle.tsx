@@ -17,7 +17,7 @@ export function SignToggle(){
     return (
         mounted ? (
             <div className="flex items-center gap-x-4">
-                <Link href="/admin/editor">작성하기</Link>
+                <Link href="/editor">작성하기</Link>
                 <SignOut />
             </div>
         ) : (
