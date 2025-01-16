@@ -30,8 +30,8 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
             const json = await response.json()
 
             setTitle(json.title)
-            setTitle(json.content)
-            setTitle(json.category)
+            setContent(json.content)
+            setCategory(json.category)
         }
         fetchPost()
     }, [id])
