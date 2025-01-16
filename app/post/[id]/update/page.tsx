@@ -71,11 +71,13 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
                 <input placeholder="카테고리" className="border w-full p-3 text-lg" value={category} onChange={onChangeCategory} />
             </div>
             <div className="container">
-                <MDEditor
-                    height={600}
-                    value={content}
-                    onChange={onChangeContent}
-                />
+                {
+                    content && <MDEditor
+                        height={600}
+                        value={content}
+                        onChange={onChangeContent}
+                    />
+                }
             </div>
             <div>
                 <button onClick={onSubmit} type="submit" className="px-7 py-3 bg-bricn-100 active:bg-bricn-200">저장하기</button>
