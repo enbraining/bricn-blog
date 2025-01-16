@@ -33,11 +33,12 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
             setCategory(json.category)
         }
         fetchPost()
+        console.log("fuck")
     }, [id])
 
     const onChangeContent = useCallback((value?: string) => {
         setContent(value || "")
-    }, [content])
+    }, [])
 
     const onChangeTitle = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
         setTitle(e.target.value)
