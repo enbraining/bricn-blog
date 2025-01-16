@@ -12,7 +12,7 @@ export default function Page() {
     useEffect(() => {
         const fetchPosts = async () => {
             const fetchPosts = await fetch("/api/post", {
-                next: { revalidate: 10 }
+                next: { revalidate: 20 }
             }).then(res => res.json())
             setPosts(fetchPosts.data)
         }
