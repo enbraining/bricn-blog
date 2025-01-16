@@ -1,4 +1,5 @@
 import { supabase } from "@/app/lib/supabase";
+import { getBaseUrl } from "@/app/lib/url";
 import { Post } from "@/app/types/Post";
 
 async function getPost(id: string){
@@ -13,9 +14,13 @@ async function updatePost(id: string, post: Partial<Post>){
     }).eq('id', id)
 }
 
-export async function GET(request: Request, { params }: { params: Promise<{ id: string }> }) {
+export async function GET(request: Request, response: Response, { params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
     const { data } = await getPost(id);
+
+    response.headers.set('Access-Control-Allow-Origin', getBaseUrl());
+    response.headers.set('Access-Control-Allow-Methods', 'GET');
+    response.headers.set('Access-Control-Allow-Headers', 'Content-Type, Post-Category');
 
     return new Response(JSON.stringify(data), {
         status: 200,
