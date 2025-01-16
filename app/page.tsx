@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import ExternalLink from "./components/ExternalLink";
 import Myself from "./components/Myself";
-import { YoutubeApi } from "./lib/axios";
+import { config } from "./lib/config";
 
 interface Video {
 	id: string;
@@ -27,15 +27,13 @@ export default function Home() {
 
 	useEffect(() => {
 		const fetchVideos = async () => {
-			const response = await YoutubeApi.get("playlistItems", {
-				params: {
-					part: "snippet",
-					playlistId: "UUoW0vKiUGiYF976V78ev4aw",
-					maxResults: 10,
-				},
-			});
+            const MAX_RESULTS = 10
+            const url = `${config.YOUTUBE_API_BASE_URL}/playlistItems?part=snippet&playlistId=${config.PLAYLIST_ID}&maxResults=${MAX_RESULTS}&key=${process.env.NEXT_PUBLIC_YOUTUBE_API_KEY}`
 
-			setVideos(response.data.items);
+            const response = await fetch(url)
+            const json = await response.json()
+
+			setVideos(json.items);
 		};
 
 		fetchVideos();

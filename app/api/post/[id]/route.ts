@@ -5,7 +5,7 @@ async function getPost(id: string){
     return supabase.from('posts').select('*').eq('id', id).single();
 }
 
-async function updatePost(id: string, post: Post){
+async function updatePost(id: string, post: Partial<Post>){
     return supabase.from('posts').update({
         title: post.title,
         category: post.category,
@@ -31,8 +31,6 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
         title: body.title,
         content: body.content,
         category: body.json,
-        id: 0,
-        created_at: ""
     });
 
     return new Response(null, {

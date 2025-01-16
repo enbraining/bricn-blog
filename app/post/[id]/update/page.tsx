@@ -61,9 +61,9 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
         fetch(`/api/post/${id}`, {
             method: "PATCH",
             body: JSON.stringify({
-                title: post?.title,
-                content: post?.content,
-                category: post?.category
+                title: post.title,
+                content: post.content,
+                category: post.category
             }),
         }).then(() => {
             redirect("/")
