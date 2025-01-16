@@ -1,6 +1,10 @@
 import { supabase } from "@/app/lib/supabase";
 
-async function getPosts(){
+async function getPosts(category?: string){
+    if(category){
+        return supabase.from('posts').select('*').order('created_at', { ascending: false }).eq('category', category)
+    }
+
     return supabase.from('posts').select('*').order('created_at', { ascending: false })
 }
 
@@ -12,9 +16,10 @@ async function createPost(title: string, content: string, category: string){
     }).single()
 }
 
-export async function GET(){
-    const posts = await getPosts()
-    return new Response(JSON.stringify(posts), {
+export async function GET(request: Request){
+    const { data } = await getPosts(request.headers.get("Post-Category") || undefined)
+
+    return new Response(JSON.stringify(data), {
         status: 200,
         headers: {
             'Content-Type': 'application/json'
