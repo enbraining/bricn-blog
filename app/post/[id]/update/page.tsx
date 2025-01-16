@@ -41,7 +41,7 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
     const onChangeContent = useCallback((value?: string) => {
         setPost((prev) => ({
             ...prev!,
-            content: value || ""
+            content: value || "???"
        }))
     }, [])
 
