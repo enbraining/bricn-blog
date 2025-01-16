@@ -1,7 +1,16 @@
 import { supabase } from "@/app/lib/supabase";
+import { Post } from "@/app/types/Post";
 
 async function getPost(id: string){
     return supabase.from('posts').select('*').eq('id', id).single();
+}
+
+async function updatePost(id: string, post: Post){
+    return supabase.from('posts').update({
+        title: post.title,
+        category: post.category,
+        content: post.content
+    }).eq('id', id)
 }
 
 export async function GET(request: Request, { params }: { params: Promise<{ id: string }> }) {
@@ -9,6 +18,24 @@ export async function GET(request: Request, { params }: { params: Promise<{ id: 
     const { data } = await getPost(id);
 
     return new Response(JSON.stringify(data), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' },
+    });
+}
+
+export async function PATCH(request: Request, { params }: { params: Promise<{ id: string }> }) {
+    const { id } = await params;
+    const body = await request.json()
+
+    await updatePost(id, {
+        title: body.title,
+        content: body.content,
+        category: body.json,
+        id: 0,
+        created_at: ""
+    });
+
+    return new Response(null, {
         status: 200,
         headers: { 'Content-Type': 'application/json' },
     });

@@ -24,9 +24,9 @@ export async function GET(){
 
 export async function POST(request: Request){
     const body = await request.json();
-    const post = await createPost(body.title, body.content, body.category)
+    await createPost(body.title, body.content, body.category)
 
-    return new Response(JSON.stringify(post), {
+    return new Response(null, {
         status: 200,
         headers: {
             'Content-Type': 'application/json'

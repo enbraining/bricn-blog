@@ -1,5 +1,6 @@
 "use server";
 
+import { auth } from "@/app/auth";
 import ContentShare from "@/app/components/content/ContentShare";
 import ContentTitle from "@/app/components/content/ContentTitle";
 import GiscusComment from "@/app/components/content/GiscusComment";
@@ -8,6 +9,8 @@ import IconCalendarWeek from "@/app/components/icons/IconCalendarWeek";
 import IconStopwatch from "@/app/components/icons/IconStopwatch";
 import Seo from "@/app/lib/Seo";
 import { formatYearMonthDay } from "@/app/lib/date";
+import { getBaseUrl } from "@/app/lib/url";
+import Link from "next/link";
 import readingTime from "reading-time";
 
 export default async function Page({
@@ -15,17 +18,21 @@ export default async function Page({
 }: {
 	params: Promise<{ id: string }>;
 }) {
+    const session = await auth()
     const { id } = await params
-    const isProduction = process.env.NODE_ENV === 'production'
-    const post = await fetch(`${isProduction ?
-        "https://bricn.net" :
-        "http://localhost:3000"
-    }/api/post/${id}`).then(res => res.json())
+    const post = await fetch(`${getBaseUrl()}/api/post/${id}`).then(res => res.json())
 
 	return (
 		<div>
             <Seo title={post?.title || ""} description={post?.content.substring(0, 100) || ""} />
-			<ContentTitle>{post?.title}</ContentTitle>
+            <ContentTitle>{post?.title}</ContentTitle>
+            {
+                session && (
+                    <div className="mt-3">
+                        <Link href={`/post/${id}/update`}>수정하기</Link>
+                    </div>
+                )
+            }
 			<div className="mt-5 mb-12 sm:flex sm:gap-y-0 gap-y-4 grid pb-4 border-b">
 				<div className="sm:flex grid gap-x-8">
                     <div className="flex gap-x-1 items-center text-bricn-200">
