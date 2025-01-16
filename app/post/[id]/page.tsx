@@ -7,7 +7,6 @@ import GiscusComment from "@/app/components/content/GiscusComment";
 import MarkdownContent from "@/app/components/content/MarkdownContent";
 import IconCalendarWeek from "@/app/components/icons/IconCalendarWeek";
 import IconStopwatch from "@/app/components/icons/IconStopwatch";
-import Seo from "@/app/lib/Seo";
 import { formatYearMonthDay } from "@/app/lib/date";
 import { getBaseUrl } from "@/app/lib/url";
 import Link from "next/link";
@@ -24,7 +23,6 @@ export default async function Page({
 
 	return (
 		<div>
-            <Seo title={post?.title || ""} description={post?.content.substring(0, 100) || ""} />
             <ContentTitle>{post?.title}</ContentTitle>
             {
                 session && (

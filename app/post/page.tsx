@@ -3,7 +3,6 @@
 import { useCallback, useEffect, useState } from "react";
 import ContentThumbnailList from "../components/contentThumb/PostThumbList";
 import { ThumbSkeletonList } from "../components/contentThumb/ThumbSkeletonList";
-import Seo from "../lib/Seo";
 import { Category } from "../types/Category";
 import type { Post } from "../types/Post";
 
@@ -54,7 +53,6 @@ export default function Page() {
 
 	return (
 		<div>
-            <Seo title="블로그" />
             <div className="flex">
                 <div className="flex gap-x-1 my-3">
                     {

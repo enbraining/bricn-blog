@@ -5,12 +5,10 @@ import LineLink from "../components/LineLink";
 import LineTitle from "../components/LineTitle";
 import PortfolioMyself from "../components/PortfolioMyself";
 import H1 from "../components/basic/H1";
-import Seo from "../lib/Seo";
 
 export default function Page() {
 	return (
 		<div>
-            <Seo title={"프로필"} />
 			<div className="grid sm:grid-cols-2 grid-cols-1 gap-y-5 items-start">
                 <PortfolioMyself />
                 <div className="grid gap-y-2">
