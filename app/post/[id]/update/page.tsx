@@ -33,7 +33,6 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
             setCategory(json.category)
         }
         fetchPost()
-        console.log("fuck")
     }, [id])
 
     const onChangeContent = useCallback((value?: string) => {
@@ -48,7 +47,7 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
         setCategory(e.target.value)
     }, [])
 
-    const onSubmit = useCallback(() => {
+    const onSubmit = () => {
         fetch(`/api/post/${id}`, {
             method: "PATCH",
             body: JSON.stringify({
@@ -59,7 +58,7 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
         }).then(() => {
             redirect("/")
         })
-    }, [id, title, content, category])
+    }
 
     if(!session) {
         return <div>403</div>
