@@ -31,12 +31,14 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
             setTitle(json.title)
             setContent(json.content)
             setCategory(json.category)
+            console.log("나 로딩될거임")
         }
         fetchPost()
     }, [id])
 
     const onChangeContent = useCallback((value?: string) => {
         setContent(value || "")
+        console.log("나 바뀔거임")
     }, [])
 
     const onChangeTitle = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -71,13 +73,11 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
                 <input placeholder="카테고리" className="border w-full p-3 text-lg" value={category} onChange={onChangeCategory} />
             </div>
             <div className="container">
-                {
-                    content && <MDEditor
-                        height={600}
-                        value={content}
-                        onChange={onChangeContent}
-                    />
-                }
+                <MDEditor
+                    height={600}
+                    value={content}
+                    onChange={onChangeContent}
+                />
             </div>
             <div>
                 <button onClick={onSubmit} type="submit" className="px-7 py-3 bg-bricn-100 active:bg-bricn-200">저장하기</button>
