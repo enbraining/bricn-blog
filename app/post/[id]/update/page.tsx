@@ -60,7 +60,7 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
         }).then(() => {
             redirect("/")
         })
-    }, [post, id, content])
+    }, [id, title, content, category])
 
     if(!session) {
         return <div>403</div>
