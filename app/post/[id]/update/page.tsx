@@ -1,7 +1,6 @@
 "use client"
 
 import { getBaseUrl } from "@/app/lib/url";
-import type { Post } from "@/app/types/Post";
 import MDEditor from "@uiw/react-md-editor";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
@@ -10,14 +9,9 @@ import { useCallback, useEffect, useState } from "react";
 export default function Page({ params }: { params: Promise<{ id: string }> }) {
     const session = useSession()
     const [id, setId] = useState<string>("")
-    const [post, setPost] = useState<Post>({
-        id: "",
-        title: "",
-        content: "UNUSED",
-        created_at: "UNUSED",
-        category: ""
-    })
-    const [content, setContent] = useState<string>("")
+    const [title, setTitle] = useState("")
+    const [category, setCategory] = useState("")
+    const [content, setContent] = useState("")
 
     useEffect(() => {
         const fetchId = async () => {
@@ -33,7 +27,11 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
             const response = await fetch(`${getBaseUrl()}/api/post/${id}`, {
                 credentials: 'include'
             })
-            setPost(await response.json())
+            const json = await response.json()
+
+            setTitle(json.title)
+            setTitle(json.content)
+            setTitle(json.category)
         }
         fetchPost()
     }, [id])
@@ -44,26 +42,20 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
     }, [])
 
     const onChangeTitle = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-        setPost((prev) => ({
-            ...prev!,
-            title: e.target.value
-       }))
+        setTitle(e.target.value)
     }, [])
 
     const onChangeCategory = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-        setPost((prev) => ({
-            ...prev!,
-            category: e.target.value
-       }))
+        setCategory(e.target.value)
     }, [])
 
     const onSubmit = useCallback(() => {
         fetch(`/api/post/${id}`, {
             method: "PATCH",
             body: JSON.stringify({
-                title: post.title,
+                title: title,
                 content: content,
-                category: post.category
+                category: category
             }),
         }).then(() => {
             redirect("/")
