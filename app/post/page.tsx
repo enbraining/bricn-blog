@@ -1,7 +1,7 @@
 "use client"
 
 import { useCallback, useEffect, useState } from "react";
-import ContentThumbnailList from "../components/contentThumb/ContentThumbList";
+import ContentThumbnailList from "../components/contentThumb/PostThumbList";
 import { ThumbSkeletonList } from "../components/contentThumb/ThumbSkeletonList";
 import Seo from "../lib/Seo";
 import { Category } from "../types/Category";
@@ -75,7 +75,7 @@ export default function Page() {
             </div>
             {
                 posts.length > 0 ?
-                    <ContentThumbnailList contents={posts} /> :
+                    <ContentThumbnailList posts={posts} /> :
                     <ThumbSkeletonList />
             }
 		</div>

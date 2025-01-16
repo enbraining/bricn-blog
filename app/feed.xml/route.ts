@@ -20,10 +20,10 @@ export async function GET() {
 
     (await getPosts()).data?.map((post: Post) => {
         feed.item({
-            title: post.title,
-            description: post.content.substring(0, 100),
+            title: post.title || "",
+            description: post.content?.substring(0, 100) || "",
             url: `https://bricn.net/post/${post.id}`,
-            date: post.created_at
+            date: post.created_at || new Date()
         });
     });
 
