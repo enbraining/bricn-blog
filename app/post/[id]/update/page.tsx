@@ -13,10 +13,11 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
     const [post, setPost] = useState<Post>({
         id: "",
         title: "",
-        content: "",
-        created_at: "",
+        content: "UNUSED",
+        created_at: "UNUSED",
         category: ""
     })
+    const [content, setContent] = useState<string>("")
 
     useEffect(() => {
         const fetchId = async () => {
@@ -39,10 +40,7 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
 
 
     const onChangeContent = useCallback((value?: string) => {
-        setPost((prev) => ({
-            ...prev!,
-            content: value!
-       }))
+        setContent(value || "")
     }, [])
 
     const onChangeTitle = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -64,13 +62,13 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
             method: "PATCH",
             body: JSON.stringify({
                 title: post.title,
-                content: post.content,
+                content: content,
                 category: post.category
             }),
         }).then(() => {
             redirect("/")
         })
-    }, [post, id])
+    }, [post, id, content])
 
     if(!session) {
         return <div>403</div>
