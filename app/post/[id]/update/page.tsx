@@ -1,87 +1,111 @@
 "use client"
 
+import { MDEditor } from "@/app/components/editor/MDEditor";
 import { getBaseUrl } from "@/app/lib/url";
-import MDEditor from "@uiw/react-md-editor";
+import { Post } from "@/app/types/Post";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 export default function Page({ params }: { params: Promise<{ id: string }> }) {
     const session = useSession()
-    const [id, setId] = useState<string>("")
-    const [title, setTitle] = useState("")
-    const [category, setCategory] = useState("")
-    const [content, setContent] = useState<string>()
+    const [post, setPost] = useState<Post>({
+        id: undefined,
+        title: undefined,
+        content: undefined,
+        category: undefined,
+        created_at: undefined
+    })
 
     useEffect(() => {
         const fetchId = async () => {
             const { id } = await params
-            setId(id)
+            setPost((prev) => ({
+                ...prev,
+                id: id
+            }))
         }
-        fetchId()
+
+        if(!post.id){
+            fetchId()
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [params])
 
     useEffect(() => {
         const fetchPost = async () => {
-            const response = await fetch(`${getBaseUrl()}/api/post/${id}`, {
+            const response = await fetch(`${getBaseUrl()}/api/post/${post.id}`, {
                 credentials: 'include'
             })
             const json = await response.json()
 
-            setTitle(json.title)
-            setContent(json.content)
-            setCategory(json.category)
-            console.log("나 로딩될거임")
+            setPost((prev) => ({
+                ...prev,
+                title: json.title,
+                content: json.content,
+                category: json.category,
+            }))
         }
-        fetchPost()
-    }, [id])
+
+        if(post.id){
+            fetchPost()
+        }
+    }, [post.id])
 
     const onChangeContent = useCallback((value?: string) => {
-        setContent(value || "")
-        console.log("나 바뀔거임")
+        setPost((prev) => ({
+            ...prev,
+            content: value
+        }))
     }, [])
 
     const onChangeTitle = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-        setTitle(e.target.value)
+        setPost((prev) => ({
+            ...prev,
+            title: e.target.value
+        }))
     }, [])
 
     const onChangeCategory = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-        setCategory(e.target.value)
+        setPost((prev) => ({
+            ...prev,
+            category: e.target.value
+        }))
     }, [])
 
-    const onSubmit = () => {
-        fetch(`/api/post/${id}`, {
+    const onSubmit = useCallback(() => {
+        fetch(`/api/post/${post.id}`, {
             method: "PATCH",
             body: JSON.stringify({
-                title: title,
-                content: content,
-                category: category
+                title: post.title,
+                content: post.content,
+                category: post.category
             }),
         }).then(() => {
             redirect("/")
         })
-    }
+    }, [post])
 
     if(!session) {
         return <div>403</div>
     }
 
     return (
-        <div className="grid gap-y-5">
-            <div className="grid grid-cols-3 gap-x-3">
-                <input placeholder="제목" className="border w-full p-3 text-lg col-span-2" value={title} onChange={onChangeTitle} />
-                <input placeholder="카테고리" className="border w-full p-3 text-lg" value={category} onChange={onChangeCategory} />
-            </div>
-            <div className="container">
-                <MDEditor
-                    height={600}
-                    value={content}
-                    onChange={onChangeContent}
-                />
-            </div>
-            <div>
-                <button onClick={onSubmit} type="submit" className="px-7 py-3 bg-bricn-100 active:bg-bricn-200">저장하기</button>
-            </div>
-        </div>
+            <form className="grid gap-y-5">
+                <div className="grid grid-cols-3 gap-x-3">
+                    <input placeholder="제목" className="border w-full p-3 text-lg col-span-2" value={post.title} onChange={onChangeTitle} />
+                    <input placeholder="카테고리" className="border w-full p-3 text-lg" value={post.category} onChange={onChangeCategory} />
+                </div>
+                <div className="container">
+                    <MDEditor
+                        height={600}
+                        value={post.content}
+                        onChange={onChangeContent}
+                    />
+                </div>
+                <div>
+                    <button onClick={onSubmit} type="button" className="px-7 py-3 bg-bricn-100 active:bg-bricn-200">저장하기</button>
+                </div>
+            </form>
     )
 }

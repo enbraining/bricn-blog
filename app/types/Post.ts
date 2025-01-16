@@ -1,7 +1,7 @@
 export interface Post {
-    id: string
-    title: string
-    content: string
-    created_at: string
-    category: string
+    id: string | undefined
+    title: string | undefined
+    content: string | undefined
+    created_at: string | undefined
+    category: string | undefined
 }
