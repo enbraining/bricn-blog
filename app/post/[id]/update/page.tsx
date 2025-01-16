@@ -29,7 +29,9 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
 
     useEffect(() => {
         const fetchPost = async () => {
-            const response = await fetch(`${getBaseUrl()}/api/post/${id}`)
+            const response = await fetch(`${getBaseUrl()}/api/post/${id}`, {
+                credentials: 'same-origin'
+            })
             setPost(await response.json())
         }
         fetchPost()
