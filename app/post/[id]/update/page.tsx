@@ -18,7 +18,6 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
             const { id } = await params
             setId(id)
         }
-
         fetchId()
     }, [params])
 
@@ -29,16 +28,16 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
             })
             const json = await response.json()
 
-            await setTitle(json.title)
-            await setContent(json.content)
-            await setCategory(json.category)
+            setTitle(json.title)
+            setContent(json.content)
+            setCategory(json.category)
         }
         fetchPost()
     }, [id])
 
-    const onChangeContent = (value?: string) => {
+    const onChangeContent = useCallback((value?: string) => {
         setContent(value || "")
-    }
+    }, [content])
 
     const onChangeTitle = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
         setTitle(e.target.value)
