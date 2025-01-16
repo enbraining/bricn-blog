@@ -11,7 +11,7 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
     const [id, setId] = useState<string>("")
     const [title, setTitle] = useState("")
     const [category, setCategory] = useState("")
-    const [content, setContent] = useState<string | null>(null)
+    const [content, setContent] = useState<string>()
 
     useEffect(() => {
         const fetchId = async () => {
@@ -73,7 +73,7 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
             <div className="container">
                 <MDEditor
                     height={600}
-                    value={content || ""}
+                    value={content}
                     onChange={onChangeContent}
                 />
             </div>
