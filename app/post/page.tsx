@@ -55,10 +55,23 @@ export default function Page() {
 	return (
 		<div>
             <Seo title="블로그" />
-            <div className="flex gap-x-1 my-3">
-                {
-                    categories.map((c) => <div onClick={() => onFilterCategory(c.name)} className={`p-1 rounded-sm border ${category === c.name ? "bg-bricn-200 text-white" : "hover:bg-bricn-100 hover:text-bricn-300"}`} key={c.name}>{`${c.name} ${c.count}`}</div>)
-                }
+            <div className="flex">
+                <div className="flex gap-x-1 my-3">
+                    {
+                        categories.map((c) => (
+                            <div
+                                onClick={() => onFilterCategory(c.name)}
+                                className={`p-1 rounded-sm border ${category === c.name ? "bg-bricn-200 text-white" : "hover:bg-bricn-100 hover:text-bricn-300"}`}
+                                key={c.name}
+                            >
+                                    {`${c.name} ${c.count}`}
+                            </div>
+                        ))
+                    }
+                </div>
+                <div className="ml-auto">
+                    <p className="p-1 rounded-sm border">{">"}</p>
+                </div>
             </div>
             {
                 posts.length > 0 ?
