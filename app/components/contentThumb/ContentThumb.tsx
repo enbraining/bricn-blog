@@ -29,7 +29,7 @@ export default function ContentThumbnail({
 						</div>
 						<div className="flex gap-x-1 items-center">
 							<IconStopwatch size={18} />
-							<p>{`${(readingTime(content.content).minutes + 1) | 0}분`}</p>
+							<p>{`${(readingTime(content.content || "").minutes + 1) | 0}분`}</p>
 						</div>
 					</div>
 			</Link>
