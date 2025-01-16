@@ -69,13 +69,13 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
     return (
         <div className="grid gap-y-5">
             <div className="grid grid-cols-3 gap-x-3">
-                <input placeholder="제목" className="border w-full p-3 text-lg col-span-2" value={post.title} onChange={onChangeTitle} />
-                <input placeholder="카테고리" className="border w-full p-3 text-lg" value={post.category} onChange={onChangeCategory} />
+                <input placeholder="제목" className="border w-full p-3 text-lg col-span-2" value={title} onChange={onChangeTitle} />
+                <input placeholder="카테고리" className="border w-full p-3 text-lg" value={category} onChange={onChangeCategory} />
             </div>
             <div className="container">
                 <MDEditor
                     height={600}
-                    value={post.content}
+                    value={content}
                     onChange={onChangeContent}
                 />
             </div>
