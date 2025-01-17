@@ -1,75 +1,65 @@
 "use client"
 
-import { Post } from "@/app/types/Post";
 import MDEditor from "@uiw/react-md-editor";
 import { useSession } from "next-auth/react";
+import Form from 'next/form';
 import { redirect } from "next/navigation";
 import { useCallback, useState } from "react";
 
 export default function Page(){
     const session = useSession()
-    const [post, setpost] = useState<Post>({
-        id: "",
-        title: "",
-        content: "",
-        created_at: "",
-        category: ""
-    })
+    const [content, setContent] = useState<string>("")
 
     const onChangeContent = useCallback((value?: string) => {
-        setpost((prev) => ({
-            ...prev,
-            content: value || "",
-        }))
+        setContent(value || "")
     }, [])
 
-    const onChangeTitle = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-        setpost((prev) => ({
-            ...prev,
-            title: e.target.value
-        }))
-    }, [])
+    const onSubmit = useCallback((formData: FormData) => {
+        const title = formData.get("title")
+        const category = formData.get("category")
+        const thumbnail = formData.get("thumbnail") as File
 
-    const onChangeCategory = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-        setpost((prev) => ({
-            ...prev,
-            category: e.target.value
-        }))
-    }, [])
+        const body = new FormData()
+        body.append("title", title as string)
+        body.append("category", category as string)
+        body.append("content", content)
+        body.append("thumbnail", thumbnail)
 
-    const onSubmit = useCallback(() => {
         fetch("/api/post", {
             method: "POST",
-            body: JSON.stringify({
-                title: post.title,
-                content: post.content,
-                category: post.category
-            }),
+            body
         }).then(() => {
             redirect("/")
         })
-    }, [post])
+    }, [content])
+
+    const onKeyDown = useCallback((event: React.KeyboardEvent<HTMLInputElement>) => {
+        if(event.key === "Enter"){
+            event.preventDefault()
+        }
+    }, [])
 
     if(!session) {
         return <div>403</div>
     }
 
     return (
-        <div className="grid gap-y-5">
+        <Form action={onSubmit} onSubmit={() => { return false }} className="grid gap-y-5">
+            <input placeholder="Thumbnail Image" type="file" name="thumbnail" />
             <div className="grid grid-cols-3 gap-x-3">
-                <input placeholder="제목" className="border w-full p-3 text-lg col-span-2" value={post.title} onChange={onChangeTitle} />
-                <input placeholder="카테고리" className="border w-full p-3 text-lg" value={post.category} onChange={onChangeCategory} />
+                <input onKeyDown={onKeyDown} name="title" placeholder="제목" className="border w-full p-3 text-lg col-span-2" />
+                <input onKeyDown={onKeyDown} name="category" placeholder="카테고리" className="border w-full p-3 text-lg" />
             </div>
             <div className="container">
                 <MDEditor
                     height={600}
-                    value={post.content}
+                    value={content}
                     onChange={onChangeContent}
                 />
             </div>
             <div>
-                <button onClick={onSubmit} type="submit" className="px-7 py-3 bg-bricn-100 active:bg-bricn-200">저장하기</button>
+                <button type="submit" className="px-7 py-3 bg-bricn-100 active:bg-bricn-200">저장하기</button>
             </div>
-        </div>
+        </Form>
     )
 }
