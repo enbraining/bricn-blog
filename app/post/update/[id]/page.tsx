@@ -1,15 +1,17 @@
 "use client"
 
 import { MDEditor } from "@/app/components/editor/MDEditor";
+import { config } from "@/app/lib/config";
+import { supabase } from "@/app/lib/supabase";
 import { getBaseUrl } from "@/app/lib/url";
 import { Post } from "@/app/types/Post";
-import { useSession } from "next-auth/react";
 import Form from "next/form";
 import { redirect } from "next/navigation";
 import React, { useCallback, useEffect, useState } from "react";
 
 export default function Page({ params }: { params: Promise<{ id: string }> }) {
-    const session = useSession()
+    const [session, setSession] = useState(false)
+    const [id, setId] = useState("")
     const [post, setPost] = useState<Post>({
         id: undefined,
         title: undefined,
@@ -20,21 +22,26 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
     })
 
     useEffect(() => {
+        const fetchSession = async () => {
+            const { data } = await supabase.auth.getSession()
+            if(data.session) setSession(!!data.session)
+        }
+        fetchSession()
+    }, [])
+
+    useEffect(() => {
         const fetchId = async () => {
             const { id } = await params
-            setPost((prev) => ({
-                ...prev,
-                id: id
-            }))
+            setId(id)
         }
 
-        if(!post.id) fetchId()
+        if(!id) fetchId()
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [params])
 
     useEffect(() => {
         const fetchPost = async () => {
-            const response = await fetch(`${getBaseUrl()}/api/post/${post.id}`, {
+            const response = await fetch(`${getBaseUrl()}/api/post/${id}`, {
                 credentials: 'include'
             })
             const json = await response.json()
@@ -47,10 +54,8 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
             }))
         }
 
-        if(post.id){
-            fetchPost()
-        }
-    }, [post.id])
+        if(id) fetchPost()
+    }, [id])
 
     const onChangeContent = useCallback((value?: string) => {
         setPost((prev) => ({
@@ -74,19 +79,46 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
     }, [])
 
     const onSubmit = useCallback((formData: FormData) => {
-        const body = new FormData()
-        body.append("title", formData.get("title") as string)
-        body.append("category", formData.get("category") as string)
-        body.append("thumbnail", formData.get("thumbnail") as File)
-        body.append("content", post.content as string)
+        const thumbnail = formData.get("thumbnail") as File
+        const category = formData.get("category") as string
+        const title = formData.get("title") as string
+        const content = post.content
+        const bucketName = config.supabaseBucketName
 
-        fetch(`/api/post/${post.id}`, {
-            method: "PATCH",
-            body
-        }).then(() => {
-            redirect("/")
-        })
-    }, [post])
+        const updatePost = async () => {
+                let imageUrl: string | null = null
+
+                if(thumbnail?.size !== 0 && thumbnail){
+                    const { data: uploadData } = await supabase.storage.from(bucketName)
+                        .upload(`thumbnail/${id}.jpg`, thumbnail, {
+                            upsert: true
+                        })
+
+                    const path = uploadData?.path as string
+                    imageUrl = await supabase.storage.from(bucketName)
+                        .getPublicUrl(path)
+                        .data
+                        .publicUrl
+                }
+
+                const updateData: Record<string, string | undefined> = {
+                    title: title,
+                    category: category,
+                    content: content,
+                }
+
+                if(imageUrl !== null){
+                    updateData.image_url = imageUrl
+                }
+
+                await supabase.from('posts')
+                    .update(updateData)
+                    .eq('id', id)
+        }
+
+        updatePost()
+        redirect(`/post/${id}`)
+    }, [post, id])
 
     if(!session) {
         return <div>403</div>

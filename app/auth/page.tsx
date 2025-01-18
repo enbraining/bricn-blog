@@ -1,30 +1,34 @@
 "use client"
 
-import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
+import { supabase } from "../lib/supabase";
 
 export default function Page(){
-    const session = useSession()
-    const [mounted, setMounted] = useState(false)
+    const [session, setSession] = useState(false)
 
     const onSignIn = useCallback(() => {
-        signIn("github")
+        redirect("/auth/signin")
     }, [])
 
-    const onSignOut = useCallback(() => {
-        signOut()
+    const onSignOut = useCallback(async () => {
+        await supabase.auth.signOut()
     }, [])
 
     useEffect(() => {
-        setMounted(!!session.data)
-    }, [session])
+        const fetchSession = async () => {
+            const { data } = await supabase.auth.getSession()
+            if(data.session) setSession(!!data.session)
+        }
+        fetchSession()
+    }, [])
 
     return (
         <div className="grid">
             <div className="mx-auto grid gap-y-2">
                 {
-                    mounted
+                    session
                         ? (
                             <div className="grid gap-y-2">
                                 <button className="border px-52 py-3 rounded-sm" onClick={onSignOut}>로그아웃</button>

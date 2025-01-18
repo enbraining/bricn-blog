@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import ContentThumbnailList from "../components/contentThumb/PostThumbList";
 import { ThumbSkeletonList } from "../components/contentThumb/ThumbSkeletonList";
+import { supabase } from "../lib/supabase";
 import { Category } from "../types/Category";
 import type { Post } from "../types/Post";
 
@@ -13,13 +14,14 @@ export default function Page() {
 
     useEffect(() => {
         const fetchPosts = async () => {
-            const fetchPosts = await fetch("/api/post").then(res => res.json())
-            setPosts(fetchPosts)
+            const fetchPosts = await supabase.from("posts").select("*").order('created_at', { ascending: false })
+            setPosts(fetchPosts.data || [])
         }
 
         const fetchCategories = async () => {
-            const fetchCategories = await fetch("/api/category").then(res => res.json())
-            setCategories(fetchCategories)
+            const query = await supabase.rpc("group_by_category")
+            const data = query.data
+            setCategories(data)
         }
 
         fetchPosts()
@@ -27,16 +29,22 @@ export default function Page() {
     }, [])
 
     useEffect(() => {
-        const headers: Record<string, string> = category
-        ? { "Post-Category": category }
-        : {};
+        const getPosts = async () => {
+            const query = supabase
+              .from('posts')
+              .select('*')
+              .order('created_at', { ascending: false });
+
+            if (category) {
+              query.eq('category', category);
+            }
+
+            return await query;
+          };
 
         const fetchPosts = async () => {
-            const response = await fetch("/api/post", {
-                headers: headers,
-                next: { revalidate: 20 },
-            }).then(res => res.json())
-            setPosts(response)
+            const { data: posts } = await getPosts()
+            setPosts(posts || [])
         }
         fetchPosts()
     }, [category])

@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { SessionProvider } from "next-auth/react";
 import { ThemeProvider } from "next-themes";
 import LocalFont from "next/font/local";
 import Footer from "./components/Footer";
@@ -29,15 +28,13 @@ export default function RootLayout({
 					<GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS} />
 				)}
 				<ThemeProvider>
-					<SessionProvider>
-						<div className="lg:mx-[4rem] md:mx-[2rem] mx-[1rem]">
-							<div className="min-h-[92vh] mb-8">
-								<Header />
-								{children}
-							</div>
-							<Footer />
+					<div className="lg:mx-[4rem] md:mx-[2rem] mx-[1rem]">
+						<div className="min-h-[92vh] mb-8">
+							<Header />
+							{children}
 						</div>
-					</SessionProvider>
+						<Footer />
+					</div>
 				</ThemeProvider>
 			</body>
 			{process.env.NEXT_PUBLIC_GOOGLE_PID && (

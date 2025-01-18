@@ -1,14 +1,23 @@
 "use client"
 
+import { config } from "@/app/lib/config";
+import { supabase } from "@/app/lib/supabase";
 import MDEditor from "@uiw/react-md-editor";
-import { useSession } from "next-auth/react";
 import Form from 'next/form';
 import { redirect } from "next/navigation";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 export default function Page(){
-    const session = useSession()
+    const [session, setSession] = useState(false)
     const [content, setContent] = useState<string>("")
+
+    useEffect(() => {
+        const fetchSession = async () => {
+            const { data } = await supabase.auth.getSession()
+            if(data.session) setSession(!!data.session)
+        }
+        fetchSession()
+    }, [])
 
     const onChangeContent = useCallback((value?: string) => {
         setContent(value || "")
@@ -18,19 +27,44 @@ export default function Page(){
         const title = formData.get("title")
         const category = formData.get("category")
         const thumbnail = formData.get("thumbnail") as File
+        const bucketName = config.supabaseBucketName || ""
 
-        const body = new FormData()
-        body.append("title", title as string)
-        body.append("category", category as string)
-        body.append("content", content)
-        body.append("thumbnail", thumbnail)
+        const createPost = async () => {
+            const { data: savedData } = await supabase.from('posts')
+                .insert({
+                    title: title,
+                    content: content,
+                    category: category,
+                })
+                .select()
 
-        fetch("/api/post", {
-            method: "POST",
-            body
-        }).then(() => {
-            redirect("/")
-        })
+            if(thumbnail.size !== 0){
+                const savedPost = savedData?.at(0)
+
+                const { data: uploadData } = await supabase.storage.from(bucketName)
+                .upload(`thumbnail/${savedPost.id}.jpg`, thumbnail, {
+                    upsert: true
+                })
+
+                if(uploadData){
+                    const imageUrl = await supabase.storage.from(bucketName)
+                        .getPublicUrl(uploadData?.path)
+                        .data
+                        .publicUrl
+
+                    const { error } = await supabase.from('posts')
+                        .update({
+                            image_url: imageUrl
+                        })
+                        .eq("id", savedPost.id)
+
+                    console.log(error?.cause)
+                }
+            }
+        }
+
+        createPost()
+        redirect("/post")
     }, [content])
 
     const onKeyDown = useCallback((event: React.KeyboardEvent<HTMLInputElement>) => {
