@@ -27,7 +27,7 @@ export default async function Page({
             {
                 session && (
                     <div className="mt-3">
-                        <Link href={`/post/${id}/update`}>수정하기</Link>
+                        <Link href={`/post/update/${id}`}>수정하기</Link>
                     </div>
                 )
             }

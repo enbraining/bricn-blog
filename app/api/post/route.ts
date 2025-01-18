@@ -1,3 +1,4 @@
+import { config } from "@/app/lib/config";
 import { supabase } from "@/app/lib/supabase";
 
 async function getPosts(category?: string){
@@ -9,23 +10,24 @@ async function getPosts(category?: string){
 }
 
 async function createPost({ title, content, category, thumbnail }: { title: string; content: string; category: string; thumbnail: File }){
-    const response = await supabase.from('posts')
+    const bucketName = config.supabaseBucketName || ""
+    const { data: savedData } = await supabase.from('posts')
         .insert({
             title: title,
             content: content,
             category: category,
         })
         .select()
-    const savedPost = response.data?.at(0)
+    const savedPost = savedData?.at(0)
 
-    const { data } = await supabase.storage.from("bricn-image-bucket")
+    const { data: uploadData } = await supabase.storage.from(bucketName)
         .upload(`thumbnail/${savedPost.id}.jpg`, thumbnail, {
             upsert: true
         })
 
-    if(data){
-        const imageUrl = await supabase.storage.from("bricn-image-bucket")
-            .getPublicUrl(data?.path)
+    if(uploadData){
+        const imageUrl = await supabase.storage.from(bucketName)
+            .getPublicUrl(uploadData?.path)
             .data
             .publicUrl
 

@@ -16,11 +16,11 @@ export default function PostThumbnail({
         <li key={post.id}>
 			<Link
 				href={`/post/${post.id}`}
-				className="border-b pb-3 rounded-sm w-[18rem] h-[17rem] border-bricn-100 hover:bg-bricn-100 duration-200 grid gap-y-2"
+				className="border-b pb-3 rounded-sm border-bricn-100 hover:bg-bricn-100 duration-200 grid gap-y-2"
 			>
-				<div className="rounded-sm w-[18rem] h-[10rem] bg-black">
+				<div className="rounded-sm aspect-[5/3] bg-black">
                     {post.image_url && (
-                        <div className="w-[18rem] h-[10rem] relative">
+                        <div className="aspect-[5/3] relative">
                             <Image
                             src={post.image_url}
                             alt="Thumbnail Image"
@@ -30,11 +30,8 @@ export default function PostThumbnail({
                         </div>
                     )}
                 </div>
-                <div className="px-2">
-                    <div>
-                        <p className="text-sm text-bricn-300">{post.category}</p>
-                        <h1 className="text-lg text-bricn-500">{post.title}</h1>
-                    </div>
+                <div>
+                    <h1 className="text-lg text-bricn-500">{post.title}</h1>
                     <div className="flex gap-x-4 text-bricn-200 text-sm">
                         <div className="flex gap-x-1 items-center">
                             <IconCalendarWeek size={18} />
