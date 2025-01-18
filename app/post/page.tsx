@@ -13,9 +13,7 @@ export default function Page() {
 
     useEffect(() => {
         const fetchPosts = async () => {
-            const fetchPosts = await fetch("/api/post", {
-                next: { revalidate: 20 }
-            }).then(res => res.json())
+            const fetchPosts = await fetch("/api/post").then(res => res.json())
             setPosts(fetchPosts)
         }
 
@@ -53,16 +51,16 @@ export default function Page() {
 
 	return (
 		<div>
-            <div className="flex">
-                <div className="flex gap-x-1 my-3">
+            <div className="flex my-3">
+                <div className="flex gap-x-5">
                     {
                         categories.map((c) => (
                             <div
                                 onClick={() => onFilterCategory(c.name)}
-                                className={`p-1 rounded-sm border ${category === c.name ? "bg-bricn-200 text-white" : "hover:bg-bricn-100 hover:text-bricn-300"}`}
+                                className={`${category === c.name ? "text-bricn-300" : "hover:text-bricn-200 text-bricn-100"}`}
                                 key={c.name}
                             >
-                                    {`${c.name} ${c.count}`}
+                                    <p className="text-2xl uppercase font-bold">{`${c.name} ${c.count}`}</p>
                             </div>
                         ))
                     }

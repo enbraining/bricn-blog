@@ -8,6 +8,7 @@ import MarkdownContent from "@/app/components/content/MarkdownContent";
 import IconCalendarWeek from "@/app/components/icons/IconCalendarWeek";
 import IconStopwatch from "@/app/components/icons/IconStopwatch";
 import { formatYearMonthDay } from "@/app/lib/date";
+import { getDescription } from "@/app/lib/seo";
 import { getBaseUrl } from "@/app/lib/url";
 import { Post } from "@/app/types/Post";
 import { Metadata } from "next";
@@ -20,7 +21,7 @@ export const generateMetadata = async ({ params }: { params: Promise<{ id: strin
 
     return {
         title: post.title,
-        description: post.content?.substring(0, 100)
+        description: getDescription(post.content || "")
     }
 }
 

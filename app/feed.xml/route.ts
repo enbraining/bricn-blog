@@ -1,4 +1,5 @@
 import RSS from "rss";
+import { getDescription } from "../lib/seo";
 import { supabase } from "../lib/supabase";
 import type { Post } from "../types/Post";
 
@@ -21,7 +22,7 @@ export async function GET() {
     (await getPosts()).data?.map((post: Post) => {
         feed.item({
             title: post.title || "",
-            description: post.content?.substring(0, 100) || "",
+            description: getDescription(post.content || ""),
             url: `https://bricn.net/post/${post.id}`,
             date: post.created_at || new Date()
         });
