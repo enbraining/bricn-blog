@@ -1,6 +1,6 @@
 "use client"
 
-import { supabaseClient } from "@/app/lib/supabase"
+import { supabase } from "@/app/lib/supabase"
 import Form from "next/form"
 import { useCallback } from "react"
 
@@ -12,7 +12,7 @@ export default function Page(){
         }
 
         const fetchToken = async () => {
-            await supabaseClient.auth.signInWithPassword(body)
+            await supabase.auth.signInWithPassword(body)
         }
 
         fetchToken()
