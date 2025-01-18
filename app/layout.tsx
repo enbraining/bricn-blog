@@ -13,8 +13,8 @@ const localFont = LocalFont({
 });
 
 export const metadata: Metadata = {
-	title: "Bricn Portfolio",
-	description: "Donghak Kim's portfolio",
+	title: "Bricn blog",
+	description: "Donghak Kim's tech blog",
 };
 
 export default function RootLayout({
