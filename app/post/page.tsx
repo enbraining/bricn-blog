@@ -52,7 +52,7 @@ export default function Page() {
 	return (
 		<div>
             <div className="flex my-3">
-                <div className="flex gap-x-5">
+                <div className="flex gap-x-5 overflow-x-scroll">
                     {
                         categories.map((c) => (
                             <div
