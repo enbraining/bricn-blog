@@ -30,7 +30,7 @@ export default function RootLayout({
 				)}
 				<ThemeProvider>
 					<SessionProvider>
-						<div className="lg:mx-[10rem] md:mx-[6rem] mx-[1rem]">
+						<div className="lg:mx-[4rem] md:mx-[2rem] mx-[1rem]">
 							<div className="min-h-[92vh] mb-8">
 								<Header />
 								{children}
