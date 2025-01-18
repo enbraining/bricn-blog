@@ -2,7 +2,6 @@
 
 import { useTheme } from "next-themes";
 import HoverLink from "./HoverLink";
-import { SignToggle } from "./auth/SignToggle";
 import IconMoon from "./icons/IconMoon";
 import IconSun from "./icons/IconSun";
 
@@ -17,7 +16,6 @@ export default function Header() {
 				<HoverLink href={"/post"}>블로그</HoverLink>
 			</div>
 			<div className="ml-auto flex items-center gap-x-6">
-				<SignToggle />
 				<div className="hover:text-headerHover text-header">
 					{theme === "white" ? (
 						// biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
