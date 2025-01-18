@@ -42,12 +42,19 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
         const fetchPost = async () => {
             const { data } = await supabase.from("posts").select("*").eq("id", id).single()
 
+            const title = data.title
+            const content = data.content
+            const category = data.category
+
             setPost((prev) => ({
-                ...prev,
-                title: data.title,
-                content: data.content,
-                category: data.category,
+                ...prev, title, content, category
             }))
+
+            const fileBody = {
+                title, content, category
+            }
+
+            await supabase.storage.from(config.supabaseBucketName).upload(`history/${new Date().toISOString().slice(0, 19)}.txt`, JSON.stringify(fileBody))
         }
 
         if(id) fetchPost()
