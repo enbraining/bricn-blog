@@ -3,7 +3,6 @@
 import { MDEditor } from "@/app/components/editor/MDEditor";
 import { config } from "@/app/lib/config";
 import { supabase } from "@/app/lib/supabase";
-import { getBaseUrl } from "@/app/lib/url";
 import { Post } from "@/app/types/Post";
 import Form from "next/form";
 import { redirect } from "next/navigation";
@@ -41,16 +40,13 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
 
     useEffect(() => {
         const fetchPost = async () => {
-            const response = await fetch(`${getBaseUrl()}/api/post/${id}`, {
-                credentials: 'include'
-            })
-            const json = await response.json()
+            const { data } = await supabase.from("posts").select("*").eq("id", id).single()
 
             setPost((prev) => ({
                 ...prev,
-                title: json.title,
-                content: json.content,
-                category: json.category,
+                title: data.title,
+                content: data.content,
+                category: data.category,
             }))
         }
 
