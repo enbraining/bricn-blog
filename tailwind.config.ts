@@ -9,12 +9,6 @@ export default {
 	],
 	theme: {
     	extend: {
-            screens: {
-                'xl': '1480px',
-                'lg': '1350px',
-                'md': '600px',
-                'sm': '100px'
-            },
     		colors: {
     			'bricn-100': 'var(--bricn-100)',
     			'bricn-200': 'var(--bricn-200)',
