@@ -7,7 +7,7 @@ export default function Myself() {
 	return (
 		<div>
 			<div className="flex items-end gap-x-3 mb-5">
-				<p className="text-2xl font-bold text-bricn-500">김동학</p>
+				<h1 className="text-2xl font-bold text-bricn-500">김동학</h1>
 				<p className="text-base text-bricn-300">Nest.js, Next.js, C++</p>
 			</div>
 			<Hr />

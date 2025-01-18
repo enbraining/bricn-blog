@@ -9,8 +9,20 @@ import IconCalendarWeek from "@/app/components/icons/IconCalendarWeek";
 import IconStopwatch from "@/app/components/icons/IconStopwatch";
 import { formatYearMonthDay } from "@/app/lib/date";
 import { getBaseUrl } from "@/app/lib/url";
+import { Post } from "@/app/types/Post";
+import { Metadata } from "next";
 import Link from "next/link";
 import readingTime from "reading-time";
+
+export const generateMetadata = async ({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> => {
+    const { id } = await params
+    const post: Post = await fetch(`${getBaseUrl()}/api/post/${id}`).then(res => res.json())
+
+    return {
+        title: post.title,
+        description: post.content?.substring(0, 100)
+    }
+}
 
 export default async function Page({
 	params,
