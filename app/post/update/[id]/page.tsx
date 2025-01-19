@@ -134,7 +134,7 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
                     <input name="title" placeholder="제목" className="border w-full p-3 text-lg col-span-2" value={post.title} onChange={onChangeTitle} />
                     <input name="category" placeholder="카테고리" className="border w-full p-3 text-lg" value={post.category} onChange={onChangeCategory} />
                 </div>
-                <div className="container">
+                <div>
                     <MDEditor
                         height={600}
                         value={post.content}

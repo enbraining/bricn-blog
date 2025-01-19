@@ -84,7 +84,7 @@ export default function Page(){
                 <input onKeyDown={onKeyDown} name="title" placeholder="제목" className="border w-full p-3 text-lg col-span-2" />
                 <input onKeyDown={onKeyDown} name="category" placeholder="카테고리" className="border w-full p-3 text-lg" />
             </div>
-            <div className="container">
+            <div>
                 <MDEditor
                     height={600}
                     value={content}
