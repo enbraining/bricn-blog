@@ -6,7 +6,7 @@ import remarkGfm from "remark-gfm";
 
 export default function MarkdownContent({ content }: { content: string }) {
 	return (
-		<div className="lg:mx-[6rem] md:mx-[0rem] sm:mx-[0rem]">
+		<div className="lg:mx-[17rem] md:mx-[0rem] sm:mx-[0rem]">
             <Markdown
                 components={{
                     code({ inline, className, children, ...props }) {
