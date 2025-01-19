@@ -16,15 +16,15 @@ export default function PostThumbnail({
         <li key={post.id}>
 			<Link
 				href={`/post/${post.id}`}
-				className="border-b pb-3 rounded-sm border-bricn-100 hover:bg-bricn-100 duration-200 grid gap-y-2"
+				className="pb-3 grid gap-y-2 group"
 			>
-				<div className="rounded-sm aspect-[5/3] bg-black">
+				<div className="rounded-xl aspect-[6/3] bg-black">
                     {post.image_url && (
-                        <div className="aspect-[5/3] relative">
+                        <div className="aspect-[6/3] relative overflow-hidden rounded-xl">
                             <Image
                             src={post.image_url}
                             alt="Thumbnail Image"
-                            className="rounded-sm absolute inset-0 object-cover"
+                            className="group-hover:scale-110 rounded-xl absolute inset-0 object-cover transition-transform duration-300"
                             fill
                             />
                         </div>
