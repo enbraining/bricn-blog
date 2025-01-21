@@ -15,7 +15,7 @@ export default function MarkdownContent({ content }: { content: string }) {
             <Markdown
                 remarkPlugins={[remarkGfm, remarkMath]}
                 rehypePlugins={[rehypeKatex, rehypePrismPlus as Pluggable]}
-                className="markdown-body"
+                className="markdown-body overflow-x-auto"
             >
                 {content}
             </Markdown>
