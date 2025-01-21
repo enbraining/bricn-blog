@@ -1,4 +1,5 @@
-/* light */
+@import url('./markdown-list.css');
+
 .markdown-body {
   color-scheme: light;
   -ms-text-size-adjust: 100%;
@@ -313,25 +314,6 @@
   border-left: .25em solid #d1d9e0;
 }
 
-.markdown-body ul,
-.markdown-body ol {
-  margin-top: 0;
-  margin-bottom: 0;
-  padding-left: 2em;
-}
-
-.markdown-body ol ol,
-.markdown-body ul ol {
-  list-style-type: lower-roman;
-}
-
-.markdown-body ul ul ol,
-.markdown-body ul ol ol,
-.markdown-body ol ul ol,
-.markdown-body ol ol ol {
-  list-style-type: lower-alpha;
-}
-
 .markdown-body dd {
   margin-left: 0;
 }
@@ -409,8 +391,6 @@
 
 .markdown-body p,
 .markdown-body blockquote,
-.markdown-body ul,
-.markdown-body ol,
 .markdown-body dl,
 .markdown-body table,
 .markdown-body pre,
@@ -494,52 +474,6 @@
 .markdown-body summary h2 {
   padding-bottom: 0;
   border-bottom: 0;
-}
-
-.markdown-body ul.no-list,
-.markdown-body ol.no-list {
-  padding: 0;
-  list-style-type: none;
-}
-
-.markdown-body ol[type="a s"] {
-  list-style-type: lower-alpha;
-}
-
-.markdown-body ol[type="A s"] {
-  list-style-type: upper-alpha;
-}
-
-.markdown-body ol[type="i s"] {
-  list-style-type: lower-roman;
-}
-
-.markdown-body ol[type="I s"] {
-  list-style-type: upper-roman;
-}
-
-.markdown-body ol[type="1"] {
-  list-style-type: decimal;
-}
-
-.markdown-body div>ol:not([type]) {
-  list-style-type: decimal;
-}
-
-.markdown-body ul ul,
-.markdown-body ul ol,
-.markdown-body ol ol,
-.markdown-body ol ul {
-  margin-top: 0;
-  margin-bottom: 0;
-}
-
-.markdown-body li>p {
-  margin-top: 1rem;
-}
-
-.markdown-body li+li {
-  margin-top: .25em;
 }
 
 .markdown-body dl {
@@ -798,36 +732,6 @@
   border-top: 1px solid #d1d9e0;
 }
 
-.markdown-body .footnotes ol {
-  padding-left: 1rem;
-}
-
-.markdown-body .footnotes ol ul {
-  display: inline-block;
-  padding-left: 1rem;
-  margin-top: 1rem;
-}
-
-.markdown-body .footnotes li {
-  position: relative;
-}
-
-.markdown-body .footnotes li:target::before {
-  position: absolute;
-  top: calc(0.5rem*-1);
-  right: calc(0.5rem*-1);
-  bottom: calc(0.5rem*-1);
-  left: calc(1.5rem*-1);
-  pointer-events: none;
-  content: "";
-  border: 2px solid #0969da;
-  border-radius: 6px;
-}
-
-.markdown-body .footnotes li:target {
-  color: #1f2328;
-}
-
 .markdown-body .footnotes .data-footnote-backref g-emoji {
   font-family: monospace;
 }
@@ -1009,14 +913,6 @@
 .markdown-body .task-list-item-checkbox {
   margin: 0 .2em .25em -1.4em;
   vertical-align: middle;
-}
-
-.markdown-body ul:dir(rtl) .task-list-item-checkbox {
-  margin: 0 -1.6em .25em .2em;
-}
-
-.markdown-body ol:dir(rtl) .task-list-item-checkbox {
-  margin: 0 -1.6em .25em .2em;
 }
 
 .markdown-body .contains-task-list:hover .task-list-item-convert-container,

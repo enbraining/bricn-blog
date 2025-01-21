@@ -13,7 +13,6 @@ import { Pluggable } from 'unified';
 
 export default function MarkdownContent({ content }: { content: string }) {
 	return (
-		<div className="lg:mx-[17rem] md:mx-[0rem] sm:mx-[0rem]">
             <Markdown
                 remarkPlugins={[remarkGfm, remarkMath]}
                 rehypePlugins={[rehypeKatex, rehypePrismPlus as Pluggable]}
@@ -21,6 +20,5 @@ export default function MarkdownContent({ content }: { content: string }) {
             >
                 {content}
             </Markdown>
-        </div>
 	);
 }

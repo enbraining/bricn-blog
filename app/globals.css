@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 @import url('@/app/css/line-number.css');
-@import url('@/app/css/github-markdown-light.css');
+@import url('@/app/css/markdown/github-markdown-light.css');
 
 :root {
     --bricn-0: rgb(250 250 250);

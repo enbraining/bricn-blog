@@ -1,10 +1,8 @@
 "use client"
 
 import { useCallback } from "react";
-import IconBrandX from "../icons/IconBrandX";
-import IconCopy from "../icons/IconCopy";
 
-export default function ContentShare({ path, title }: { path: string, title: string }) {
+export default function ContentShare({ path }: { path: string }) {
     const copyToClipboard = useCallback(async () => {
         try {
           await navigator.clipboard.writeText(`https://bricn.net${path}`);
@@ -14,22 +12,11 @@ export default function ContentShare({ path, title }: { path: string, title: str
         }
     }, [path])
 
-    const onClickShareX = useCallback(() => {
-        const link = encodeURIComponent(`https://bricn.net${path}`);
-        const text = encodeURIComponent(`Bricn | ${title}`);
-        const twitterIntent = `https://twitter.com/intent/tweet?text=${text}&url=${link}`;
-        window.open(twitterIntent, '_blank');
-    }, [path, title])
-
     return (
         <div className="flex gap-x-2 text-bricn-300">
             {/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
             <div onClick={copyToClipboard} className="cursor-pointer">
-                <IconCopy size={24} />
-            </div>
-            {/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
-            <div onClick={onClickShareX} className="cursor-pointer">
-                <IconBrandX size={24} />
+                <p>공유하기</p>
             </div>
         </div>
     )
