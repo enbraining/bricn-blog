@@ -4,11 +4,9 @@ import { formatYearMonthDay } from "@/app/lib/date";
 import type { Post } from "@/app/types/Post";
 import Image from "next/image";
 import Link from "next/link";
-import readingTime from "reading-time";
-import IconCalendarWeek from "../icons/IconCalendarWeek";
-import IconStopwatch from "../icons/IconStopwatch";
+import H3 from "../basic/H3";
 
-export default function PostThumbnail({
+export default function Thumbnail({
 	post,
 }: { post: Post }) {
 	if (!post) return null;
@@ -31,16 +29,9 @@ export default function PostThumbnail({
                     )}
                 </div>
                 <div>
-                    <h1 className="text-lg text-bricn-500">{post.title}</h1>
+                    <H3>{post.title}</H3>
                     <div className="flex gap-x-4 text-bricn-200 text-sm">
-                        <div className="flex gap-x-1 items-center">
-                            <IconCalendarWeek size={18} />
-                            <p>{formatYearMonthDay(post.created_at)}</p>
-                        </div>
-                        <div className="flex gap-x-1 items-center">
-                            <IconStopwatch size={18} />
-                            <p>{`${(readingTime(post.content || "").minutes + 1) | 0}분`}</p>
-                        </div>
+                        <p>{`${formatYearMonthDay(post.created_at)}에 생성됨`}</p>
                     </div>
                 </div>
 			</Link>

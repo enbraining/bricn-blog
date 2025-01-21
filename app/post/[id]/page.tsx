@@ -1,18 +1,17 @@
 "use server";
 
-import ContentBio from "@/app/components/content/ContentBio";
-import GiscusComment from "@/app/components/content/GiscusComment";
-import MarkdownContent from "@/app/components/content/MarkdownContent";
+import ContentBio from "@/app/components/markdown/ContentBio";
+import GiscusComment from "@/app/components/markdown/GiscusComment";
+import MarkdownContent from "@/app/components/markdown/MarkdownContent";
 import { formatYearMonthDay } from "@/app/lib/date";
 import { getDescription } from "@/app/lib/seo";
 import { supabase } from "@/app/lib/supabase";
-import { Post } from "@/app/types/Post";
 import { Metadata } from "next";
 import readingTime from "reading-time";
 
 export const generateMetadata = async ({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> => {
     const { id } = await params
-    const post: Post = (await supabase.from('posts').select('*').eq('id', id).single()).data;
+    const { data: post } = await supabase.from('posts').select('*').eq('id', id).single();
 
     return {
         title: post.title,
@@ -26,8 +25,7 @@ export default async function Page({
 	params: Promise<{ id: string }>;
 }) {
     const { id } = await params
-    const query = await supabase.from('posts').select('*').eq('id', id).single();
-    const post: Post = query.data
+    const { data: post } = await supabase.from('posts').select('*').eq('id', id).single();
 
 	return (
 		<div>
@@ -45,16 +43,6 @@ export default async function Page({
                 </div>
             </div>
 			<GiscusComment />
-            <ins className="adsbygoogle"
-                style={{ display: "block" }}
-                data-ad-client="ca-pub-5938651528318065"
-                data-ad-slot="8217244863"
-                data-ad-format="auto"
-                data-full-width-responsive="true"
-            />
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
 		</div>
 	);
 }

@@ -1,10 +1,10 @@
 "use client";
 
-import Hr from "../components/Hr";
+import H3 from "../components/basic/H3";
+import Hr from "../components/basic/Hr";
 import LineLink from "../components/LineLink";
 import LineTitle from "../components/LineTitle";
 import PortfolioMyself from "../components/PortfolioMyself";
-import H1 from "../components/basic/H1";
 
 export default function Page() {
 	return (
@@ -30,7 +30,7 @@ export default function Page() {
 					</div>
             </div>
             <div className="mt-12">
-                <h1 className="text-xl font-semibold text-bricn-500">자기소개</h1>
+                <H3>자기소개</H3>
                 <Hr />
                 <div className="grid gap-y-3">
                     <p>아키텍쳐와 함께 하는 개발자 김동학입니다. 많은 패러다임과 서비스들을 접하면서 역량을 키우고 있습니다.</p>
@@ -39,12 +39,12 @@ export default function Page() {
                 </div>
             </div>
             <div className="mt-12">
-                <H1>기술 스택</H1>
+                <H3>기술 스택</H3>
                 <Hr />
                 <p>Next.js, Typescript, AWS, Spring Boot, Java, Kotlin</p>
             </div>
             <div className="mt-12">
-                <H1>자격증 및 외국어</H1>
+                <H3>자격증 및 외국어</H3>
                 <Hr />
                 <div className="grid gap-y-2">
                     <LineTitle
@@ -58,20 +58,9 @@ export default function Page() {
                 </div>
             </div>
             <div className="mt-12">
-                <H1>프로젝트</H1>
+                <H3>프로젝트</H3>
                 <Hr />
-                {/* <ContentThumbnailList contents={projects} /> */}
             </div>
-            <ins className="adsbygoogle"
-                style={{ display: "block" }}
-                data-ad-client="ca-pub-5938651528318065"
-                data-ad-slot="8217244863"
-                data-ad-format="auto"
-                data-full-width-responsive="true"
-            />
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
 		</div>
 	);
 }

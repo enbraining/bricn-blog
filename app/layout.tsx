@@ -4,8 +4,8 @@ import LocalFont from "next/font/local";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import "./globals.css";
-import GoogleAds from "./lib/GoogleAds";
-import GoogleAnalytics from "./lib/GoogleAnalytics";
+import GoogleAds from "./components/google/GoogleAds";
+import GoogleAnalytics from "./components/google/GoogleAnalytics";
 
 const localFont = LocalFont({
 	src: "../public/fonts/PretendardVariable.woff2",

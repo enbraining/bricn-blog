@@ -1,3 +1,4 @@
+import H2 from "./basic/H2";
 import IconAt from "./icons/IconAt";
 import IconSchool from "./icons/IconSchool";
 
@@ -5,7 +6,7 @@ export default function PortfolioMyself() {
 	return (
 		<div>
 			<div className="mb-3 inline-block">
-				<p className="text-2xl font-bold text-bricn-500">김동학</p>
+				<H2>김동학</H2>
 				<p className="text-base text-bricn-300">Backend Engineer</p>
 			</div>
 			<ul className="text-base grid gap-y-1">

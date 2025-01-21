@@ -4,11 +4,6 @@ import { getBaseUrl } from "./app/lib/url";
 const nextConfig: NextConfig = {
 	images: {
 		remotePatterns: [
-			{
-                // Youtube Thumbnail
-				protocol: "https",
-				hostname: "i.ytimg.com",
-			},
             {
                 protocol: "https",
                 hostname: "upgxsmxvczlxleomheol.supabase.co",

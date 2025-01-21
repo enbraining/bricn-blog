@@ -1,8 +1,8 @@
 "use client"
 
 import { useCallback, useEffect, useState } from "react";
-import ContentThumbnailList from "./components/contentThumb/PostThumbList";
-import { ThumbSkeletonList } from "./components/contentThumb/ThumbSkeletonList";
+import ContentThumbnailList from "./components/thumbnail/ThumbnailList";
+import { Skeleton } from "./components/ui/skeleton";
 import { supabase } from "./lib/supabase";
 import { Category } from "./types/Category";
 import { Post } from "./types/Post";
@@ -80,18 +80,15 @@ export default function Page() {
             {
                 posts.length > 0 ?
                     <ContentThumbnailList posts={posts} /> :
-                    <ThumbSkeletonList />
+                    (
+                        <div className="grid grid-cols-4 gap-4">
+                            <Skeleton className="aspect-square" />
+                            <Skeleton className="aspect-square" />
+                            <Skeleton className="aspect-square" />
+                            <Skeleton className="aspect-square" />
+                        </div>
+                    )
             }
-            <ins className="adsbygoogle"
-                style={{ display: "block" }}
-                data-ad-client="ca-pub-5938651528318065"
-                data-ad-slot="8217244863"
-                data-ad-format="auto"
-                data-full-width-responsive="true"
-            />
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
 		</div>
 	);
 }

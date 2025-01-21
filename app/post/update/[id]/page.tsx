@@ -1,6 +1,6 @@
 "use client"
 
-import { MDEditor } from "@/app/components/editor/MDEditor";
+import { MarkdownEditor } from "@/app/components/markdown/MarkdownEditor";
 import { config } from "@/app/lib/config";
 import { supabase } from "@/app/lib/supabase";
 import { Post } from "@/app/types/Post";
@@ -128,7 +128,7 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
                     <input name="category" placeholder="카테고리" className="border w-full p-3 text-lg" value={post.category} onChange={onChangeCategory} />
                 </div>
                 <div>
-                    <MDEditor
+                    <MarkdownEditor
                         height={600}
                         value={post.content}
                         onChange={onChangeContent}

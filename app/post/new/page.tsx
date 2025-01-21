@@ -1,8 +1,8 @@
 "use client"
 
+import { MarkdownEditor } from "@/app/components/markdown/MarkdownEditor";
 import { config } from "@/app/lib/config";
 import { supabase } from "@/app/lib/supabase";
-import MDEditor from "@uiw/react-md-editor";
 import Form from 'next/form';
 import { redirect } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
@@ -85,7 +85,7 @@ export default function Page(){
                 <input onKeyDown={onKeyDown} name="category" placeholder="카테고리" className="border w-full p-3 text-lg" />
             </div>
             <div>
-                <MDEditor
+                <MarkdownEditor
                     height={600}
                     value={content}
                     onChange={onChangeContent}

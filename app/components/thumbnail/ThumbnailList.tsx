@@ -1,9 +1,9 @@
 "use client";
 
 import type { Post } from "@/app/types/Post";
-import ContentThumbnail from "./PostThumb";
+import ContentThumbnail from "./Thumbnail";
 
-export default function ContentThumbnailList({
+export default function ThumbnailList({
 	posts,
 }: { posts: Post[] }) {
 	return (

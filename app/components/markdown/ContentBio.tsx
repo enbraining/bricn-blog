@@ -1,5 +1,5 @@
+import H1 from "../basic/H1";
 import ContentShare from "./ContentShare";
-import ContentTitle from "./ContentTitle";
 
 export default function ContentBio({ title, id }: {
     title: string;
@@ -10,7 +10,7 @@ export default function ContentBio({ title, id }: {
     return (
         <div>
             <div className="grid border-b mt-5 mb-12 pb-3 gap-y-4">
-                <ContentTitle>{title}</ContentTitle>
+                <H1>{title}</H1>
                 <ContentShare path={`/post/${id}`} />
             </div>
         </div>
