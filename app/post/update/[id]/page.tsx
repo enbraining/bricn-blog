@@ -17,6 +17,7 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
         content: undefined,
         category: undefined,
         created_at: undefined,
+        modified_at: undefined,
         image_url: undefined
     })
 
