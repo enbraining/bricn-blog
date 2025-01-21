@@ -11,15 +11,7 @@ import React, { useCallback, useEffect, useState } from "react";
 export default function Page({ params }: { params: Promise<{ id: string }> }) {
     const [session, setSession] = useState(false)
     const [id, setId] = useState("")
-    const [post, setPost] = useState<Post>({
-        id: undefined,
-        title: undefined,
-        content: undefined,
-        category: undefined,
-        created_at: undefined,
-        modified_at: undefined,
-        image_url: undefined
-    })
+    const [post, setPost] = useState<Post>({} as Post)
 
     useEffect(() => {
         const fetchSession = async () => {
