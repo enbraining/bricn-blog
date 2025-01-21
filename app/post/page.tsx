@@ -82,6 +82,16 @@ export default function Page() {
                     <ContentThumbnailList posts={posts} /> :
                     <ThumbSkeletonList />
             }
+            <ins className="adsbygoogle"
+                style={{ display: "block" }}
+                data-ad-client="ca-pub-5938651528318065"
+                data-ad-slot="8217244863"
+                data-ad-format="auto"
+                data-full-width-responsive="true"
+            />
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
 		</div>
 	);
 }
