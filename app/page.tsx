@@ -66,19 +66,16 @@ export default function Page() {
   return (
     <div>
       <div className="flex my-3">
-        <div className="flex gap-x-5 overflow-x-scroll">
+        <div className="flex gap-x-5 overflow-x-auto">
           {categories.map((c) => (
             <div
               onClick={() => onFilterCategory(c.name)}
               className={`${category === c.name ? 'text-bricn-300' : 'hover:text-bricn-200 text-bricn-100'}`}
               key={c.name}
             >
-              <p className="text-2xl uppercase font-bold">{`${c.name} ${c.count}`}</p>
+              <p className="whitespace-nowrap text-2xl uppercase font-bold">{`${c.name} ${c.count}`}</p>
             </div>
           ))}
-        </div>
-        <div className="ml-auto">
-          <p className="p-1 rounded-sm border">{'>'}</p>
         </div>
       </div>
       {posts.length > 0 ? (
