@@ -1,1 +1,3 @@
-# Bricn Blog
+# Bricn blog
+
+Based `Next.js` + `Supabase`
