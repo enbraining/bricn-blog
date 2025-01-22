@@ -1,5 +1,5 @@
-import dynamic from "next/dynamic";
+import dynamic from 'next/dynamic';
 
-export const MarkdownEditor = dynamic(() => import("@uiw/react-md-editor"), {
-    ssr: false,
+export const MarkdownEditor = dynamic(() => import('@uiw/react-md-editor'), {
+  ssr: false,
 });

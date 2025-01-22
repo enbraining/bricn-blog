@@ -1,5 +1,5 @@
 .markdown-body ul {
-    list-style-type: disc;
+  list-style-type: disc;
 }
 
 .markdown-body ul,
@@ -23,8 +23,8 @@
 
 .markdown-body ul,
 .markdown-body ol {
-    margin-top: 0;
-    margin-bottom: 1rem;
+  margin-top: 0;
+  margin-bottom: 1rem;
 }
 
 .markdown-body ul.no-list,
@@ -33,27 +33,27 @@
   list-style-type: none;
 }
 
-.markdown-body ol[type="a s"] {
+.markdown-body ol[type='a s'] {
   list-style-type: lower-alpha;
 }
 
-.markdown-body ol[type="A s"] {
+.markdown-body ol[type='A s'] {
   list-style-type: upper-alpha;
 }
 
-.markdown-body ol[type="i s"] {
+.markdown-body ol[type='i s'] {
   list-style-type: lower-roman;
 }
 
-.markdown-body ol[type="I s"] {
+.markdown-body ol[type='I s'] {
   list-style-type: upper-roman;
 }
 
-.markdown-body ol[type="1"] {
+.markdown-body ol[type='1'] {
   list-style-type: decimal;
 }
 
-.markdown-body div>ol:not([type]) {
+.markdown-body div > ol:not([type]) {
   list-style-type: decimal;
 }
 
@@ -65,48 +65,48 @@
   margin-bottom: 0;
 }
 
-.markdown-body li>p {
+.markdown-body li > p {
   margin-top: 1rem;
 }
 
-.markdown-body li+li {
-  margin-top: .25em;
+.markdown-body li + li {
+  margin-top: 0.25em;
 }
 
 .markdown-body .footnotes ol {
-    padding-left: 1rem;
-  }
+  padding-left: 1rem;
+}
 
-  .markdown-body .footnotes ol ul {
-    display: inline-block;
-    padding-left: 1rem;
-    margin-top: 1rem;
-  }
+.markdown-body .footnotes ol ul {
+  display: inline-block;
+  padding-left: 1rem;
+  margin-top: 1rem;
+}
 
-  .markdown-body .footnotes li {
-    position: relative;
-  }
+.markdown-body .footnotes li {
+  position: relative;
+}
 
-  .markdown-body .footnotes li:target::before {
-    position: absolute;
-    top: calc(0.5rem*-1);
-    right: calc(0.5rem*-1);
-    bottom: calc(0.5rem*-1);
-    left: calc(1.5rem*-1);
-    pointer-events: none;
-    content: "";
-    border: 2px solid #0969da;
-    border-radius: 6px;
-  }
+.markdown-body .footnotes li:target::before {
+  position: absolute;
+  top: calc(0.5rem * -1);
+  right: calc(0.5rem * -1);
+  bottom: calc(0.5rem * -1);
+  left: calc(1.5rem * -1);
+  pointer-events: none;
+  content: '';
+  border: 2px solid #0969da;
+  border-radius: 6px;
+}
 
-  .markdown-body .footnotes li:target {
-    color: #1f2328;
-  }
+.markdown-body .footnotes li:target {
+  color: #1f2328;
+}
 
-  .markdown-body ul:dir(rtl) .task-list-item-checkbox {
-    margin: 0 -1.6em .25em .2em;
-  }
+.markdown-body ul:dir(rtl) .task-list-item-checkbox {
+  margin: 0 -1.6em 0.25em 0.2em;
+}
 
-  .markdown-body ol:dir(rtl) .task-list-item-checkbox {
-    margin: 0 -1.6em .25em .2em;
-  }
+.markdown-body ol:dir(rtl) .task-list-item-checkbox {
+  margin: 0 -1.6em 0.25em 0.2em;
+}

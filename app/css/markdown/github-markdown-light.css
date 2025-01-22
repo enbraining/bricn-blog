@@ -8,7 +8,8 @@
   -webkit-text-size-adjust: 100%;
   margin: 0;
   color: #1f2328;
-  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans',
+    Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
   font-size: 16px;
   line-height: 1.5;
   word-wrap: break-word;
@@ -105,7 +106,7 @@
   overflow: hidden;
   background: transparent;
   border-bottom: 1px solid #d1d9e0b3;
-  height: .25em;
+  height: 0.25em;
   padding: 0;
   margin: 1.5rem 0;
   background-color: #d1d9e0;
@@ -121,33 +122,33 @@
   line-height: inherit;
 }
 
-.markdown-body [type=button],
-.markdown-body [type=reset],
-.markdown-body [type=submit] {
+.markdown-body [type='button'],
+.markdown-body [type='reset'],
+.markdown-body [type='submit'] {
   -webkit-appearance: button;
   appearance: button;
 }
 
-.markdown-body [type=checkbox],
-.markdown-body [type=radio] {
+.markdown-body [type='checkbox'],
+.markdown-body [type='radio'] {
   box-sizing: border-box;
   padding: 0;
 }
 
-.markdown-body [type=number]::-webkit-inner-spin-button,
-.markdown-body [type=number]::-webkit-outer-spin-button {
+.markdown-body [type='number']::-webkit-inner-spin-button,
+.markdown-body [type='number']::-webkit-outer-spin-button {
   height: auto;
 }
 
-.markdown-body [type=search]::-webkit-search-cancel-button,
-.markdown-body [type=search]::-webkit-search-decoration {
+.markdown-body [type='search']::-webkit-search-cancel-button,
+.markdown-body [type='search']::-webkit-search-decoration {
   -webkit-appearance: none;
   appearance: none;
 }
 
 .markdown-body ::-webkit-input-placeholder {
   color: inherit;
-  opacity: .54;
+  opacity: 0.54;
 }
 
 .markdown-body ::-webkit-file-upload-button {
@@ -167,13 +168,13 @@
 
 .markdown-body hr::before {
   display: table;
-  content: "";
+  content: '';
 }
 
 .markdown-body hr::after {
   display: table;
   clear: both;
-  content: "";
+  content: '';
 }
 
 .markdown-body table {
@@ -196,25 +197,25 @@
 }
 
 .markdown-body a:focus,
-.markdown-body [role=button]:focus,
-.markdown-body input[type=radio]:focus,
-.markdown-body input[type=checkbox]:focus {
+.markdown-body [role='button']:focus,
+.markdown-body input[type='radio']:focus,
+.markdown-body input[type='checkbox']:focus {
   outline: 2px solid #0969da;
   outline-offset: -2px;
   box-shadow: none;
 }
 
 .markdown-body a:focus:not(:focus-visible),
-.markdown-body [role=button]:focus:not(:focus-visible),
-.markdown-body input[type=radio]:focus:not(:focus-visible),
-.markdown-body input[type=checkbox]:focus:not(:focus-visible) {
+.markdown-body [role='button']:focus:not(:focus-visible),
+.markdown-body input[type='radio']:focus:not(:focus-visible),
+.markdown-body input[type='checkbox']:focus:not(:focus-visible) {
   outline: solid 1px transparent;
 }
 
 .markdown-body a:focus-visible,
-.markdown-body [role=button]:focus-visible,
-.markdown-body input[type=radio]:focus-visible,
-.markdown-body input[type=checkbox]:focus-visible {
+.markdown-body [role='button']:focus-visible,
+.markdown-body input[type='radio']:focus-visible,
+.markdown-body input[type='checkbox']:focus-visible {
   outline: 2px solid #0969da;
   outline-offset: -2px;
   box-shadow: none;
@@ -222,17 +223,24 @@
 
 .markdown-body a:not([class]):focus,
 .markdown-body a:not([class]):focus-visible,
-.markdown-body input[type=radio]:focus,
-.markdown-body input[type=radio]:focus-visible,
-.markdown-body input[type=checkbox]:focus,
-.markdown-body input[type=checkbox]:focus-visible {
+.markdown-body input[type='radio']:focus,
+.markdown-body input[type='radio']:focus-visible,
+.markdown-body input[type='checkbox']:focus,
+.markdown-body input[type='checkbox']:focus-visible {
   outline-offset: 0;
 }
 
 .markdown-body kbd {
   display: inline-block;
   padding: 0.25rem;
-  font: 11px ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+  font:
+    11px ui-monospace,
+    SFMono-Regular,
+    SF Mono,
+    Menlo,
+    Consolas,
+    Liberation Mono,
+    monospace;
   line-height: 10px;
   color: #1f2328;
   vertical-align: middle;
@@ -252,7 +260,7 @@
   margin: 0;
   padding: 0 1em;
   color: #59636e;
-  border-left: .25em solid #d1d9e0;
+  border-left: 0.25em solid #d1d9e0;
 }
 
 .markdown-body dd {
@@ -262,14 +270,28 @@
 .markdown-body tt,
 .markdown-body code,
 .markdown-body samp {
-  font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    SF Mono,
+    Menlo,
+    Consolas,
+    Liberation Mono,
+    monospace;
   font-size: 12px;
 }
 
 .markdown-body pre {
   margin-top: 0;
   margin-bottom: 0;
-  font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    SF Mono,
+    Menlo,
+    Consolas,
+    Liberation Mono,
+    monospace;
   font-size: 12px;
   word-wrap: normal;
 }
@@ -293,20 +315,20 @@
 
 .markdown-body::before {
   display: table;
-  content: "";
+  content: '';
 }
 
 .markdown-body::after {
   display: table;
   clear: both;
-  content: "";
+  content: '';
 }
 
-.markdown-body>*:first-child {
+.markdown-body > *:first-child {
   margin-top: 0 !important;
 }
 
-.markdown-body>*:last-child {
+.markdown-body > *:last-child {
   margin-bottom: 0 !important;
 }
 
@@ -340,11 +362,11 @@
   margin-bottom: 1rem;
 }
 
-.markdown-body blockquote>:first-child {
+.markdown-body blockquote > :first-child {
   margin-top: 0;
 }
 
-.markdown-body blockquote>:last-child {
+.markdown-body blockquote > :last-child {
   margin-bottom: 0;
 }
 
@@ -375,7 +397,7 @@
   border: 1px solid #d1d9e0;
 }
 
-.markdown-body table td>:last-child {
+.markdown-body table td > :last-child {
   margin-bottom: 0;
 }
 
@@ -392,11 +414,11 @@
   background-color: transparent;
 }
 
-.markdown-body img[align=right] {
+.markdown-body img[align='right'] {
   padding-left: 20px;
 }
 
-.markdown-body img[align=left] {
+.markdown-body img[align='left'] {
   padding-right: 20px;
 }
 
@@ -411,7 +433,7 @@
   overflow: hidden;
 }
 
-.markdown-body span.frame>span {
+.markdown-body span.frame > span {
   display: block;
   float: left;
   width: auto;
@@ -439,7 +461,7 @@
   clear: both;
 }
 
-.markdown-body span.align-center>span {
+.markdown-body span.align-center > span {
   display: block;
   margin: 13px auto 0;
   overflow: hidden;
@@ -457,7 +479,7 @@
   clear: both;
 }
 
-.markdown-body span.align-right>span {
+.markdown-body span.align-right > span {
   display: block;
   margin: 13px 0 0;
   overflow: hidden;
@@ -487,7 +509,7 @@
   overflow: hidden;
 }
 
-.markdown-body span.float-right>span {
+.markdown-body span.float-right > span {
   display: block;
   margin: 13px auto 0;
   overflow: hidden;
@@ -496,7 +518,7 @@
 
 .markdown-body code,
 .markdown-body tt {
-  padding: .2em .4em;
+  padding: 0.2em 0.4em;
   margin: 0;
   font-size: 85%;
   white-space: break-spaces;
@@ -590,11 +612,11 @@
 }
 
 .markdown-body [data-footnote-ref]::before {
-  content: "[";
+  content: '[';
 }
 
 .markdown-body [data-footnote-ref]::after {
-  content: "]";
+  content: ']';
 }
 
 .markdown-body .footnotes {
@@ -731,8 +753,8 @@
   color: #0a3069;
 }
 
-.markdown-body [role=button]:focus:not(:focus-visible),
-.markdown-body [role=tabpanel][tabindex="0"]:focus:not(:focus-visible),
+.markdown-body [role='button']:focus:not(:focus-visible),
+.markdown-body [role='tabpanel'][tabindex='0']:focus:not(:focus-visible),
 .markdown-body button:focus:not(:focus-visible),
 .markdown-body summary:focus:not(:focus-visible),
 .markdown-body a:focus:not(:focus-visible) {
@@ -740,7 +762,7 @@
   box-shadow: none;
 }
 
-.markdown-body [tabindex="0"]:focus:not(:focus-visible),
+.markdown-body [tabindex='0']:focus:not(:focus-visible),
 .markdown-body details-dialog:focus:not(:focus-visible) {
   outline: none;
 }
@@ -748,7 +770,7 @@
 .markdown-body g-emoji {
   display: inline-block;
   min-width: 1ch;
-  font-family: "Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   font-size: 1em;
   font-style: normal !important;
   font-weight: 400;
@@ -773,7 +795,7 @@
   cursor: pointer;
 }
 
-.markdown-body .task-list-item+.task-list-item {
+.markdown-body .task-list-item + .task-list-item {
   margin-top: 0.25rem;
 }
 
@@ -782,12 +804,14 @@
 }
 
 .markdown-body .task-list-item-checkbox {
-  margin: 0 .2em .25em -1.4em;
+  margin: 0 0.2em 0.25em -1.4em;
   vertical-align: middle;
 }
 
 .markdown-body .contains-task-list:hover .task-list-item-convert-container,
-.markdown-body .contains-task-list:focus-within .task-list-item-convert-container {
+.markdown-body
+  .contains-task-list:focus-within
+  .task-list-item-convert-container {
   display: block;
   width: auto;
   height: 24px;
@@ -799,10 +823,10 @@
   filter: invert(50%);
 }
 
-.markdown-body>*:first-child>.heading-element:first-child {
+.markdown-body > *:first-child > .heading-element:first-child {
   margin-top: 0 !important;
 }
 
-.markdown-body .highlight pre:has(+.zeroclipboard-container) {
+.markdown-body .highlight pre:has(+ .zeroclipboard-container) {
   min-height: 52px;
 }
