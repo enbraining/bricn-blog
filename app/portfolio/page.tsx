@@ -2,29 +2,14 @@
 
 import H3 from '../components/basic/H3';
 import Hr from '../components/basic/Hr';
-import LineLink from '../components/LineLink';
 import LineTitle from '../components/LineTitle';
 import PortfolioMyself from '../components/PortfolioMyself';
 
 export default function Page() {
   return (
     <div>
-      <div className="grid sm:grid-cols-2 grid-cols-1 gap-y-5 items-start">
+      <div className="grid gap-y-5 items-start">
         <PortfolioMyself />
-        <div className="grid gap-y-2">
-          <LineLink type="GITHUB" href={'https://github.com/enbraining'}>
-            Github
-          </LineLink>
-          <LineLink type="LINKEDIN" href={'https://linkedin.com/in/enbraining'}>
-            LinkedIn
-          </LineLink>
-          <LineLink
-            type="SOLVEDAC"
-            href={'https://solved.ac/profile/enbraining'}
-          >
-            Solved.ac
-          </LineLink>
-        </div>
       </div>
       <div className="mt-12">
         <H3>자기소개</H3>

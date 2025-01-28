@@ -5,13 +5,14 @@ import IconChessBishop from './icons/IconChessBishop';
 import IconCode from './icons/IconCode';
 import IconExternalLink from './icons/IconExternalLink';
 import IconQuestionMark from './icons/IconQuestionMark';
+import IconBrandYoutube from './icons/IconBrandYoutube';
 
 export default function LineLink({
   type,
   href,
   children,
 }: {
-  type: 'GITHUB' | 'LINKEDIN' | 'CHESSCOM' | 'SOLVEDAC';
+  type: 'GITHUB' | 'LINKEDIN' | 'CHESSCOM' | 'SOLVEDAC' | 'YOUTUBE';
   href: string;
   children: React.ReactNode;
 }) {
@@ -24,6 +25,8 @@ export default function LineLink({
       <IconChessBishop size={18} />
     ) : type === 'SOLVEDAC' ? (
       <IconCode size={18} />
+    ) : type === 'YOUTUBE' ? (
+      <IconBrandYoutube size={18} />
     ) : (
       <IconQuestionMark size={18} />
     );
