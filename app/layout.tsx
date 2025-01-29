@@ -28,7 +28,7 @@ export default function RootLayout({
         )}
         <div className="md:mx-[2rem] mx-[1rem]">
           <Header />
-          <div className="py-24">{children}</div>
+          <div className="py-4">{children}</div>
           <Footer />
         </div>
       </body>

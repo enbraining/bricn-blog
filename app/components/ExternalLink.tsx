@@ -1,5 +1,5 @@
+import { IconExternalLink } from '@tabler/icons-react';
 import Link from 'next/link';
-import IconExternalLink from './icons/IconExternalLink';
 
 export default function ExternalLink({
   href,

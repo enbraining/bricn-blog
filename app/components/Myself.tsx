@@ -1,7 +1,5 @@
+import { IconAt, IconBriefcase, IconSchool } from '@tabler/icons-react';
 import Hr from './basic/Hr';
-import IconAt from './icons/IconAt';
-import IconBriefcase from './icons/IconBriefcase';
-import IconSchool from './icons/IconSchool';
 
 export default function Myself() {
   return (
