@@ -1,6 +1,5 @@
+import { IconAt, IconSchool } from '@tabler/icons-react';
 import H2 from './basic/H2';
-import IconAt from './icons/IconAt';
-import IconSchool from './icons/IconSchool';
 
 export default function PortfolioMyself() {
   return (
