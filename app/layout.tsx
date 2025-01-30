@@ -26,7 +26,7 @@ export default function RootLayout({
         {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS && (
           <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS} />
         )}
-        <div className="md:mx-[2rem] mx-[1rem]">
+        <div className="md:mx-[10rem] mx-[1rem]">
           <Header />
           <div className="py-4">{children}</div>
           <Footer />
