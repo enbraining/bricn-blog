@@ -28,11 +28,13 @@ export default function Page() {
               name="Github"
             />
             <LineLink
+              classname="hover:border-[#006EAC] hover:bg-[#141e23]"
               icon={<IconBrandLinkedin size={22} />}
               href={'https://linkedin.com/in/enbraining'}
               name="LinkedIn"
             />
             <LineLink
+              classname="hover:border-[#EE0002] hover:bg-[#2b1919]"
               icon={<IconBrandYoutube size={22} />}
               href={'https://youtube.com/@enbraining'}
               name="Youtube"
@@ -46,11 +48,13 @@ export default function Page() {
           <Hr />
           <div className="grid gap-y-2">
             <LineLink
+              classname="hover:border-[#18CE3B] hover:bg-[#0e1e11]"
               icon={<IconArrowBadgeRight size={22} />}
               href={'https://solved.ac/profile/enbraining'}
               name="Solved.ac"
             />
             <LineLink
+              classname="hover:border-[#0076C0] hover:bg-[#11191e]"
               icon={<IconCode size={22} />}
               href={'https://www.acmicpc.net/user/enbraining'}
               name="Baekjoon"
@@ -64,9 +68,10 @@ export default function Page() {
           <Hr />
           <div className="grid gap-y-2">
             <LineLink
+              classname="hover:border-[#5D9948] hover:bg-[#182011]"
               icon={<IconChessBishop size={22} />}
               href={'https://www.chess.com/member/enbraining'}
-              name="Chess.com"
+              name="Chess.com (486)"
             />
           </div>
         </div>

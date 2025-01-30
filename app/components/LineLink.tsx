@@ -5,20 +5,22 @@ export default function LineLink({
   icon,
   href,
   name,
+  classname,
 }: {
   icon: React.ReactNode;
   href: string;
   name: string;
+  classname?: string;
 }) {
   return (
     <Link
       href={href}
-      className="hover:border-bricn-700 border-bricn-800 duration-500 gap-x-5 text-base flex items-center border rounded-lg py-3 px-5"
+      className={`${classname || 'hover:border-[#5F5F5F]'} text-bricn-400 hover:text-bricn-100 border-bricn-800 duration-500 gap-x-5 text-base flex items-center border rounded-lg py-3 px-5`}
       target="_blank"
     >
-      <div className="text-bricn-300">{icon}</div>
-      <p className="text-bricn-400">{name}</p>
-      <IconExternalLink size={20} className="ml-auto text-bricn-400" />
+      <div>{icon}</div>
+      <p>{name}</p>
+      <IconExternalLink size={20} className="ml-auto" />
     </Link>
   );
 }

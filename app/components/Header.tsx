@@ -14,7 +14,7 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 py-4 z-10 group flex">
-      <div className="ml-auto flex">
+      <div className="ml-auto flex text-bricn-300">
         {isToggle && (
           <div className="flex">
             <Link
