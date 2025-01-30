@@ -12,7 +12,7 @@ export default function ContentBio({
 }) {
   return (
     <div>
-      <div className="grid border-b mt-5 mb-12 pb-3 gap-y-4">
+      <div className="grid border-b border-bricn-800 mt-5 mb-12 pb-3 gap-y-4">
         <H1>{title}</H1>
         <ContentShare path={`/post/${id}`} />
       </div>

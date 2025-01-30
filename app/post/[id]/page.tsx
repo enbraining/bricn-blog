@@ -47,7 +47,7 @@ export default async function Page({
         readingTime={readingTime(post?.content || '').minutes + 1}
         id={post.id || '0'}
       />
-      <div className="flex xl:mx-[13rem] lg:mx-[8rem] md:mx-[0rem] sm:mx-[0rem] gap-x-8">
+      <div className="flex lg:mx-[8rem] md:mx-[0rem] sm:mx-[0rem] gap-x-8">
         <MarkdownContent content={post?.content || ''} />
         <div className="flex-1 sm:block max-w-fit hidden text-bricn-200 whitespace-nowrap text-sm">
           <p>{`${formatYearMonthDay(post?.created_at)}에 생성함`}</p>

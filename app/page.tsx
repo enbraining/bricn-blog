@@ -70,7 +70,7 @@ export default function Page() {
           {categories.map((c) => (
             <div
               onClick={() => onFilterCategory(c.name)}
-              className={`${category === c.name ? 'text-bricn-300' : 'hover:text-bricn-200 text-bricn-100'}`}
+              className={`${category === c.name ? 'text-bricn-700' : 'hover:text-bricn-600 text-bricn-800'}`}
               key={c.name}
             >
               <p className="whitespace-nowrap text-2xl uppercase font-bold">{`${c.name} ${c.count}`}</p>

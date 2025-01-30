@@ -19,21 +19,21 @@ export default function Header() {
           <div className="flex">
             <Link
               href={'/portfolio'}
-              className="bg-white hover:bg-bricn-100 bg-opacity-50 p-3 rounded-full flex gap-x-3 duration-200"
+              className="hover:bg-bricn-800 bg-opacity-50 p-3 rounded-full flex gap-x-3 duration-200"
             >
               <IconBriefcase size={24} />
               <p className="hidden group-hover:block">Portfolio</p>
             </Link>
             <Link
               href={'/'}
-              className="bg-white hover:bg-bricn-100 bg-opacity-50 p-3 rounded-full flex gap-x-3 duration-200"
+              className="hover:bg-bricn-800 bg-opacity-50 p-3 rounded-full flex gap-x-3 duration-200"
             >
               <IconBlockquote size={24} />
               <p className="hidden group-hover:block">Blog</p>
             </Link>
             <Link
               href={'/links'}
-              className="bg-white hover:bg-bricn-100 bg-opacity-50 p-3 rounded-full flex gap-x-3 duration-200"
+              className="hover:bg-bricn-800 bg-opacity-50 p-3 rounded-full flex gap-x-3 duration-200"
             >
               <IconLink size={24} />
               <p className="hidden group-hover:block">Links</p>
@@ -42,7 +42,7 @@ export default function Header() {
         )}
         <div
           onClick={() => setToggle(!isToggle)}
-          className="bg-white hover:bg-bricn-100 bg-opacity-50 p-3 rounded-full flex gap-x-3 duration-200"
+          className="hover:bg-bricn-800 bg-opacity-50 p-3 rounded-full flex gap-x-3 duration-200"
         >
           <IconMenu2 size={24} />
         </div>

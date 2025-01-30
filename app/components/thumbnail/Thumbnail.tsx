@@ -11,7 +11,7 @@ export default function Thumbnail({ post }: { post: Post }) {
   return (
     <li key={post.id}>
       <Link href={`/post/${post.id}`} className="pb-3 grid gap-y-2 group">
-        <div className="rounded-xl aspect-[6/3] bg-black">
+        <div className="rounded-xl aspect-[6/3] bg-bricn-800">
           {post.image_url && (
             <div className="aspect-[6/3] relative overflow-hidden rounded-xl">
               <Image
@@ -25,7 +25,7 @@ export default function Thumbnail({ post }: { post: Post }) {
         </div>
         <div>
           <H3>{post.title}</H3>
-          <div className="flex gap-x-4 text-bricn-200 text-sm">
+          <div className="flex gap-x-4 text-bricn-100 text-sm">
             <p>{`${formatYearMonthDay(post.created_at)}에 생성됨`}</p>
           </div>
         </div>

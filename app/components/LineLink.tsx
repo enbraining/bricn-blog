@@ -13,7 +13,7 @@ export default function LineLink({
   return (
     <Link
       href={href}
-      className="hover:border-bricn-200 duration-500 border-bricn-100 gap-x-5 text-base flex items-center border rounded-lg py-3 px-5"
+      className="hover:border-bricn-700 border-bricn-800 duration-500 gap-x-5 text-base flex items-center border rounded-lg py-3 px-5"
       target="_blank"
     >
       <div className="text-bricn-300">{icon}</div>

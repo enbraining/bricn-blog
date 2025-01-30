@@ -10,12 +10,16 @@ export default {
   theme: {
     extend: {
       colors: {
+        'bricn-0': 'var(--bricn-0)',
         'bricn-100': 'var(--bricn-100)',
         'bricn-200': 'var(--bricn-200)',
         'bricn-300': 'var(--bricn-300)',
         'bricn-400': 'var(--bricn-400)',
         'bricn-500': 'var(--bricn-500)',
         'bricn-600': 'var(--bricn-600)',
+        'bricn-700': 'var(--bricn-700)',
+        'bricn-800': 'var(--bricn-800)',
+        'bricn-900': 'var(--bricn-900)',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {
