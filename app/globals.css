@@ -2,8 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('@/app/css/line-number.css');
-@import url('@/app/css/markdown/github-markdown-light.css');
+@import url('@/app/css/markdown/github-markdown-dark.css');
 
 :root {
   --bricn-0: rgb(255 255 255);

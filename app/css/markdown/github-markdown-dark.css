@@ -1,5 +1,4 @@
-@import url('/app/globals.css');
-@import url('../line-number.css');
+@import url('./line-number.css');
 
 /* dark */
 .markdown-body {

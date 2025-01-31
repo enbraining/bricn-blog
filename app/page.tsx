@@ -65,18 +65,16 @@ export default function Page() {
 
   return (
     <div>
-      <div className="flex my-3">
-        <div className="flex gap-x-5 overflow-x-auto">
-          {categories.map((c) => (
-            <div
-              onClick={() => onFilterCategory(c.name)}
-              className={`${category === c.name ? 'text-bricn-700' : 'hover:text-bricn-600 text-bricn-800'}`}
-              key={c.name}
-            >
-              <p className="whitespace-nowrap text-2xl uppercase font-bold">{`${c.name} ${c.count}`}</p>
-            </div>
-          ))}
-        </div>
+      <div className="mb-10 flex gap-x-5">
+        {categories.map((c) => (
+          <div
+            onClick={() => onFilterCategory(c.name)}
+            className={`${category === c.name ? 'text-bricn-300' : 'hover:text-bricn-500 text-bricn-700'}`}
+            key={c.name}
+          >
+            <p className="whitespace-nowrap uppercase">{`${c.name} ${c.count}`}</p>
+          </div>
+        ))}
       </div>
       {posts.length > 0 ? (
         <ContentThumbnailList posts={posts} />
