@@ -1,50 +1,20 @@
 'use client';
 
-import {
-  IconBlockquote,
-  IconBriefcase,
-  IconLink,
-  IconMenu2,
-} from '@tabler/icons-react';
-import Link from 'next/link';
+import { IconMenu } from '@tabler/icons-react';
 import { useState } from 'react';
+import HoverLink from './basic/HoverLink';
 
 export default function Header() {
   const [isToggle, setToggle] = useState(false);
 
   return (
-    <header className="sticky top-0 py-4 z-10 group flex">
-      <div className="ml-auto flex text-bricn-300">
-        {isToggle && (
-          <div className="flex">
-            <Link
-              href={'/portfolio'}
-              className="hover:bg-bricn-800 bg-opacity-50 p-3 rounded-full flex gap-x-3 duration-200"
-            >
-              <IconBriefcase size={24} />
-              <p className="hidden group-hover:block">Portfolio</p>
-            </Link>
-            <Link
-              href={'/'}
-              className="hover:bg-bricn-800 bg-opacity-50 p-3 rounded-full flex gap-x-3 duration-200"
-            >
-              <IconBlockquote size={24} />
-              <p className="hidden group-hover:block">Blog</p>
-            </Link>
-            <Link
-              href={'/links'}
-              className="hover:bg-bricn-800 bg-opacity-50 p-3 rounded-full flex gap-x-3 duration-200"
-            >
-              <IconLink size={24} />
-              <p className="hidden group-hover:block">Links</p>
-            </Link>
-          </div>
-        )}
-        <div
-          onClick={() => setToggle(!isToggle)}
-          className="hover:bg-bricn-800 bg-opacity-50 p-3 rounded-full flex gap-x-3 duration-200"
-        >
-          <IconMenu2 size={24} />
+    <header className="sticky top-0 py-6 z-10 flex">
+      <div className="ml-auto flex text-bricn-200 items-center gap-x-6">
+        <HoverLink href={'/portfolio'}>Portfolio</HoverLink>
+        <HoverLink href={'/'}>Blog</HoverLink>
+        <HoverLink href={'/links'}>Links</HoverLink>
+        <div onClick={() => setToggle(!isToggle)} className="ml-2">
+          <IconMenu size={24} strokeWidth={1.5} />
         </div>
       </div>
     </header>
