@@ -22,6 +22,11 @@ body {
   background: var(--bricn-900);
 }
 
+input {
+  background-color: var(--bricn-800);
+  border-color: var(--bricn-700);
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

@@ -1,5 +1,6 @@
 'use client';
 
+import Button from '@/app/components/form/Button';
 import { MarkdownEditor } from '@/app/components/markdown/MarkdownEditor';
 import { config } from '@/app/lib/config';
 import { supabase } from '@/app/lib/supabase';
@@ -142,22 +143,22 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
 
   return (
     <Form action={onSubmit} className="grid gap-y-5">
-      <input placeholder="Thumbnail Image" type="file" name="thumbnail" />
-      <div className="grid grid-cols-3 gap-x-3">
+      <div className="grid grid-cols-7 gap-x-3">
         <input
           name="title"
           placeholder="제목"
-          className="border w-full p-3 text-lg col-span-2"
+          className="border w-full p-3 text-lg col-span-4"
           value={post.title}
           onChange={onChangeTitle}
         />
         <input
           name="category"
           placeholder="카테고리"
-          className="border w-full p-3 text-lg"
+          className="border w-full p-3 text-lg col-span-2"
           value={post.category}
           onChange={onChangeCategory}
         />
+        <Button type="submit">저장하기</Button>
       </div>
       <div>
         <MarkdownEditor
@@ -165,14 +166,6 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
           value={post.content}
           onChange={onChangeContent}
         />
-      </div>
-      <div>
-        <button
-          type="submit"
-          className="px-7 py-3 bg-bricn-100 active:bg-bricn-200"
-        >
-          저장하기
-        </button>
       </div>
     </Form>
   );
