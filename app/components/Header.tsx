@@ -10,14 +10,12 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 py-6 z-10 flex items-center">
-      <div>
-        <Link
-          className="font-semibold hover:text-bricn-300 duration-300 text-bricn-100"
-          href={'/'}
-        >
-          Bricn Tech Blog
-        </Link>
-      </div>
+      <Link
+        className="sm:block hidden font-semibold hover:text-bricn-300 duration-300 text-bricn-100"
+        href={'/'}
+      >
+        Bricn Tech Blog
+      </Link>
       <div className="ml-auto flex text-bricn-200 items-center gap-x-6">
         <HoverLink href={'/portfolio'}>Portfolio</HoverLink>
         <HoverLink href={'/'}>Blog</HoverLink>
