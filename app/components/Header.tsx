@@ -18,7 +18,7 @@ export default function Header() {
       </Link>
       <div className="sm:ml-auto sm:w-min w-full ml-0 flex text-bricn-200 items-center gap-x-6">
         <HoverLink href={'/portfolio'}>Portfolio</HoverLink>
-        <HoverLink href={'/'}>Blog</HoverLink>
+        <HoverLink href={'/post'}>Blog</HoverLink>
         <HoverLink href={'/links'}>Links</HoverLink>
         <div onClick={() => setToggle(!isToggle)} className="ml-auto">
           <IconMenu size={24} strokeWidth={1.5} />
