@@ -3,7 +3,7 @@
 import 'react-cmdk/dist/cmdk.css';
 import CommandPalette, { filterItems, getItemIndex } from 'react-cmdk';
 import { useEffect, useState } from 'react';
-import { supabase } from '../lib/supabase';
+import { supabase } from '../../lib/supabase';
 import { User } from '@supabase/supabase-js';
 
 const CmdK = () => {

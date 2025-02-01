@@ -1,19 +1,19 @@
 import type { Metadata } from 'next';
 import LocalFont from 'next/font/local';
-import Footer from './components/Footer';
-import Header from './components/Header';
+import Footer from './components/layout/Footer';
+import Header from './components/layout/Header';
 import './globals.css';
 import GoogleAds from './components/google/GoogleAds';
 import GoogleAnalytics from './components/google/GoogleAnalytics';
-import CmdK from './components/CmdK';
+import CmdK from './components/layout/CmdK';
+import { config } from './config';
 
 const localFont = LocalFont({
   src: '../public/fonts/PretendardVariable.woff2',
 });
 
 export const metadata: Metadata = {
-  title: 'Bricn blog',
-  description: "Donghak Kim's tech blog",
+  title: config.siteTitle,
 };
 
 export default function RootLayout({

@@ -1,5 +1,5 @@
 import { IconAt, IconSchool } from '@tabler/icons-react';
-import H2 from './basic/H2';
+import H2 from '../basic/H2';
 
 export default function Myself() {
   return (

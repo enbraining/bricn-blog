@@ -3,7 +3,7 @@
 import H3 from '../components/basic/H3';
 import Hr from '../components/basic/Hr';
 import LineTitle from '../components/basic/LineTitle';
-import PortfolioMyself from '../components/Myself';
+import PortfolioMyself from '../components/profile/Myself';
 
 export default function Page() {
   return (
