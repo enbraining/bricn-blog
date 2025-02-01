@@ -1,16 +1,18 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
-import ContentThumbnailList from '../components/thumbnail/ThumbnailList';
+import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { Skeleton } from '../components/ui/skeleton';
 import { supabase } from '../lib/supabase';
 import { Category } from '../types/Category';
 import { Post } from '../types/Post';
+import Thumbnail from '../components/thumbnail/Thumbnail';
+import readingTime from 'reading-time';
 
 export default function Page() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [category, setCategory] = useState<string | null>(null);
+  const [isFilterShort, setFilterShort] = useState(true);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -63,8 +65,23 @@ export default function Page() {
     [category]
   );
 
+  const onChangeFilterShort = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      setFilterShort(event.target.checked);
+    },
+    []
+  );
+
   return (
     <div>
+      <div className="flex items-center gap-x-2 mb-3">
+        <input
+          checked={isFilterShort}
+          onChange={onChangeFilterShort}
+          type="checkbox"
+        />
+        <label>짧은 글 허용</label>
+      </div>
       <div className="mb-3 flex gap-x-5 overflow-x-auto">
         {categories.map((c) => (
           <div
@@ -77,7 +94,21 @@ export default function Page() {
         ))}
       </div>
       {posts.length > 0 ? (
-        <ContentThumbnailList posts={posts} />
+        <div className="grid">
+          <ul className="mx-auto w-full">
+            {posts
+              .filter((post) => {
+                if (!isFilterShort) {
+                  if (readingTime(post.content || '').minutes > 1) return true;
+                  return false;
+                }
+                return true;
+              })
+              .map((post) => (
+                <Thumbnail post={post} key={post.id} />
+              ))}
+          </ul>
+        </div>
       ) : (
         <div className="grid grid-cols-4 gap-4">
           <Skeleton className="aspect-square" />

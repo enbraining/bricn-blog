@@ -5,6 +5,7 @@ import Header from './components/Header';
 import './globals.css';
 import GoogleAds from './components/google/GoogleAds';
 import GoogleAnalytics from './components/google/GoogleAnalytics';
+import CmdK from './components/CmdK';
 
 const localFont = LocalFont({
   src: '../public/fonts/PretendardVariable.woff2',
@@ -23,6 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`antialiased ${localFont.className}`}>
+        <CmdK />
         {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS && (
           <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS} />
         )}
