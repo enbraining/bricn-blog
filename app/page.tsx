@@ -5,12 +5,8 @@ import { supabase } from './lib/supabase';
 import { Category } from './types/Category';
 import { Post } from './types/Post';
 import H3 from './components/basic/H3';
-import H2 from './components/basic/H2';
-import UnderlineLink from './components/basic/UnderlineLink';
-import H4 from './components/basic/H4';
 import { formatYearMonthDay } from './lib/date';
 import Hr from './components/basic/Hr';
-import H5 from './components/basic/H5';
 
 export default function Page() {
   const [posts, setPosts] = useState<Post[]>([]);
