@@ -9,7 +9,7 @@ export default function Header() {
   const [isToggle, setToggle] = useState(false);
 
   return (
-    <header className="sticky top-0 py-6 z-10 flex items-center w-full">
+    <header className="sticky top-0 py-6 z-10 flex items-center w-full mb-16">
       <Link
         className="sm:block hidden font-semibold hover:text-bricn-300 duration-300 text-bricn-100"
         href={'/'}

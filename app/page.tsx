@@ -65,7 +65,7 @@ export default function Page() {
 
   return (
     <div>
-      <div className="mb-10 flex gap-x-5 overflow-x-auto">
+      <div className="mb-3 flex gap-x-5 overflow-x-auto">
         {categories.map((c) => (
           <div
             onClick={() => onFilterCategory(c.name)}
