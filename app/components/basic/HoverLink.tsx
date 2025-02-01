@@ -10,7 +10,7 @@ export default function HoverLink({
   return (
     <Link
       href={href}
-      className="text-bricn-100 hover:text-bricn-400 duration-200 px-3"
+      className="text-bricn-100 hover:text-bricn-400 duration-200 pr-3"
     >
       {children}
     </Link>
