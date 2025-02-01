@@ -2,7 +2,6 @@
 
 import Button from '@/app/components/form/Button';
 import { MarkdownEditor } from '@/app/components/markdown/MarkdownEditor';
-import { config } from '@/app/lib/config';
 import { supabase } from '@/app/lib/supabase';
 import Form from 'next/form';
 import { redirect } from 'next/navigation';
@@ -28,11 +27,9 @@ export default function Page() {
     (formData: FormData) => {
       const title = formData.get('title');
       const category = formData.get('category');
-      const thumbnail = formData.get('thumbnail') as File;
-      const bucketName = config.supabaseBucketName || '';
 
       const createPost = async () => {
-        const { data: savedData } = await supabase
+        await supabase
           .from('posts')
           .insert({
             title: title,
@@ -40,31 +37,6 @@ export default function Page() {
             category: category,
           })
           .select();
-
-        if (thumbnail.size !== 0) {
-          const savedPost = savedData?.at(0);
-
-          const { data: uploadData } = await supabase.storage
-            .from(bucketName)
-            .upload(`thumbnail/${savedPost.id}.jpg`, thumbnail, {
-              upsert: true,
-            });
-
-          if (uploadData) {
-            const imageUrl = await supabase.storage
-              .from(bucketName)
-              .getPublicUrl(uploadData?.path).data.publicUrl;
-
-            const { error } = await supabase
-              .from('posts')
-              .update({
-                image_url: imageUrl,
-              })
-              .eq('id', savedPost.id);
-
-            console.log(error?.cause);
-          }
-        }
       };
 
       createPost();

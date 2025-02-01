@@ -2,7 +2,6 @@
 
 import Button from '@/app/components/form/Button';
 import { MarkdownEditor } from '@/app/components/markdown/MarkdownEditor';
-import { config } from '@/app/lib/config';
 import { supabase } from '@/app/lib/supabase';
 import { Post } from '@/app/types/Post';
 import Form from 'next/form';
@@ -50,19 +49,6 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
         content,
         category,
       }));
-
-      const fileBody = {
-        title,
-        content,
-        category,
-      };
-
-      await supabase.storage
-        .from(config.supabaseBucketName)
-        .upload(
-          `history/${new Date().toISOString().slice(0, 19)}.txt`,
-          JSON.stringify(fileBody)
-        );
     };
 
     if (id) fetchPost();
@@ -97,38 +83,19 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
 
   const onSubmit = useCallback(
     (formData: FormData) => {
-      const thumbnail = formData.get('thumbnail') as File;
       const category = formData.get('category') as string;
       const title = formData.get('title') as string;
       const content = post.content;
-      const bucketName = config.supabaseBucketName;
 
       const updatePost = async () => {
-        let imageUrl: string | null = null;
-
-        if (thumbnail?.size !== 0 && thumbnail) {
-          const { data: uploadData } = await supabase.storage
-            .from(bucketName)
-            .upload(`thumbnail/${id}.jpg`, thumbnail, {
-              upsert: true,
-            });
-
-          const path = uploadData?.path as string;
-          imageUrl = await supabase.storage.from(bucketName).getPublicUrl(path)
-            .data.publicUrl;
-        }
-
-        const updateData: Record<string, string | undefined> = {
-          title: title,
-          category: category,
-          content: content,
-        };
-
-        if (imageUrl !== null) {
-          updateData.image_url = imageUrl;
-        }
-
-        await supabase.from('posts').update(updateData).eq('id', id);
+        await supabase
+          .from('posts')
+          .update({
+            title: title,
+            category: category,
+            content: content,
+          })
+          .eq('id', id);
       };
 
       updatePost();
