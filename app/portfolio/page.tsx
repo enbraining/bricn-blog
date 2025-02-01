@@ -2,8 +2,8 @@
 
 import H3 from '../components/basic/H3';
 import Hr from '../components/basic/Hr';
-import LineTitle from '../components/LineTitle';
-import PortfolioMyself from '../components/PortfolioMyself';
+import LineTitle from '../components/basic/LineTitle';
+import PortfolioMyself from '../components/Myself';
 
 export default function Page() {
   return (

@@ -1,8 +1,8 @@
 'use server';
 
-import ContentBio from '@/app/components/markdown/ContentBio';
-import GiscusComment from '@/app/components/markdown/GiscusComment';
-import MarkdownContent from '@/app/components/markdown/MarkdownContent';
+import ContentBio from '@/app/components/content/ContentBio';
+import GiscusComment from '@/app/components/content/GiscusComment';
+import MarkdownContent from '@/app/components/content/MarkdownContent';
 import { formatYearMonthDay } from '@/app/lib/date';
 import { getDescription } from '@/app/lib/seo';
 import { supabase } from '@/app/lib/supabase';

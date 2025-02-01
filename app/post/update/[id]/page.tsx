@@ -1,7 +1,7 @@
 'use client';
 
 import Button from '@/app/components/form/Button';
-import { MarkdownEditor } from '@/app/components/markdown/MarkdownEditor';
+import { MarkdownEditor } from '@/app/components/content/MarkdownEditor';
 import { supabase } from '@/app/lib/supabase';
 import { Post } from '@/app/types/Post';
 import Form from 'next/form';

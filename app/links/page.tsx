@@ -11,7 +11,7 @@ import {
 
 import H3 from '../components/basic/H3';
 import Hr from '../components/basic/Hr';
-import LineLink from '../components/LineLink';
+import LineLink from '../components/basic/LineLink';
 
 export default function Page() {
   return (

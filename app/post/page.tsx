@@ -5,7 +5,7 @@ import { Skeleton } from '../components/ui/skeleton';
 import { supabase } from '../lib/supabase';
 import { Category } from '../types/Category';
 import { Post } from '../types/Post';
-import Thumbnail from '../components/thumbnail/Thumbnail';
+import Thumbnail from '../components/content/Thumbnail';
 import readingTime from 'reading-time';
 
 export default function Page() {
