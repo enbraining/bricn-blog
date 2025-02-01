@@ -1,6 +1,6 @@
 'use client';
 
-import { ChangeEvent, useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Skeleton } from '../components/ui/skeleton';
 import { supabase } from '../lib/supabase';
 import { Category } from '../types/Category';
@@ -65,19 +65,12 @@ export default function Page() {
     [category]
   );
 
-  const onChangeFilterShort = useCallback(
-    (event: ChangeEvent<HTMLInputElement>) => {
-      setFilterShort(event.target.checked);
-    },
-    []
-  );
-
   return (
     <div>
       <div className="flex items-center gap-x-2 mb-3">
         <input
           checked={isFilterShort}
-          onChange={onChangeFilterShort}
+          onChange={() => setFilterShort(!isFilterShort)}
           type="checkbox"
         />
         <label>짧은 글 허용</label>
