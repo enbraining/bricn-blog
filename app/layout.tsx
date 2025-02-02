@@ -28,7 +28,7 @@ export default function RootLayout({
         {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS && (
           <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS} />
         )}
-        <div className="md:mx-[18rem] mx-[1rem]">
+        <div className="xl:mx-[18rem] lg:mx-[14rem] md:mx-[6rem] mx-[1rem]">
           <div className="min-h-screen">
             <Header />
             <div className="py-4">{children}</div>
