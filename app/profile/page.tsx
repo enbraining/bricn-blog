@@ -8,6 +8,16 @@ import PortfolioMyself from '../components/profile/Myself';
 export default function Page() {
   return (
     <div>
+      <div className="mb-3 print:hidden">
+        <div
+          onClick={() => {
+            window.print();
+          }}
+        >
+          저장하기
+        </div>
+        <Hr />
+      </div>
       <div className="grid gap-y-5 items-start">
         <PortfolioMyself />
       </div>
