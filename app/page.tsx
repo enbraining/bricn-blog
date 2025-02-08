@@ -6,7 +6,6 @@ import { Category } from './types/Category';
 import { Post } from './types/Post';
 import H3 from './components/basic/H3';
 import { formatYearMonthDay } from './lib/date';
-import Hr from './components/basic/Hr';
 import Link from 'next/link';
 
 export default function Page() {
