@@ -27,6 +27,21 @@ input {
   border-color: var(--bricn-700);
 }
 
+::-webkit-scrollbar-track {
+  display: none;
+}
+
+::-webkit-scrollbar {
+  background-color: transparent;
+  height: 0.3rem;
+  width: 0.3rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--bricn-800);
+  border-radius: 1rem;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

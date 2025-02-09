@@ -75,7 +75,7 @@ export default function Page() {
         />
         <label>짧은 글 허용</label>
       </div>
-      <div className="mb-3 flex gap-x-5 overflow-x-auto">
+      <div className="mb-3 flex gap-x-5 overflow-x-auto cursor-grab select-none">
         {categories.map((c) => (
           <div
             onClick={() => onFilterCategory(c.name)}
