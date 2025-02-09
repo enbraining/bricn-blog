@@ -43,6 +43,27 @@ export default function Page() {
     category.current = value;
   };
 
+  const getPosts = useCallback(async (categoryParam?: string) => {
+    const query = supabase
+      .from('posts')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (categoryParam) {
+      query.eq('category', categoryParam);
+    }
+
+    return await query;
+  }, []);
+
+  const fetchPosts = useCallback(
+    async (categoryParam?: string) => {
+      const { data: posts } = await getPosts(categoryParam);
+      setPosts(posts || []);
+    },
+    [getPosts]
+  );
+
   useEffect(() => {
     const fetchCategories = async () => {
       const { data } = await supabase.rpc('group_by_category');
@@ -52,26 +73,8 @@ export default function Page() {
   }, []);
 
   useEffect(() => {
-    const getPosts = async (categoryParam?: string) => {
-      const query = supabase
-        .from('posts')
-        .select('*')
-        .order('created_at', { ascending: false });
-
-      if (categoryParam) {
-        query.eq('category', categoryParam);
-      }
-
-      return await query;
-    };
-
-    const fetchPosts = async (categoryParam?: string) => {
-      const { data: posts } = await getPosts(categoryParam);
-      setPosts(posts || []);
-    };
-
     fetchPosts(category.current ?? undefined);
-  }, [pathname]);
+  }, [pathname, fetchPosts]);
 
   const onFilterCategory = useCallback(
     (changedCategory: string) => {
@@ -81,27 +84,9 @@ export default function Page() {
         category.current = changedCategory;
       }
 
-      const getPosts = async (categoryParam?: string) => {
-        const query = supabase
-          .from('posts')
-          .select('*')
-          .order('created_at', { ascending: false });
-
-        if (categoryParam) {
-          query.eq('category', categoryParam);
-        }
-
-        return await query;
-      };
-
-      const fetchPosts = async (categoryParam?: string) => {
-        const { data: posts } = await getPosts(categoryParam);
-        setPosts(posts || []);
-      };
-
       fetchPosts(category.current ?? undefined);
     },
-    [category]
+    [category, fetchPosts]
   );
 
   const memoizedSearchParams = useMemo(
