@@ -112,7 +112,7 @@ export default function Page() {
             className={`${category === c.name ? 'text-bricn-300' : 'hover:text-bricn-500 text-bricn-700'}`}
             key={c.name}
           >
-            <p className="whitespace-nowrap uppercase">{`${c.name} ${c.count}`}</p>
+            <p className="whitespace-nowrap uppercase">{c.name}</p>
           </div>
         ))}
         <Link
