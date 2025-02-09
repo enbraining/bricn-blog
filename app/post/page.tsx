@@ -1,11 +1,11 @@
 'use client';
 
 import {
-  Dispatch,
-  SetStateAction,
   Suspense,
   useCallback,
   useEffect,
+  useMemo,
+  useRef,
   useState,
 } from 'react';
 import { Skeleton } from '../components/ui/skeleton';
@@ -15,15 +15,19 @@ import { Post } from '../types/Post';
 import Thumbnail from '../components/content/Thumbnail';
 import readingTime from 'reading-time';
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 
 function SearchParams({
-  setQueryString,
+  onChangeCategory,
 }: {
-  setQueryString: Dispatch<SetStateAction<string | null>>;
+  onChangeCategory: (value: string) => void;
 }) {
   const searchParams = useSearchParams();
-  setQueryString(searchParams.get('category'));
+
+  const category = searchParams.get('category');
+  if (category) {
+    onChangeCategory(category);
+  }
 
   return <></>;
 }
@@ -31,73 +35,87 @@ function SearchParams({
 export default function Page() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
-  const [category, setCategory] = useState<string | null>(null);
-  const [queryString, setQueryString] = useState<string | null>(null);
+  const category = useRef<string | null>(null);
   const [isFilterShort, setFilterShort] = useState(true);
+  const pathname = usePathname();
+
+  const onChangeCategory = (value: string) => {
+    category.current = value;
+  };
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      const query = supabase
-        .from('posts')
-        .select('*')
-        .order('created_at', { ascending: false });
-
-      if (category) {
-        query.eq('category', queryString);
-      }
-
-      const { data } = await query;
-
-      setPosts(data || []);
-    };
-
     const fetchCategories = async () => {
-      const query = await supabase.rpc('group_by_category');
-      const data = query.data;
+      const { data } = await supabase.rpc('group_by_category');
       setCategories(data);
     };
-
-    fetchPosts();
     fetchCategories();
   }, []);
 
   useEffect(() => {
-    const getPosts = async () => {
+    const getPosts = async (categoryParam?: string) => {
       const query = supabase
         .from('posts')
         .select('*')
         .order('created_at', { ascending: false });
 
-      if (category) {
-        query.eq('category', category);
+      if (categoryParam) {
+        query.eq('category', categoryParam);
       }
 
       return await query;
     };
 
-    const fetchPosts = async () => {
-      const { data: posts } = await getPosts();
+    const fetchPosts = async (categoryParam?: string) => {
+      const { data: posts } = await getPosts(categoryParam);
       setPosts(posts || []);
     };
-    fetchPosts();
-  }, [category]);
+
+    fetchPosts(category.current ?? undefined);
+  }, [pathname]);
 
   const onFilterCategory = useCallback(
     (changedCategory: string) => {
-      if (category != null && category === changedCategory) {
-        setCategory(null);
+      if (category.current === changedCategory) {
+        category.current = null;
       } else {
-        setCategory(changedCategory);
+        category.current = changedCategory;
       }
+
+      const getPosts = async (categoryParam?: string) => {
+        const query = supabase
+          .from('posts')
+          .select('*')
+          .order('created_at', { ascending: false });
+
+        if (categoryParam) {
+          query.eq('category', categoryParam);
+        }
+
+        return await query;
+      };
+
+      const fetchPosts = async (categoryParam?: string) => {
+        const { data: posts } = await getPosts(categoryParam);
+        setPosts(posts || []);
+      };
+
+      fetchPosts(category.current ?? undefined);
     },
     [category]
   );
 
+  const memoizedSearchParams = useMemo(
+    () => (
+      <Suspense>
+        <SearchParams onChangeCategory={onChangeCategory} />
+      </Suspense>
+    ),
+    []
+  );
+
   return (
     <div>
-      <Suspense>
-        <SearchParams setQueryString={setQueryString} />
-      </Suspense>
+      {memoizedSearchParams}
       <div className="flex items-center gap-x-2 mb-3">
         <input
           checked={isFilterShort}
@@ -110,7 +128,7 @@ export default function Page() {
         {categories.slice(0, 8).map((c) => (
           <div
             onClick={() => onFilterCategory(c.name)}
-            className={`${category === c.name ? 'text-bricn-300' : 'hover:text-bricn-500 text-bricn-700'}`}
+            className={`${category.current === c.name ? 'text-bricn-300' : 'hover:text-bricn-500 text-bricn-700'}`}
             key={c.name}
           >
             <p className="whitespace-nowrap uppercase">{c.name}</p>

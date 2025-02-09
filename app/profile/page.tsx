@@ -1,11 +1,28 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import H3 from '../components/basic/H3';
 import Hr from '../components/basic/Hr';
 import LineTitle from '../components/basic/LineTitle';
 import PortfolioMyself from '../components/profile/Myself';
+import { Post } from '../types/Post';
+import { supabase } from '../lib/supabase';
 
 export default function Page() {
+  const [projects, setProjects] = useState<Post[]>();
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const { data } = await supabase
+        .from('posts')
+        .select('*')
+        .order('created_at', { ascending: false })
+        .eq('category', '프로젝트');
+      setProjects(data || []);
+    };
+    fetchPosts();
+  }, []);
+
   return (
     <div>
       <div className="mb-3 print:hidden">
@@ -63,6 +80,9 @@ export default function Page() {
       <div className="mt-12">
         <H3>프로젝트</H3>
         <Hr />
+        {projects?.map((project) => (
+          <div key={project.id}>{project.title}</div>
+        ))}
       </div>
     </div>
   );
