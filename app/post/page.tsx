@@ -36,12 +36,18 @@ export default function Page() {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const fetchPosts = await supabase
+      const query = supabase
         .from('posts')
         .select('*')
-        .order('created_at', { ascending: false })
-        .eq('category', category);
-      setPosts(fetchPosts.data || []);
+        .order('created_at', { ascending: false });
+
+      if (category) {
+        query.eq('category', category);
+      }
+
+      const { data } = await query;
+
+      setPosts(data || []);
     };
 
     const fetchCategories = async () => {
@@ -52,7 +58,7 @@ export default function Page() {
 
     fetchPosts();
     fetchCategories();
-  }, [category]);
+  }, []);
 
   useEffect(() => {
     const getPosts = async () => {
