@@ -18,12 +18,12 @@ import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 
 function SearchParams({
-  setCategory,
+  setQueryString,
 }: {
-  setCategory: Dispatch<SetStateAction<string | null>>;
+  setQueryString: Dispatch<SetStateAction<string | null>>;
 }) {
   const searchParams = useSearchParams();
-  setCategory(searchParams.get('category'));
+  setQueryString(searchParams.get('category'));
 
   return <></>;
 }
@@ -32,6 +32,7 @@ export default function Page() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [category, setCategory] = useState<string | null>(null);
+  const [queryString, setQueryString] = useState<string | null>(null);
   const [isFilterShort, setFilterShort] = useState(true);
 
   useEffect(() => {
@@ -42,7 +43,7 @@ export default function Page() {
         .order('created_at', { ascending: false });
 
       if (category) {
-        query.eq('category', category);
+        query.eq('category', queryString);
       }
 
       const { data } = await query;
@@ -95,7 +96,7 @@ export default function Page() {
   return (
     <div>
       <Suspense>
-        <SearchParams setCategory={setCategory} />
+        <SearchParams setQueryString={setQueryString} />
       </Suspense>
       <div className="flex items-center gap-x-2 mb-3">
         <input
