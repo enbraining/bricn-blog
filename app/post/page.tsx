@@ -1,47 +1,18 @@
 'use client';
 
-import {
-  Suspense,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Skeleton } from '../components/ui/skeleton';
 import { supabase } from '../lib/supabase';
 import { Category } from '../types/Category';
 import { Post } from '../types/Post';
 import Thumbnail from '../components/content/Thumbnail';
 import readingTime from 'reading-time';
-import Link from 'next/link';
-import { usePathname, useSearchParams } from 'next/navigation';
-
-function SearchParams({
-  onChangeCategory,
-}: {
-  onChangeCategory: (value: string) => void;
-}) {
-  const searchParams = useSearchParams();
-
-  const category = searchParams.get('category');
-  if (category) {
-    onChangeCategory(category);
-  }
-
-  return <></>;
-}
 
 export default function Page() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const category = useRef<string | null>(null);
   const [isFilterShort, setFilterShort] = useState(true);
-  const pathname = usePathname();
-
-  const onChangeCategory = (value: string) => {
-    category.current = value;
-  };
 
   const getPosts = useCallback(async (categoryParam?: string) => {
     const query = supabase
@@ -74,7 +45,7 @@ export default function Page() {
 
   useEffect(() => {
     fetchPosts(category.current ?? undefined);
-  }, [pathname, fetchPosts]);
+  }, [fetchPosts]);
 
   const onFilterCategory = useCallback(
     (changedCategory: string) => {
@@ -89,18 +60,8 @@ export default function Page() {
     [category, fetchPosts]
   );
 
-  const memoizedSearchParams = useMemo(
-    () => (
-      <Suspense>
-        <SearchParams onChangeCategory={onChangeCategory} />
-      </Suspense>
-    ),
-    []
-  );
-
   return (
     <div>
-      {memoizedSearchParams}
       <div className="flex items-center gap-x-2 mb-3">
         <input
           checked={isFilterShort}
@@ -109,22 +70,31 @@ export default function Page() {
         />
         <label>짧은 글 허용</label>
       </div>
-      <div className="mb-3 flex gap-x-5 overflow-x-auto cursor-grab select-none">
-        {categories.slice(0, 8).map((c) => (
-          <div
-            onClick={() => onFilterCategory(c.name)}
-            className={`${category.current === c.name ? 'text-bricn-300' : 'hover:text-bricn-500 text-bricn-700'}`}
-            key={c.name}
-          >
-            <p className="whitespace-nowrap uppercase">{c.name}</p>
-          </div>
-        ))}
-        <Link
-          href={'/post/category'}
-          className={`hover:text-bricn-500 text-bricn-700`}
-        >
-          <p className="whitespace-nowrap uppercase">더보기</p>
-        </Link>
+      <div className="mb-3 overflow-x-auto cursor-grab select-none gap-y-4 whitespace-nowrap">
+        <div className="flex gap-x-4">
+          {categories.slice(0, categories.length / 2).map((c) => (
+            <div
+              onClick={() => onFilterCategory(c.name)}
+              className={`${category.current === c.name ? 'text-bricn-300' : 'hover:text-bricn-500 text-bricn-700'}`}
+              key={c.name}
+            >
+              <p className="uppercase">{c.name}</p>
+            </div>
+          ))}
+        </div>
+        <div className="flex gap-x-4">
+          {categories
+            .slice(categories.length / 2 + 1, categories.length - 1)
+            .map((c) => (
+              <div
+                onClick={() => onFilterCategory(c.name)}
+                className={`${category.current === c.name ? 'text-bricn-300' : 'hover:text-bricn-500 text-bricn-700'}`}
+                key={c.name}
+              >
+                <p className="uppercase">{c.name}</p>
+              </div>
+            ))}
+        </div>
       </div>
       {posts.length > 0 ? (
         <div className="grid">
