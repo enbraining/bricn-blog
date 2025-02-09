@@ -1,12 +1,32 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import {
+  Dispatch,
+  SetStateAction,
+  Suspense,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react';
 import { Skeleton } from '../components/ui/skeleton';
 import { supabase } from '../lib/supabase';
 import { Category } from '../types/Category';
 import { Post } from '../types/Post';
 import Thumbnail from '../components/content/Thumbnail';
 import readingTime from 'reading-time';
+import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
+
+function SearchParams({
+  setCategory,
+}: {
+  setCategory: Dispatch<SetStateAction<string | null>>;
+}) {
+  const searchParams = useSearchParams();
+  setCategory(searchParams.get('category'));
+
+  return <></>;
+}
 
 export default function Page() {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -19,7 +39,8 @@ export default function Page() {
       const fetchPosts = await supabase
         .from('posts')
         .select('*')
-        .order('created_at', { ascending: false });
+        .order('created_at', { ascending: false })
+        .eq('category', category);
       setPosts(fetchPosts.data || []);
     };
 
@@ -31,7 +52,7 @@ export default function Page() {
 
     fetchPosts();
     fetchCategories();
-  }, []);
+  }, [category]);
 
   useEffect(() => {
     const getPosts = async () => {
@@ -67,6 +88,9 @@ export default function Page() {
 
   return (
     <div>
+      <Suspense>
+        <SearchParams setCategory={setCategory} />
+      </Suspense>
       <div className="flex items-center gap-x-2 mb-3">
         <input
           checked={isFilterShort}
@@ -76,7 +100,7 @@ export default function Page() {
         <label>짧은 글 허용</label>
       </div>
       <div className="mb-3 flex gap-x-5 overflow-x-auto cursor-grab select-none">
-        {categories.map((c) => (
+        {categories.slice(0, 8).map((c) => (
           <div
             onClick={() => onFilterCategory(c.name)}
             className={`${category === c.name ? 'text-bricn-300' : 'hover:text-bricn-500 text-bricn-700'}`}
@@ -85,6 +109,12 @@ export default function Page() {
             <p className="whitespace-nowrap uppercase">{`${c.name} ${c.count}`}</p>
           </div>
         ))}
+        <Link
+          href={'/post/category'}
+          className={`hover:text-bricn-500 text-bricn-700`}
+        >
+          <p className="whitespace-nowrap uppercase">더보기</p>
+        </Link>
       </div>
       {posts.length > 0 ? (
         <div className="grid">
