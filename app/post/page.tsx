@@ -1,67 +1,73 @@
 'use client';
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { Suspense, useCallback, useEffect, useRef, useState } from 'react';
 import { Skeleton } from '../components/ui/skeleton';
 import { supabase } from '../lib/supabase';
 import { Category } from '../types/Category';
 import { Post } from '../types/Post';
 import Thumbnail from '../components/content/Thumbnail';
 import readingTime from 'reading-time';
+import SearchParams from '../components/post/SearchParams';
+import Link from 'next/link';
 
 export default function Page() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
-  const category = useRef<string | null>(null);
+  const [category, setCategory] = useState<string | null>(null);
   const [isFilterShort, setFilterShort] = useState(true);
+  const isInitialRender = useRef(true);
 
-  const getPosts = useCallback(async (categoryParam?: string) => {
+  const getPosts = useCallback(async () => {
     const query = supabase
       .from('posts')
       .select('*')
       .order('created_at', { ascending: false });
 
-    if (categoryParam) {
-      query.eq('category', categoryParam);
+    if (category) {
+      query.eq('category', category);
     }
 
     return await query;
-  }, []);
+  }, [category]);
 
-  const fetchPosts = useCallback(
-    async (categoryParam?: string) => {
-      const { data: posts } = await getPosts(categoryParam);
-      setPosts(posts || []);
+  const fetchPosts = useCallback(async () => {
+    const { data: posts } = await getPosts();
+    setPosts(posts || []);
+  }, [getPosts]);
+
+  const onFilterCategory = useCallback(
+    (changedCategory: string) => {
+      if (category === changedCategory) {
+        setCategory(null);
+      } else {
+        setCategory(changedCategory);
+      }
     },
-    [getPosts]
+    [category]
   );
 
   useEffect(() => {
     const fetchCategories = async () => {
       const { data } = await supabase.rpc('group_by_category');
-      setCategories(data);
+      setCategories(data.slice(0, 7));
     };
     fetchCategories();
   }, []);
 
   useEffect(() => {
-    fetchPosts(category.current ?? undefined);
-  }, [fetchPosts]);
+    if (isInitialRender.current) {
+      isInitialRender.current = false;
+      return;
+    }
 
-  const onFilterCategory = useCallback(
-    (changedCategory: string) => {
-      if (category.current === changedCategory) {
-        category.current = null;
-      } else {
-        category.current = changedCategory;
-      }
-
-      fetchPosts(category.current ?? undefined);
-    },
-    [category, fetchPosts]
-  );
+    fetchPosts();
+  }, [fetchPosts, category]);
 
   return (
     <div>
+      <Suspense>
+        <SearchParams setCategory={setCategory} />
+      </Suspense>
       <div className="flex items-center gap-x-2 mb-3">
         <input
           checked={isFilterShort}
@@ -70,31 +76,17 @@ export default function Page() {
         />
         <label>짧은 글 허용</label>
       </div>
-      <div className="mb-3 overflow-x-auto cursor-grab select-none gap-y-4 whitespace-nowrap">
-        <div className="flex gap-x-4">
-          {categories.slice(0, categories.length / 2).map((c) => (
-            <div
-              onClick={() => onFilterCategory(c.name)}
-              className={`${category.current === c.name ? 'text-bricn-300' : 'hover:text-bricn-500 text-bricn-700'}`}
-              key={c.name}
-            >
-              <p className="uppercase">{c.name}</p>
-            </div>
-          ))}
-        </div>
-        <div className="flex gap-x-4">
-          {categories
-            .slice(categories.length / 2 + 1, categories.length - 1)
-            .map((c) => (
-              <div
-                onClick={() => onFilterCategory(c.name)}
-                className={`${category.current === c.name ? 'text-bricn-300' : 'hover:text-bricn-500 text-bricn-700'}`}
-                key={c.name}
-              >
-                <p className="uppercase">{c.name}</p>
-              </div>
-            ))}
-        </div>
+      <div className="mb-3 overflow-x-auto cursor-grab flex select-none gap-x-4 whitespace-nowrap">
+        {categories.map((c) => (
+          <div
+            onClick={() => onFilterCategory(c.name)}
+            className={`${category === c.name ? 'text-bricn-300' : 'hover:text-bricn-500 text-bricn-700'}`}
+            key={c.name}
+          >
+            <p className="uppercase">{c.name}</p>
+          </div>
+        ))}
+        <Link href={'/post/category'}>더보기</Link>
       </div>
       {posts.length > 0 ? (
         <div className="grid">
