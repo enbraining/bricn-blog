@@ -35,16 +35,9 @@ export default function Page() {
     setPosts(posts || []);
   }, [getPosts]);
 
-  const onFilterCategory = useCallback(
-    (changedCategory: string) => {
-      if (category === changedCategory) {
-        setCategory(null);
-      } else {
-        setCategory(changedCategory);
-      }
-    },
-    [category]
-  );
+  const onFilterCategory = useCallback((changedCategory: string) => {
+    setCategory((prev) => (prev === changedCategory ? null : changedCategory));
+  }, []);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -61,6 +54,7 @@ export default function Page() {
     }
 
     fetchPosts();
+    console.log('hello world');
   }, [fetchPosts, category]);
 
   return (
