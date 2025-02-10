@@ -15,6 +15,7 @@ export default function Page() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [category, setCategory] = useState<string | null>(null);
   const [isFilterShort, setFilterShort] = useState(true);
+  const [isReload, setReload] = useState(false);
   const isInitialRender = useRef(true);
 
   const getPosts = useCallback(async (value: string | null) => {
@@ -48,6 +49,7 @@ export default function Page() {
     const fetchCategories = async () => {
       const { data } = await supabase.rpc('group_by_category');
       setCategories(data.slice(0, 7));
+      setReload(!isReload);
     };
     fetchCategories();
   }, []);
@@ -58,13 +60,12 @@ export default function Page() {
       return;
     }
 
-    console.log(category);
     if (!category) {
       fetchAllPosts();
     } else {
       fetchPosts();
     }
-  }, [category]);
+  }, [fetchPosts, fetchAllPosts, category, isReload]);
 
   return (
     <div>
