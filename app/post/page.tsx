@@ -17,21 +17,26 @@ export default function Page() {
   const [isFilterShort, setFilterShort] = useState(true);
   const isInitialRender = useRef(true);
 
-  const getPosts = useCallback(async () => {
+  const getPosts = useCallback(async (value: string | null) => {
     const query = supabase
       .from('posts')
       .select('*')
       .order('created_at', { ascending: false });
 
-    if (category) {
-      query.eq('category', category);
+    if (value) {
+      query.eq('category', value);
     }
 
     return await query;
-  }, [category]);
+  }, []);
 
   const fetchPosts = useCallback(async () => {
-    const { data: posts } = await getPosts();
+    const { data: posts } = await getPosts(category);
+    setPosts(posts || []);
+  }, [getPosts, category]);
+
+  const fetchAllPosts = useCallback(async () => {
+    const { data: posts } = await getPosts(null);
     setPosts(posts || []);
   }, [getPosts]);
 
@@ -53,9 +58,13 @@ export default function Page() {
       return;
     }
 
-    fetchPosts();
-    console.log('hello world');
-  }, [fetchPosts, category]);
+    console.log(category);
+    if (!category) {
+      fetchAllPosts();
+    } else {
+      fetchPosts();
+    }
+  }, [category]);
 
   return (
     <div>
