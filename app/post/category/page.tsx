@@ -33,7 +33,7 @@ export default function Page() {
             className={`hover:text-bricn-500 text-bricn-700 bg-bricn-800 px-2 py-1 rounded-sm`}
             key={c.name}
           >
-            <p className="uppercase">{c.name}</p>
+            <p className="uppercase">{`${c.name} ${c.count}`}</p>
           </div>
         ))}
       </div>
