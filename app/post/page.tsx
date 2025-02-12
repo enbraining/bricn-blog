@@ -6,15 +6,18 @@ import { supabase } from '../lib/supabase';
 import { Category } from '../types/Category';
 import { Post } from '../types/Post';
 import Thumbnail from '../components/content/Thumbnail';
-import readingTime from 'reading-time';
 import SearchParams from '../components/post/SearchParams';
 import Link from 'next/link';
+import { Series } from '../types/Series';
+import H3 from '../components/basic/H3';
+import { formatYearMonthDay } from '../lib/date';
+import Hr from '../components/basic/Hr';
 
 export default function Page() {
   const [posts, setPosts] = useState<Post[]>([]);
+  const [series, setSeries] = useState<Series[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [category, setCategory] = useState<string | null>(null);
-  const [isFilterShort, setFilterShort] = useState(true);
   const [isReload, setReload] = useState(false);
   const isInitialRender = useRef(true);
 
@@ -47,11 +50,19 @@ export default function Page() {
 
   useEffect(() => {
     const fetchCategories = async () => {
-      const { data } = await supabase.rpc('group_by_category');
-      setCategories(data.slice(0, 7));
+      const { data: categoryData } = await supabase.rpc('group_by_category');
+      setCategories(categoryData.slice(0, 7));
       setReload(!isReload);
     };
+
+    const fetchSeries = async () => {
+      const { data: seriesData } = await supabase.from('series').select('*');
+      setSeries(seriesData ?? []);
+      console.log(seriesData?.length);
+    };
+
     fetchCategories();
+    fetchSeries();
   }, []);
 
   useEffect(() => {
@@ -72,13 +83,21 @@ export default function Page() {
       <Suspense>
         <SearchParams setCategory={setCategory} />
       </Suspense>
-      <div className="flex items-center gap-x-2 mb-3">
-        <input
-          checked={isFilterShort}
-          onChange={() => setFilterShort(!isFilterShort)}
-          type="checkbox"
-        />
-        <label>짧은 글 허용</label>
+      <div className="mb-8">
+        <H3>Series</H3>
+        <div className="grid grid-flow-col mt-2 gap-x-3 overflow-x-scroll py-2">
+          {series.map((s) => (
+            <Link
+              href={`/post/series/${s.id}`}
+              className="bg-bricn-800 px-6 py-3 w-80 rounded-sm"
+              key={s.id}
+            >
+              <H3>{s.title}</H3>
+              <p>{formatYearMonthDay(s.created_at)}</p>
+            </Link>
+          ))}
+        </div>
+        <Hr />
       </div>
       <div className="mb-3 overflow-x-auto cursor-grab flex select-none gap-x-4 whitespace-nowrap">
         {categories.map((c) => (
@@ -95,17 +114,9 @@ export default function Page() {
       {posts.length > 0 ? (
         <div className="grid">
           <ul className="mx-auto w-full">
-            {posts
-              .filter((post) => {
-                if (!isFilterShort) {
-                  if (readingTime(post.content || '').minutes > 1) return true;
-                  return false;
-                }
-                return true;
-              })
-              .map((post) => (
-                <Thumbnail post={post} key={post.id} />
-              ))}
+            {posts.map((post) => (
+              <Thumbnail post={post} key={post.id} />
+            ))}
           </ul>
         </div>
       ) : (

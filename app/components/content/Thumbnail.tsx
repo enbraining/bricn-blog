@@ -21,13 +21,7 @@ export default function Thumbnail({ post }: { post: Post }) {
           <H3>{post.title}</H3>
           <div className="gap-x-4 text-bricn-400 text-sm">
             <p>{`${formatYearMonthDay(post.created_at)}에 작성됨`}</p>
-            {reading > 1 ? (
-              <p>{reading}분이면 읽음</p>
-            ) : (
-              <div className="rounded-sm bg-bricn-800 w-fit p-1 font-semibold text-xs">
-                <p>SHORTS</p>
-              </div>
-            )}
+            <p>{reading}분이면 읽음</p>
           </div>
         </div>
       </Link>
