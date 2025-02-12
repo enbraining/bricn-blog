@@ -7,6 +7,7 @@ import LineTitle from '../components/basic/LineTitle';
 import PortfolioMyself from '../components/profile/Myself';
 import { Post } from '../types/Post';
 import { supabase } from '../lib/supabase';
+import { config } from '../config';
 
 export default function Page() {
   const [projects, setProjects] = useState<Post[]>();
@@ -64,7 +65,41 @@ export default function Page() {
       <div className="mt-12">
         <H3>기술 스택</H3>
         <Hr />
-        <p>Next.js, Typescript, AWS, Spring Boot, Java, Kotlin</p>
+        <div className="grid gap-y-6">
+          <div className="items-center gap-x-3">
+            <div className=" text-white inline rounded-full font-bold">
+              <div className="bg-green-500 w-[0.8rem] h-[0.8rem] absolute -z-10 rounded-full" />
+              <p className="ml-2">Senior</p>
+            </div>
+            <div className="flex gap-x-1">
+              {config.greenStack.map((stack) => (
+                <p key={stack}>{stack},</p>
+              ))}
+            </div>
+          </div>
+          <div className="items-center gap-x-3">
+            <div className=" text-white inline rounded-full font-bold">
+              <div className="bg-yellow-400 w-[0.8rem] h-[0.8rem] absolute -z-10 rounded-full" />
+              <p className="ml-2">Middle</p>
+            </div>
+            <div className="flex gap-x-1">
+              {config.yellowStack.map((stack) => (
+                <p key={stack}>{stack},</p>
+              ))}
+            </div>
+          </div>
+          <div className="items-center gap-x-3">
+            <div className=" text-white inline rounded-full font-bold">
+              <div className="bg-red-500 w-[0.8rem] h-[0.8rem] absolute -z-10 rounded-full" />
+              <p className="ml-2">Junior</p>
+            </div>
+            <div className="flex gap-x-1">
+              {config.redStack.map((stack) => (
+                <p key={stack}>{stack},</p>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
       <div className="mt-12">
         <H3>자격증 및 외국어</H3>
