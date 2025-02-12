@@ -65,26 +65,26 @@ export default function Page() {
       <div className="mt-12">
         <H3>기술 스택</H3>
         <Hr />
-        <div className="grid gap-y-6">
+        <div className="grid md:grid-cols-3 grid-cols-1 gap-y-6">
           <div className="items-center gap-x-3">
             <div className=" text-white inline rounded-full font-bold">
               <div className="bg-green-500 w-[0.8rem] h-[0.8rem] absolute -z-10 rounded-full" />
               <p className="ml-2">Senior</p>
             </div>
-            <div className="flex gap-x-1">
+            <div className="grid gap-x-1 ml-2">
               {config.greenStack.map((stack) => (
-                <p key={stack}>{stack},</p>
+                <p key={stack}>{stack}</p>
               ))}
             </div>
           </div>
           <div className="items-center gap-x-3">
-            <div className=" text-white inline rounded-full font-bold">
+            <div className="text-white inline rounded-full font-bold">
               <div className="bg-yellow-400 w-[0.8rem] h-[0.8rem] absolute -z-10 rounded-full" />
               <p className="ml-2">Middle</p>
             </div>
-            <div className="flex gap-x-1">
+            <div className="grid gap-x-1 ml-2">
               {config.yellowStack.map((stack) => (
-                <p key={stack}>{stack},</p>
+                <p key={stack}>{stack}</p>
               ))}
             </div>
           </div>
@@ -93,9 +93,9 @@ export default function Page() {
               <div className="bg-red-500 w-[0.8rem] h-[0.8rem] absolute -z-10 rounded-full" />
               <p className="ml-2">Junior</p>
             </div>
-            <div className="flex gap-x-1">
+            <div className="grid gap-x-1 ml-2">
               {config.redStack.map((stack) => (
-                <p key={stack}>{stack},</p>
+                <p key={stack}>{stack}</p>
               ))}
             </div>
           </div>
