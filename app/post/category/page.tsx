@@ -2,19 +2,20 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import { supabase } from '@/app/lib/supabase';
-import { Category } from '@/app/types/Category';
+import { Tag } from '@/app/types/Tag';
 import { useRouter } from 'next/navigation';
 
 export default function Page() {
-  const [categories, setCategories] = useState<Category[]>([]);
+  const [tags, setTags] = useState<Tag[]>([]);
   const router = useRouter();
 
   useEffect(() => {
-    const fetchCategories = async () => {
-      const { data } = await supabase.rpc('group_by_category');
-      setCategories(data);
+    const fetchTags = async () => {
+      const { data } = await supabase.rpc('group_by_tag');
+      setTags(data);
     };
-    fetchCategories();
+
+    fetchTags();
   }, []);
 
   const onClickHandler = useCallback(
@@ -27,7 +28,7 @@ export default function Page() {
   return (
     <div>
       <div className="mb-3 overflow-x-auto cursor-grab flex flex-wrap select-none gap-2 whitespace-nowrap">
-        {categories.map((c) => (
+        {tags.map((c) => (
           <div
             onClick={() => onClickHandler(c.name)}
             className={`hover:text-bricn-500 text-bricn-700 bg-bricn-800 px-2 py-1 rounded-sm`}

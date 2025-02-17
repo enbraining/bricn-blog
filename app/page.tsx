@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { supabase } from './lib/supabase';
-import { Category } from './types/Category';
+import { Tag } from './types/Tag';
 import { Post } from './types/Post';
 import H3 from './components/basic/H3';
 import { formatYearMonthDay } from './lib/date';
@@ -10,7 +10,7 @@ import Link from 'next/link';
 
 export default function Page() {
   const [posts, setPosts] = useState<Post[]>([]);
-  const [categories, setCategories] = useState<Category[]>([]);
+  const [tags, setTags] = useState<Tag[]>([]);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -21,14 +21,14 @@ export default function Page() {
       setPosts(fetchPosts.data || []);
     };
 
-    const fetchCategories = async () => {
-      const query = await supabase.rpc('group_by_category');
+    const fetchtags = async () => {
+      const query = await supabase.rpc('group_by_tag');
       const data = query.data;
-      setCategories(data);
+      setTags(data);
     };
 
     fetchPosts();
-    fetchCategories();
+    fetchtags();
   }, []);
 
   return (
@@ -38,7 +38,7 @@ export default function Page() {
         <H3>주로 HAM radio, 알고리즘이나 인문학을 좋아합니다.</H3>
       </div>
       <div>
-        {categories.slice(0, 5).map((c) => (
+        {tags.slice(0, 5).map((c) => (
           <Link
             href={'/post'}
             className="hover:text-bricn-500 text-bricn-700"

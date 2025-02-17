@@ -3,7 +3,7 @@
 import { Suspense, useCallback, useEffect, useRef, useState } from 'react';
 import { Skeleton } from '../components/ui/skeleton';
 import { supabase } from '../lib/supabase';
-import { Category } from '../types/Category';
+import { Tag } from '../types/Tag';
 import { Post } from '../types/Post';
 import Thumbnail from '../components/content/Thumbnail';
 import SearchParams from '../components/post/SearchParams';
@@ -11,7 +11,7 @@ import Link from 'next/link';
 
 export default function Page() {
   const [posts, setPosts] = useState<Post[]>([]);
-  const [categories, setCategories] = useState<Category[]>([]);
+  const [tags, setTags] = useState<Tag[]>([]);
   const [category, setCategory] = useState<string | null>(null);
   const [isReload, setReload] = useState(false);
   const isInitialRender = useRef(true);
@@ -44,13 +44,13 @@ export default function Page() {
   }, []);
 
   useEffect(() => {
-    const fetchCategories = async () => {
-      const { data: categoryData } = await supabase.rpc('group_by_category');
-      setCategories(categoryData.slice(0, 7));
+    const fetchTags = async () => {
+      const { data: categoryData } = await supabase.rpc('group_by_tag');
+      setTags(categoryData.slice(0, 7));
       setReload(!isReload);
     };
 
-    fetchCategories();
+    fetchTags();
   }, []);
 
   useEffect(() => {
@@ -72,7 +72,7 @@ export default function Page() {
         <SearchParams setCategory={setCategory} />
       </Suspense>
       <div className="mb-3 overflow-x-auto cursor-grab flex select-none gap-x-4 whitespace-nowrap">
-        {categories.map((c) => (
+        {tags.map((c) => (
           <div
             onClick={() => onFilterCategory(c.name)}
             className={`${category === c.name ? 'text-bricn-300' : 'hover:text-bricn-500 text-bricn-700'}`}
