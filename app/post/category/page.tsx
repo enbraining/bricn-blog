@@ -27,14 +27,14 @@ export default function Page() {
 
   return (
     <div>
-      <div className="mb-3 overflow-x-auto cursor-grab flex flex-wrap select-none gap-2 whitespace-nowrap">
+      <div className="mb-3 cursor-grab flex-wrap select-none gap-2 whitespace-nowrap">
         {tags.map((c) => (
           <div
             onClick={() => onClickHandler(c.name)}
-            className={`hover:text-bricn-500 text-bricn-700 bg-bricn-800 px-2 py-1 rounded-sm`}
+            className={`hover:text-bricn-100 text-bricn-300  px-2 py-1 rounded-sm`}
             key={c.name}
           >
-            <p className="uppercase">{`${c.name} ${c.count}`}</p>
+            <p className="uppercase">{`${c.name} (${c.count})`}</p>
           </div>
         ))}
       </div>
