@@ -2,19 +2,23 @@ import { useSearchParams } from 'next/navigation';
 import { Dispatch, SetStateAction, useEffect, useRef } from 'react';
 
 export default function SearchParams({
-  setCategory,
+  setTag,
+  setLoadingSearchParams,
 }: {
-  setCategory: Dispatch<SetStateAction<string | null>>;
+  setTag: Dispatch<SetStateAction<string | null>>;
+  setLoadingSearchParams: Dispatch<SetStateAction<boolean>>;
 }) {
   const searchParams = useSearchParams();
-  const isInitialRender = useRef(true);
+  const initialRef = useRef(true);
 
   useEffect(() => {
-    if (isInitialRender.current) {
-      isInitialRender.current = false;
-      setCategory(searchParams.get('category'));
+    if (initialRef.current) {
+      initialRef.current = false;
     }
-  }, [searchParams, setCategory]);
+
+    setLoadingSearchParams(!!searchParams);
+    setTag(searchParams.get('category'));
+  }, [searchParams, setLoadingSearchParams, setTag]);
 
   return <></>;
 }

@@ -2,7 +2,7 @@
 
 import { Suspense, useCallback, useEffect, useRef, useState } from 'react';
 import { Skeleton } from '../components/ui/skeleton';
-import { supabase } from '../lib/supabase';
+import { getPosts, supabase } from '../lib/supabase';
 import { Tag } from '../types/Tag';
 import { Post } from '../types/Post';
 import Thumbnail from '../components/content/Thumbnail';
@@ -13,46 +13,29 @@ import { IconReload } from '@tabler/icons-react';
 export default function Page() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [tags, setTags] = useState<Tag[]>([]);
-  const [category, setCategory] = useState<string | null>(null);
-  const [isReload, setReload] = useState(false);
+  const [tag, setTag] = useState<string | null>(null);
+  const [loadingSearchParams, setLoadingSearchParams] = useState(false);
   const [index, setIndex] = useState(0);
   const isInitialRender = useRef(true);
 
-  const getPosts = useCallback(
-    async (value: string | null) => {
-      const query = supabase
-        .from('posts')
-        .select('*')
-        .order('created_at', { ascending: false });
+  const onFiltertag = useCallback(
+    (changedTag: string) => {
+      setTag((prev) => (prev === changedTag ? null : changedTag));
 
-      if (value) {
-        query.eq('category', value);
-      }
-
-      query.range(index, index + 14);
-
-      return query;
+      const fetchFilterPosts = async () => {
+        const { data } = await getPosts(tag, index);
+        setPosts(data as Post[]);
+        setIndex(data?.length ?? 0);
+      };
+      fetchFilterPosts();
     },
-    [index]
+    [index, tag]
   );
-
-  const fetchPosts = useCallback(async () => {
-    const { data } = await getPosts(category);
-    setPosts((prev) => [...prev, ...(data as Post[])]);
-    setIndex((prev) => prev + (data?.length ?? 0));
-    console.log(data?.length);
-  }, [getPosts, category]);
-
-  const onFilterCategory = useCallback((changedCategory: string) => {
-    setCategory((prev) => (prev === changedCategory ? null : changedCategory));
-    setIndex(0);
-  }, []);
 
   useEffect(() => {
     const fetchTags = async () => {
-      const { data: categoryData } = await supabase.rpc('group_by_tag');
-      setTags(categoryData.slice(0, 7));
-      setReload(!isReload);
+      const { data: tagData } = await supabase.rpc('group_by_tag');
+      setTags(tagData.slice(0, 7));
     };
 
     fetchTags();
@@ -64,36 +47,46 @@ export default function Page() {
       return;
     }
 
-    if (posts.length === 0) {
-      fetchPosts();
+    const fetchInitialPosts = async () => {
+      const { data } = await getPosts(tag, index);
+      setPosts(data as Post[]);
+      setIndex(data?.length ?? 0);
+    };
+
+    if (posts.length === 0 && loadingSearchParams) {
+      fetchInitialPosts();
     }
-  }, [fetchPosts, category, isReload, posts.length]);
+  }, [index, loadingSearchParams, posts.length, tag]);
 
   const onMorePosts = useCallback(() => {
-    if (isInitialRender.current) {
-      isInitialRender.current = false;
-      return;
-    }
+    const fetchPosts = async () => {
+      const { data } = await getPosts(tag, index);
+      setPosts((prev) => [...prev, ...(data as Post[])]);
+      setIndex((prev) => prev + (data?.length ?? 0));
+    };
 
     fetchPosts();
-  }, [fetchPosts]);
+  }, [tag, index]);
 
   return (
     <div>
       <Suspense>
-        <SearchParams setCategory={setCategory} />
+        <SearchParams
+          setTag={setTag}
+          setLoadingSearchParams={setLoadingSearchParams}
+        />
       </Suspense>
       <div className="mb-3 overflow-x-auto cursor-grab flex select-none gap-x-4 whitespace-nowrap">
         {tags.map((c) => (
           <div
-            onClick={() => onFilterCategory(c.name)}
-            className={`${category === c.name ? 'text-bricn-300' : 'hover:text-bricn-500 text-bricn-700'}`}
+            onClick={() => onFiltertag(c.name)}
+            className={`${tag === c.name ? 'text-bricn-300' : 'hover:text-bricn-500 text-bricn-700'}`}
             key={c.name}
           >
             <p className="uppercase">{c.name}</p>
           </div>
         ))}
-        <Link href={'/post/category'}>더보기</Link>
+        <Link href={'/post/tag'}>더보기</Link>
       </div>
       {posts.length > 0 ? (
         <div className="grid">
