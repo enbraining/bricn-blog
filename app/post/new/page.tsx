@@ -29,18 +29,20 @@ export default function Page() {
       const category = formData.get('category');
 
       const createPost = async () => {
-        await supabase
+        const { data } = await supabase
           .from('posts')
           .insert({
             title: title,
             content: content,
             category: category,
           })
-          .select();
+          .select()
+          .single();
+
+        redirect(`/post/${data.id}`);
       };
 
       createPost();
-      redirect('/post');
     },
     [content]
   );

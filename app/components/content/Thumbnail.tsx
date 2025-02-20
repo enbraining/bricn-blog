@@ -12,10 +12,10 @@ export default function Thumbnail({ post }: { post: Post }) {
   const reading = Math.ceil(readingTime(post.content || '').minutes);
 
   return (
-    <li key={post.id}>
+    <li key={post.id} className="flex gap-x-3">
       <Link
         href={`/post/${post.id}`}
-        className="py-3 grid gap-y-2 group hover:bg-bricn-800 hover:pl-5 duration-300"
+        className="py-3 grid gap-y-2 group hover:bg-bricn-800 hover:pl-5 duration-300 w-full"
       >
         <div>
           <H3>{post.title}</H3>
