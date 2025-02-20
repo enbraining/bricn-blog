@@ -20,16 +20,18 @@ export default function Page() {
 
   const onFiltertag = useCallback(
     (changedTag: string) => {
-      setTag((prev) => (prev === changedTag ? null : changedTag));
+      const changeTag = tag === changedTag ? null : changedTag;
+      setTag(changeTag);
 
+      const INITIAL_INDEX = 0;
       const fetchFilterPosts = async () => {
-        const { data } = await getPosts(tag, index);
+        const { data } = await getPosts(changeTag, INITIAL_INDEX);
+        setIndex(data?.length ?? INITIAL_INDEX);
         setPosts(data as Post[]);
-        setIndex(data?.length ?? 0);
       };
       fetchFilterPosts();
     },
-    [index, tag]
+    [tag]
   );
 
   useEffect(() => {
