@@ -1,6 +1,13 @@
 'use client';
 
-import { Suspense, useCallback, useEffect, useRef, useState } from 'react';
+import {
+  KeyboardEvent,
+  Suspense,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { Skeleton } from '../components/ui/skeleton';
 import { getPosts, supabase } from '../lib/supabase';
 import { Tag } from '../types/Tag';
@@ -16,6 +23,7 @@ export default function Page() {
   const [tag, setTag] = useState<string | null>(null);
   const [loadingSearchParams, setLoadingSearchParams] = useState(false);
   const [index, setIndex] = useState(0);
+  const [search, setSearch] = useState<string>('');
   const isInitialRender = useRef(true);
 
   const onFiltertag = useCallback(
@@ -58,7 +66,7 @@ export default function Page() {
     if (posts.length === 0 && loadingSearchParams) {
       fetchInitialPosts();
     }
-  }, [index, loadingSearchParams, posts.length, tag]);
+  }, [index, loadingSearchParams, tag]);
 
   const onMorePosts = useCallback(() => {
     const fetchPosts = async () => {
@@ -70,6 +78,26 @@ export default function Page() {
     fetchPosts();
   }, [tag, index]);
 
+  const onSearch = useCallback(
+    (event: KeyboardEvent<HTMLInputElement>) => {
+      if (event.key === 'Enter') {
+        console.log(search);
+        const searchPosts = async () => {
+          const { data } = await supabase
+            .from('posts')
+            .select('*')
+            .ilike('title', `%${search}%`)
+            .order('created_at', { ascending: false });
+          if (data?.length !== 0) {
+            setPosts(data as Post[]);
+          }
+        };
+        searchPosts();
+      }
+    },
+    [search]
+  );
+
   return (
     <div>
       <Suspense>
@@ -79,34 +107,43 @@ export default function Page() {
         />
       </Suspense>
       <div className="grid grid-cols-7 gap-x-5">
-        <div className="col-span-5">
-          {posts.length > 0 ? (
-            <div className="grid">
+        <div className="sm:col-span-5 col-span-7">
+          <div className="grid gap-y-2">
+            <input
+              type="text"
+              className="rounded-md bg-bricn-800 py-2 px-5 ml-auto w-1/3 focus:w-full duration-200 outline-none"
+              placeholder="검색하기"
+              name="search"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              onKeyDown={onSearch}
+            ></input>
+            {posts.length > 0 ? (
               <ul className="mx-auto w-full mb-2 grid gap-y-2">
                 {posts.map((post) => (
                   <Thumbnail post={post} key={post.id} />
                 ))}
               </ul>
-              <div
-                className="bg-bricn-800 hover:bg-bricn-700 duration-300 py-2 flex rounded-md"
-                onClick={onMorePosts}
-              >
-                <div className="flex mx-auto gap-x-3 items-center">
-                  <p>더보기</p>
-                  <IconReload />
-                </div>
+            ) : (
+              <div className="grid grid-cols-4 gap-4">
+                <Skeleton className="aspect-square" />
+                <Skeleton className="aspect-square" />
+                <Skeleton className="aspect-square" />
+                <Skeleton className="aspect-square" />
+              </div>
+            )}
+            <div
+              className="bg-bricn-800 hover:bg-bricn-700 duration-300 py-2 flex rounded-md"
+              onClick={onMorePosts}
+            >
+              <div className="flex mx-auto gap-x-3 items-center">
+                <p>더보기</p>
+                <IconReload />
               </div>
             </div>
-          ) : (
-            <div className="grid grid-cols-4 gap-4">
-              <Skeleton className="aspect-square" />
-              <Skeleton className="aspect-square" />
-              <Skeleton className="aspect-square" />
-              <Skeleton className="aspect-square" />
-            </div>
-          )}
+          </div>
         </div>
-        <div className="mb-3 overflow-x-auto col-span-2 cursor-grab select-none w-full gap-x-4 whitespace-nowrap border rounded-md px-7 py-5 border-bricn-800 h-fit sticky top-36">
+        <div className="mb-3 overflow-x-auto sm:grid hidden col-span-2 cursor-grab select-none w-full gap-x-4 whitespace-nowrap border rounded-md px-7 py-5 border-bricn-800 h-fit sticky top-36">
           {tags.map((c) => (
             <div
               onClick={() => onFiltertag(c.name)}
