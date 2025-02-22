@@ -78,43 +78,47 @@ export default function Page() {
           setLoadingSearchParams={setLoadingSearchParams}
         />
       </Suspense>
-      <div className="mb-3 overflow-x-auto cursor-grab flex select-none gap-x-4 whitespace-nowrap">
-        {tags.map((c) => (
-          <div
-            onClick={() => onFiltertag(c.name)}
-            className={`${tag === c.name ? 'text-bricn-300' : 'hover:text-bricn-500 text-bricn-700'}`}
-            key={c.name}
-          >
-            <p className="uppercase">{c.name}</p>
-          </div>
-        ))}
-        <Link href={'/post/tag'}>더보기</Link>
-      </div>
-      {posts.length > 0 ? (
-        <div className="grid">
-          <ul className="mx-auto w-full mb-2">
-            {posts.map((post) => (
-              <Thumbnail post={post} key={post.id} />
-            ))}
-          </ul>
-          <div
-            className="bg-bricn-800 hover:bg-bricn-700 duration-300 py-2 flex rounded-md"
-            onClick={onMorePosts}
-          >
-            <div className="flex mx-auto gap-x-3 items-center">
-              <p>더보기</p>
-              <IconReload />
+      <div className="grid grid-cols-7 gap-x-5">
+        <div className="col-span-5">
+          {posts.length > 0 ? (
+            <div className="grid">
+              <ul className="mx-auto w-full mb-2 grid gap-y-2">
+                {posts.map((post) => (
+                  <Thumbnail post={post} key={post.id} />
+                ))}
+              </ul>
+              <div
+                className="bg-bricn-800 hover:bg-bricn-700 duration-300 py-2 flex rounded-md"
+                onClick={onMorePosts}
+              >
+                <div className="flex mx-auto gap-x-3 items-center">
+                  <p>더보기</p>
+                  <IconReload />
+                </div>
+              </div>
             </div>
-          </div>
+          ) : (
+            <div className="grid grid-cols-4 gap-4">
+              <Skeleton className="aspect-square" />
+              <Skeleton className="aspect-square" />
+              <Skeleton className="aspect-square" />
+              <Skeleton className="aspect-square" />
+            </div>
+          )}
         </div>
-      ) : (
-        <div className="grid grid-cols-4 gap-4">
-          <Skeleton className="aspect-square" />
-          <Skeleton className="aspect-square" />
-          <Skeleton className="aspect-square" />
-          <Skeleton className="aspect-square" />
+        <div className="mb-3 overflow-x-auto col-span-2 cursor-grab select-none w-full gap-x-4 whitespace-nowrap border rounded-md px-7 py-5 border-bricn-800 h-fit sticky top-36">
+          {tags.map((c) => (
+            <div
+              onClick={() => onFiltertag(c.name)}
+              className={`${tag === c.name ? 'text-bricn-300' : 'hover:text-bricn-500 text-bricn-700'}`}
+              key={c.name}
+            >
+              <p className="uppercase">{c.name}</p>
+            </div>
+          ))}
+          <Link href={'/post/tag'}>더보기</Link>
         </div>
-      )}
+      </div>
     </div>
   );
 }
