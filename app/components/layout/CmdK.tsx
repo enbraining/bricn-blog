@@ -1,15 +1,23 @@
 'use client';
 
 import 'react-cmdk/dist/cmdk.css';
-import CommandPalette, { filterItems, getItemIndex } from 'react-cmdk';
+import CommandPalette, {
+  filterItems,
+  getItemIndex,
+  JsonStructureItem,
+} from 'react-cmdk';
 import { useEffect, useState } from 'react';
 import { supabase } from '../../lib/supabase';
 import { User } from '@supabase/supabase-js';
+import { usePathname } from 'next/navigation';
 
 const CmdK = () => {
   const [open, setOpen] = useState<boolean>(false);
   const [search, setSearch] = useState('');
   const [user, setUser] = useState<User | null>(null);
+  const [postId, setPostId] = useState<number | null>(null);
+  const [menuItmes, setMenuItmes] = useState<JsonStructureItem[]>([]);
+  const pathname = usePathname();
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -17,7 +25,41 @@ const CmdK = () => {
       setUser(data.user);
     };
     fetchUser();
-  }, [open]);
+
+    if (/^\/post\/\d+$/.test(pathname)) {
+      const pathnames = pathname.split('/');
+      const parsedPostId = parseInt(pathnames.at(pathnames.length - 1) ?? '0');
+      setPostId(parsedPostId);
+    } else {
+      setPostId(null);
+    }
+
+    setMenuItmes([
+      {
+        id: 'newpost',
+        children: '글 작성하기',
+        icon: 'PencilSquareIcon',
+        href: '/post/new',
+      },
+    ]);
+
+    if (postId) {
+      setMenuItmes([
+        {
+          id: 'newpost',
+          children: '글 작성하기',
+          icon: 'PencilSquareIcon',
+          href: '/post/new',
+        },
+        {
+          id: 'updatepost',
+          children: '글 수정하기',
+          icon: 'PencilSquareIcon',
+          href: `/post/update/${postId}`,
+        },
+      ]);
+    }
+  }, [open, pathname, postId]);
 
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
@@ -69,14 +111,7 @@ const CmdK = () => {
       {
         heading: 'Post',
         id: 'post',
-        items: [
-          {
-            id: 'newpost',
-            children: '글 작성하기',
-            icon: 'PencilSquareIcon',
-            href: '/post/new',
-          },
-        ],
+        items: menuItmes,
       },
     ],
     search
