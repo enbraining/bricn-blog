@@ -15,7 +15,7 @@ export default function Thumbnail({ post }: { post: Post }) {
     <li key={post.id} className="flex gap-x-3">
       <Link
         href={`/post/${post.id}`}
-        className="group hover:border-bricn-700 hover:pl-9 duration-300 w-full border rounded-md px-7 py-5 border-bricn-800"
+        className="group hover:border-bricn-700 hover:pl-9 duration-300 w-full border rounded-md px-7 py-5 border-bricn-800 bg-neutral-950"
       >
         <H3>{post.title}</H3>
         <div className="gap-x-4 text-bricn-400 text-sm">

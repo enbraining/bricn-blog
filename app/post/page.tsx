@@ -15,7 +15,8 @@ import { Post } from '../types/Post';
 import Thumbnail from '../components/content/Thumbnail';
 import SearchParams from '../components/post/SearchParams';
 import Link from 'next/link';
-import { IconReload } from '@tabler/icons-react';
+import { IconDots, IconFilterOff, IconReload } from '@tabler/icons-react';
+import { redirect } from 'next/navigation';
 
 export default function Page() {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -23,7 +24,7 @@ export default function Page() {
   const [tag, setTag] = useState<string | null>(null);
   const [loadingSearchParams, setLoadingSearchParams] = useState(false);
   const [index, setIndex] = useState(0);
-  const [search, setSearch] = useState<string>('');
+  const [search, setSearch] = useState<string | null>(null);
   const isInitialRender = useRef(true);
 
   const onFiltertag = useCallback(
@@ -98,6 +99,19 @@ export default function Page() {
     [search]
   );
 
+  const onFilterOff = useCallback(() => {
+    const fetchInitialPosts = async () => {
+      const { data } = await getPosts(tag, index);
+      setPosts(data as Post[]);
+      setIndex(data?.length ?? 0);
+    };
+
+    setTag(null);
+    setSearch(null);
+    fetchInitialPosts();
+    redirect('/post');
+  }, [index, tag]);
+
   return (
     <div>
       <Suspense>
@@ -114,12 +128,12 @@ export default function Page() {
               className="rounded-md bg-bricn-800 py-2 px-5 ml-auto w-1/3 focus:w-full duration-200 outline-none"
               placeholder="검색하기"
               name="search"
-              value={search}
+              value={search ?? ''}
               onChange={(e) => setSearch(e.target.value)}
               onKeyDown={onSearch}
             ></input>
             {posts.length > 0 ? (
-              <ul className="mx-auto w-full mb-2 grid gap-y-2">
+              <ul className="mx-auto w-full grid gap-y-2">
                 {posts.map((post) => (
                   <Thumbnail post={post} key={post.id} />
                 ))}
@@ -133,7 +147,7 @@ export default function Page() {
               </div>
             )}
             <div
-              className="bg-bricn-800 hover:bg-bricn-700 duration-300 py-2 flex rounded-md"
+              className="bg-neutral-800 hover:bg-neutral-700 duration-300 py-2 flex rounded-md"
               onClick={onMorePosts}
             >
               <div className="flex mx-auto gap-x-3 items-center">
@@ -143,7 +157,7 @@ export default function Page() {
             </div>
           </div>
         </div>
-        <div className="mb-3 overflow-x-auto sm:grid hidden col-span-2 cursor-grab select-none w-full gap-x-4 whitespace-nowrap border rounded-md px-7 py-5 border-bricn-800 h-fit sticky top-36">
+        <div className="mb-3 overflow-x-auto sm:grid hidden col-span-2 cursor-grab select-none w-full gap-x-4 whitespace-nowrap border rounded-md px-7 py-5 border-bricn-800 h-fit sticky top-36 bg-neutral-950">
           {tags.map((c) => (
             <div
               onClick={() => onFiltertag(c.name)}
@@ -153,7 +167,20 @@ export default function Page() {
               <p className="uppercase">{c.name}</p>
             </div>
           ))}
-          <Link href={'/post/tag'}>더보기</Link>
+          <div className="flex mt-4 gap-x-2">
+            <div
+              onClick={onFilterOff}
+              className="bg-neutral-900 border border-neutral-700 p-1 rounded-sm hover:bg-neutral-800"
+            >
+              <IconFilterOff />
+            </div>
+            <Link
+              href={'/post/tag'}
+              className="bg-neutral-900 border-neutral-700 border hover:bg-neutral-800 p-1 rounded-sm"
+            >
+              <IconDots />
+            </Link>
+          </div>
         </div>
       </div>
     </div>
