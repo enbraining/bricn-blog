@@ -10,6 +10,25 @@ import { useCallback, useEffect, useState } from 'react';
 export default function Page() {
   const [session, setSession] = useState(false);
   const [content, setContent] = useState<string>('');
+  const [likeTag, setLikeTag] = useState<string[]>([]);
+  const [tag, setTag] = useState<string>('');
+
+  useEffect(() => {
+    const fetchLikeTag = async () => {
+      if (!tag) {
+        setLikeTag([]);
+        return;
+      }
+
+      const { data } = await supabase.rpc('get_unique_tags', {
+        search_tag: tag,
+      });
+      setLikeTag(
+        data.map((d: { unique_tag: string }) => d.unique_tag) as string[]
+      );
+    };
+    fetchLikeTag();
+  }, [tag]);
 
   useEffect(() => {
     const fetchSession = async () => {
@@ -61,36 +80,45 @@ export default function Page() {
   }
 
   return (
-    <Form
-      action={onSubmit}
-      onSubmit={() => {
-        return false;
-      }}
-      className="grid gap-y-5"
-    >
-      <div className="grid grid-cols-7 gap-x-3">
-        <input
-          onKeyDown={onKeyDown}
-          name="title"
-          placeholder="제목"
-          className="border w-full p-3 text-lg col-span-4"
-        />
-        <input
-          onKeyDown={onKeyDown}
-          name="category"
-          placeholder="카테고리"
-          className="border w-full p-3 text-lg col-span-2"
-        />
-        <Button type="submit">저장하기</Button>
+    <div>
+      <div className="flex mb-2 gap-x-4 h-8">
+        {likeTag.map((t, index) => (
+          <p key={index}>{t}</p>
+        ))}
       </div>
-      <div>
-        <MarkdownEditor
-          height={600}
-          value={content}
-          onChange={onChangeContent}
-        />
-      </div>
-      <div></div>
-    </Form>
+      <Form
+        action={onSubmit}
+        onSubmit={() => {
+          return false;
+        }}
+        className="grid gap-y-5"
+      >
+        <div className="grid grid-cols-7 gap-x-3">
+          <input
+            onKeyDown={onKeyDown}
+            name="title"
+            placeholder="제목"
+            className="border w-full p-3 text-lg col-span-4"
+          />
+          <input
+            onKeyDown={onKeyDown}
+            name="category"
+            placeholder="카테고리"
+            value={tag}
+            onChange={(e) => setTag(e.target.value)}
+            className="border w-full p-3 text-lg col-span-2"
+          />
+          <Button type="submit">저장하기</Button>
+        </div>
+        <div>
+          <MarkdownEditor
+            height={600}
+            value={content}
+            onChange={onChangeContent}
+          />
+        </div>
+        <div></div>
+      </Form>
+    </div>
   );
 }
