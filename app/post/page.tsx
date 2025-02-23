@@ -162,10 +162,10 @@ export default function Page() {
             {tags.map((c) => (
               <div
                 onClick={() => onFiltertag(c.name)}
-                className={`${tag === c.name ? 'text-bricn-300' : 'hover:text-bricn-500 text-bricn-700'}`}
+                className={`${tag === c.name ? 'text-bricn-100' : 'hover:text-bricn-200 text-bricn-300'}`}
                 key={c.name}
               >
-                <p className="uppercase">{c.name}</p>
+                <p className="">{c.name}</p>
               </div>
             ))}
             <div className="flex mt-2 gap-x-2">

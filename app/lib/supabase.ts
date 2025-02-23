@@ -12,7 +12,7 @@ export const getPosts = async (value: string | null, index: number) => {
     .order('created_at', { ascending: false });
 
   if (value) {
-    query.eq('category', value);
+    query.eq('tag', value);
   }
 
   query.range(index, index + 14);
