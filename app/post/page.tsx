@@ -123,15 +123,6 @@ export default function Page() {
       <div className="grid grid-cols-7 gap-x-5">
         <div className="sm:col-span-5 col-span-7">
           <div className="grid gap-y-2">
-            <input
-              type="text"
-              className="rounded-md bg-bricn-800 py-2 px-5 ml-auto w-1/3 focus:w-full duration-200 outline-none"
-              placeholder="검색하기"
-              name="search"
-              value={search ?? ''}
-              onChange={(e) => setSearch(e.target.value)}
-              onKeyDown={onSearch}
-            ></input>
             {posts.length > 0 ? (
               <ul className="mx-auto w-full grid gap-y-2">
                 {posts.map((post) => (
@@ -157,29 +148,40 @@ export default function Page() {
             </div>
           </div>
         </div>
-        <div className="mb-3 overflow-x-auto sm:grid hidden col-span-2 cursor-grab select-none w-full gap-x-4 whitespace-nowrap border rounded-md px-7 py-5 border-bricn-800 h-fit sticky top-36 bg-neutral-950">
-          {tags.map((c) => (
-            <div
-              onClick={() => onFiltertag(c.name)}
-              className={`${tag === c.name ? 'text-bricn-300' : 'hover:text-bricn-500 text-bricn-700'}`}
-              key={c.name}
-            >
-              <p className="uppercase">{c.name}</p>
+        <div className="mb-3 overflow-x-auto sm:grid hidden col-span-2 cursor-grab select-none w-full gap-x-4 whitespace-nowrap p-2 h-fit sticky top-36 gap-y-2">
+          <input
+            type="text"
+            className="rounded-md bg-neutral-950 py-2 px-5 focus:w-full duration-200 outline-none border border-bricn-800"
+            placeholder="검색하기"
+            name="search"
+            value={search ?? ''}
+            onChange={(e) => setSearch(e.target.value)}
+            onKeyDown={onSearch}
+          ></input>
+          <div className="px-5 py-4 bg-neutral-950 border rounded-md border-bricn-800">
+            {tags.map((c) => (
+              <div
+                onClick={() => onFiltertag(c.name)}
+                className={`${tag === c.name ? 'text-bricn-300' : 'hover:text-bricn-500 text-bricn-700'}`}
+                key={c.name}
+              >
+                <p className="uppercase">{c.name}</p>
+              </div>
+            ))}
+            <div className="flex mt-2 gap-x-2">
+              <div
+                onClick={onFilterOff}
+                className="bg-neutral-900 border border-neutral-700 p-1 rounded-sm hover:bg-neutral-800"
+              >
+                <IconFilterOff />
+              </div>
+              <Link
+                href={'/post/tag'}
+                className="bg-neutral-900 border-neutral-700 border hover:bg-neutral-800 p-1 rounded-sm"
+              >
+                <IconDots />
+              </Link>
             </div>
-          ))}
-          <div className="flex mt-4 gap-x-2">
-            <div
-              onClick={onFilterOff}
-              className="bg-neutral-900 border border-neutral-700 p-1 rounded-sm hover:bg-neutral-800"
-            >
-              <IconFilterOff />
-            </div>
-            <Link
-              href={'/post/tag'}
-              className="bg-neutral-900 border-neutral-700 border hover:bg-neutral-800 p-1 rounded-sm"
-            >
-              <IconDots />
-            </Link>
           </div>
         </div>
       </div>
