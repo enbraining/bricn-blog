@@ -53,7 +53,7 @@ export default function Page() {
           .insert({
             title: title,
             content: content,
-            category: category,
+            tag: category?.toString().toLocaleLowerCase(),
           })
           .select()
           .single();
