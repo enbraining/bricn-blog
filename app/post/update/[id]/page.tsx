@@ -41,13 +41,13 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
 
       const title = data.title;
       const content = data.content;
-      const category = data.category;
+      const tag = data.category;
 
       setPost((prev) => ({
         ...prev,
         title,
         content,
-        category,
+        tag,
       }));
     };
 
