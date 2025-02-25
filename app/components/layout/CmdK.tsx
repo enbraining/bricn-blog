@@ -7,7 +7,11 @@ import CommandPalette, {
   JsonStructureItem,
 } from 'react-cmdk';
 import { useEffect, useState } from 'react';
-import { supabase } from '../../lib/supabase';
+import {
+  POST_TABLE,
+  supabase,
+  SUPABSE_ADMIN_USER_ID,
+} from '../../lib/supabase';
 import { User } from '@supabase/supabase-js';
 import { usePathname } from 'next/navigation';
 
@@ -34,16 +38,7 @@ const CmdK = () => {
       setPostId(null);
     }
 
-    setMenuItmes([
-      {
-        id: 'newpost',
-        children: '글 작성하기',
-        icon: 'PencilSquareIcon',
-        href: '/post/new',
-      },
-    ]);
-
-    if (postId) {
+    if (user?.id === SUPABSE_ADMIN_USER_ID) {
       setMenuItmes([
         {
           id: 'newpost',
@@ -51,15 +46,53 @@ const CmdK = () => {
           icon: 'PencilSquareIcon',
           href: '/post/new',
         },
-        {
-          id: 'updatepost',
-          children: '글 수정하기',
-          icon: 'PencilSquareIcon',
-          href: `/post/update/${postId}`,
-        },
       ]);
+
+      if (postId) {
+        setMenuItmes((prev) => [
+          ...prev,
+          {
+            id: 'updatepost',
+            children: '글 수정하기',
+            icon: 'PencilSquareIcon',
+            href: `/post/update/${postId}`,
+          },
+          {
+            id: 'unpublishpost',
+            children: '비공개 설정',
+            icon: 'PencilSquareIcon',
+            onClick: async () => {
+              await supabase
+                .from(POST_TABLE)
+                .update({
+                  is_published: false,
+                })
+                .eq('id', postId);
+
+              alert('비공개되었습니다.');
+            },
+          },
+          {
+            id: 'publishpost',
+            children: '공개 설정',
+            icon: 'PencilSquareIcon',
+            onClick: async () => {
+              await supabase
+                .from(POST_TABLE)
+                .update({
+                  is_published: true,
+                })
+                .eq('id', postId);
+
+              alert('공개되었습니다.');
+            },
+          },
+        ]);
+      }
+    } else {
+      setMenuItmes([]);
     }
-  }, [open, pathname, postId]);
+  }, [open, pathname, postId, user?.id]);
 
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {

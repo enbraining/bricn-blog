@@ -88,7 +88,8 @@ export default function Page() {
             .from('posts')
             .select('*')
             .ilike('title', `%${search}%`)
-            .order('created_at', { ascending: false });
+            .order('created_at', { ascending: false })
+            .eq('is_published', true);
           if (data?.length !== 0) {
             setPosts(data as Post[]);
           }
