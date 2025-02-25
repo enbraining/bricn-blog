@@ -2,15 +2,15 @@
 
 import { useEffect, useState } from 'react';
 import { supabase } from './lib/supabase';
-import { Tag } from './types/Tag';
 import { Post } from './types/Post';
 import H3 from './components/basic/H3';
 import { formatYearMonthDay } from './lib/date';
-import Link from 'next/link';
+import Image from 'next/image';
+import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
+import H4 from './components/basic/H4';
 
 export default function Page() {
   const [posts, setPosts] = useState<Post[]>([]);
-  const [tags, setTags] = useState<Tag[]>([]);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -21,42 +21,47 @@ export default function Page() {
       setPosts(fetchPosts.data || []);
     };
 
-    const fetchtags = async () => {
-      const query = await supabase.rpc('group_by_tag');
-      const data = query.data;
-      setTags(data);
-    };
-
     fetchPosts();
-    fetchtags();
   }, []);
 
   return (
-    <div className="grid gap-y-8">
+    <div>
       <div>
-        <H3>안녕하세요, 저는 김동학입니다.</H3>
-        <H3>주로 HAM radio, 알고리즘이나 인문학을 좋아합니다.</H3>
+        <H3>Hello, this is Kim Donghak.</H3>
+        <H4>I mainly like HAM radio, algorithms, and humanities.</H4>
       </div>
+      <hr className="border-bricn-700 mt-6 mb-12" />
       <div>
-        {tags.slice(0, 5).map((c) => (
-          <Link
-            href={'/post'}
-            className="hover:text-bricn-500 text-bricn-700"
-            key={c.name}
-          >
-            <p className="uppercase">{`${c.name} ${c.count}`}</p>
-          </Link>
-        ))}
-        <p className="hover:text-bricn-500 text-bricn-700">...</p>
-        <p className="mt-4">
+        <div className="relative">
+          <Image
+            src={'/images/mc_fnd.png'}
+            alt="mc_fnd"
+            width={1000}
+            height={100}
+            className="w-full h-fit rounded-sm aspect-video object-cover"
+          />
+          <div className="absolute bottom-4 font-semibold text-white flex w-full px-5">
+            <div className="ml-auto flex items-center gap-x-1">
+              <div className="bg-neutral-800 p-1 bg-opacity-50 rounded-sm">
+                <IconChevronLeft />
+              </div>
+              <div className="bg-neutral-800 p-1 bg-opacity-50 rounded-sm">
+                <IconChevronRight />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="flex mt-3 text-white items-center">
+          <p>마인크래프트에서 구현한 7세그먼트</p>
+          <p className="ml-auto">2025년 2월 25일</p>
+        </div>
+      </div>
+      <div className="mt-14">
+        <p>
           {formatYearMonthDay(posts.at(posts.length - 1)?.created_at)}에
           시작해서
         </p>
         <p>지금까지 {posts.length}개의 게시글을 작성했습니다.</p>
-      </div>
-      <div>
-        <p>제 글을 읽으면서 항상 의심해주세요.</p>
-        <p>어떤 글이든지 스스로 판단하고, 검증하는 과정이 필요합니다.</p>
       </div>
     </div>
   );
