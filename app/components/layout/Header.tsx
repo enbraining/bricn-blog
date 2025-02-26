@@ -17,8 +17,8 @@ export default function Header() {
         BRICN
       </Link>
       <div className="sm:ml-auto sm:w-min w-full ml-0 flex text-bricn-200 items-center gap-x-6">
+        <HoverLink href={'/'}>홈</HoverLink>
         <HoverLink href={'/profile'}>프로필</HoverLink>
-        <HoverLink href={'/post'}>게시글</HoverLink>
         <HoverLink href={'/link'}>링크</HoverLink>
         <div onClick={() => setToggle(!isToggle)} className="ml-auto">
           <IconMenu size={24} strokeWidth={1.5} />
