@@ -9,7 +9,6 @@ import {
   useState,
 } from 'react';
 import { getPosts, supabase } from './lib/supabase';
-import { Tag } from './types/Tag';
 import { Post } from './types/Post';
 import Thumbnail from './components/content/Thumbnail';
 import SearchParams from './components/post/SearchParams';
@@ -23,6 +22,7 @@ import {
 } from '@tabler/icons-react';
 import { redirect } from 'next/navigation';
 import Image from 'next/image';
+import { Tag } from './types/Tag';
 
 export default function Page() {
   const [posts, setPosts] = useState<Post[]>([]);

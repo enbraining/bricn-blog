@@ -95,8 +95,8 @@ export default function Page() {
           />
           <input
             onKeyDown={onKeyDown}
-            name="category"
-            placeholder="카테고리"
+            name="tag"
+            placeholder="태그"
             value={tag}
             onChange={(e) => setTag(e.target.value)}
             className="border w-full p-3 text-lg col-span-2 bg-neutral-900 border-neutral-800"

@@ -40,7 +40,7 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
 
       const title = data.title;
       const content = data.content;
-      const tag = data.category;
+      const tag = data.tag;
 
       setPost((prev) => ({
         ...prev,
@@ -63,19 +63,16 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
     []
   );
 
-  const onChangeCategory = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setPost((prev) => ({
-        ...prev,
-        category: e.target.value,
-      }));
-    },
-    []
-  );
+  const onChangeTag = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setPost((prev) => ({
+      ...prev,
+      tag: e.target.value,
+    }));
+  }, []);
 
   const onSubmit = useCallback(
     (formData: FormData) => {
-      const category = formData.get('category') as string;
+      const tag = formData.get('tag') as string;
       const title = formData.get('title') as string;
       const content = formData.get('content') as string;
 
@@ -84,7 +81,7 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
           .from('posts')
           .update({
             title: title,
-            category: category,
+            tag: tag,
             content: content,
           })
           .eq('id', id);
@@ -111,11 +108,11 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
           onChange={onChangeTitle}
         />
         <input
-          name="category"
-          placeholder="카테고리"
+          name="tag"
+          placeholder="태그"
           className="border w-full p-3 text-lg col-span-2"
-          value={post.category}
-          onChange={onChangeCategory}
+          value={post.tag}
+          onChange={onChangeTag}
         />
         <Button type="submit">저장하기</Button>
       </div>

@@ -4,5 +4,5 @@ export interface Post {
   content: string | undefined;
   created_at: string | undefined;
   modified_at: string | undefined;
-  category: string | undefined;
+  tag: string | undefined;
 }
