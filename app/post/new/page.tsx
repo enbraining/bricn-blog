@@ -1,7 +1,6 @@
 'use client';
 
 import Button from '@/app/components/form/Button';
-import { MarkdownEditor } from '@/app/components/content/MarkdownEditor';
 import { supabase } from '@/app/lib/supabase';
 import Form from 'next/form';
 import { redirect } from 'next/navigation';
@@ -9,7 +8,6 @@ import { useCallback, useEffect, useState } from 'react';
 
 export default function Page() {
   const [session, setSession] = useState(false);
-  const [content, setContent] = useState<string>('');
   const [likeTag, setLikeTag] = useState<string[]>([]);
   const [tag, setTag] = useState<string>('');
 
@@ -23,6 +21,7 @@ export default function Page() {
       const { data } = await supabase.rpc('get_unique_tags', {
         search_tag: tag,
       });
+
       setLikeTag(
         data.map((d: { unique_tag: string }) => d.unique_tag) as string[]
       );
@@ -38,33 +37,27 @@ export default function Page() {
     fetchSession();
   }, []);
 
-  const onChangeContent = useCallback((value?: string) => {
-    setContent(value || '');
+  const onSubmit = useCallback((formData: FormData) => {
+    const title = formData.get('title');
+    const category = formData.get('category');
+    const content = formData.get('content');
+
+    const createPost = async () => {
+      const { data } = await supabase
+        .from('posts')
+        .insert({
+          title: title,
+          content: content,
+          tag: category?.toString().toLocaleLowerCase(),
+        })
+        .select()
+        .single();
+
+      redirect(`/post/${data.id}`);
+    };
+
+    createPost();
   }, []);
-
-  const onSubmit = useCallback(
-    (formData: FormData) => {
-      const title = formData.get('title');
-      const category = formData.get('category');
-
-      const createPost = async () => {
-        const { data } = await supabase
-          .from('posts')
-          .insert({
-            title: title,
-            content: content,
-            tag: category?.toString().toLocaleLowerCase(),
-          })
-          .select()
-          .single();
-
-        redirect(`/post/${data.id}`);
-      };
-
-      createPost();
-    },
-    [content]
-  );
 
   const onKeyDown = useCallback(
     (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -98,7 +91,7 @@ export default function Page() {
             onKeyDown={onKeyDown}
             name="title"
             placeholder="제목"
-            className="border w-full p-3 text-lg col-span-4"
+            className="border w-full p-3 text-lg col-span-5 bg-neutral-900 border-neutral-800"
           />
           <input
             onKeyDown={onKeyDown}
@@ -106,18 +99,16 @@ export default function Page() {
             placeholder="카테고리"
             value={tag}
             onChange={(e) => setTag(e.target.value)}
-            className="border w-full p-3 text-lg col-span-2"
+            className="border w-full p-3 text-lg col-span-2 bg-neutral-900 border-neutral-800"
           />
+        </div>
+        <textarea
+          className="bg-neutral-900 border border-neutral-800 w-full h-[70vh] p-3"
+          name="content"
+        />
+        <div>
           <Button type="submit">저장하기</Button>
         </div>
-        <div>
-          <MarkdownEditor
-            height={600}
-            value={content}
-            onChange={onChangeContent}
-          />
-        </div>
-        <div></div>
       </Form>
     </div>
   );

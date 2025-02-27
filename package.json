@@ -14,7 +14,6 @@
     "@supabase/supabase-js": "^2.47.12",
     "@tabler/icons-react": "^3.29.0",
     "@types/rss": "^0.0.32",
-    "@uiw/react-md-editor": "^4.0.5",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",

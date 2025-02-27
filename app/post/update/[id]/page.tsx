@@ -1,7 +1,6 @@
 'use client';
 
 import Button from '@/app/components/form/Button';
-import { MarkdownEditor } from '@/app/components/content/MarkdownEditor';
 import { supabase } from '@/app/lib/supabase';
 import { Post } from '@/app/types/Post';
 import Form from 'next/form';
@@ -54,13 +53,6 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
     if (id) fetchPost();
   }, [id]);
 
-  const onChangeContent = useCallback((value?: string) => {
-    setPost((prev) => ({
-      ...prev,
-      content: value,
-    }));
-  }, []);
-
   const onChangeTitle = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       setPost((prev) => ({
@@ -85,7 +77,7 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
     (formData: FormData) => {
       const category = formData.get('category') as string;
       const title = formData.get('title') as string;
-      const content = post.content;
+      const content = formData.get('content') as string;
 
       const updatePost = async () => {
         await supabase
@@ -101,7 +93,7 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
       updatePost();
       redirect(`/post/${id}`);
     },
-    [post, id]
+    [id]
   );
 
   if (!session) {
@@ -127,13 +119,10 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
         />
         <Button type="submit">저장하기</Button>
       </div>
-      <div>
-        <MarkdownEditor
-          height={600}
-          value={post.content}
-          onChange={onChangeContent}
-        />
-      </div>
+      <textarea
+        className="bg-neutral-900 border border-neutral-800 w-full h-[70vh] p-3"
+        name="content"
+      />
     </Form>
   );
 }
