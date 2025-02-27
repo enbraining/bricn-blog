@@ -8,7 +8,6 @@ import {
   useRef,
   useState,
 } from 'react';
-import { Skeleton } from './components/ui/skeleton';
 import { getPosts, supabase } from './lib/supabase';
 import { Tag } from './types/Tag';
 import { Post } from './types/Post';
@@ -28,27 +27,24 @@ import Image from 'next/image';
 export default function Page() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [tags, setTags] = useState<Tag[]>([]);
-  const [tag, setTag] = useState<string | null>(null);
+  const [tag, setTag] = useState<string>();
   const [loadingSearchParams, setLoadingSearchParams] = useState(false);
-  const [lastPostCreatedAt, setLastPostCreatedAt] = useState<string | null>(
-    null
-  );
-  const [search, setSearch] = useState<string | null>(null);
+  const [lastPostCreatedAt, setLastPostCreatedAt] = useState<string>();
+  const [search, setSearch] = useState<string>();
   const isInitialRender = useRef(true);
 
   const onFiltertag = useCallback(
-    (changedTag: string) => {
-      const changeTag = tag === changedTag ? null : changedTag;
+    async (changedTag: string) => {
+      const changeTag = tag === changedTag ? undefined : changedTag;
       setTag(changeTag);
 
-      const fetchFilterPosts = async () => {
-        const { data } = await getPosts(changeTag, lastPostCreatedAt);
-        setLastPostCreatedAt(data?.at(data.length - 1).created_at);
-        setPosts(data as Post[]);
-      };
-      fetchFilterPosts();
+      const { data } = await getPosts({
+        value: changeTag,
+      });
+      setLastPostCreatedAt(data?.at(data.length - 1).created_at);
+      setPosts(data as Post[]);
     },
-    [tag, lastPostCreatedAt]
+    [tag]
   );
 
   useEffect(() => {
@@ -67,7 +63,10 @@ export default function Page() {
     }
 
     const fetchInitialPosts = async () => {
-      const { data } = await getPosts(tag, lastPostCreatedAt);
+      const { data } = await getPosts({
+        value: tag,
+        cursor: lastPostCreatedAt,
+      });
       setPosts(data as Post[]);
       setLastPostCreatedAt(data?.at(data.length - 1).created_at);
     };
@@ -79,30 +78,27 @@ export default function Page() {
 
   const onMorePosts = useCallback(() => {
     const fetchPosts = async () => {
-      const { data } = await getPosts(tag, lastPostCreatedAt);
+      const { data } = await getPosts({
+        value: tag,
+        search: search,
+        cursor: lastPostCreatedAt,
+      });
       setPosts((prev) => [...prev, ...(data as Post[])]);
       setLastPostCreatedAt(data?.at(data.length - 1).created_at);
     };
 
     fetchPosts();
-  }, [tag, lastPostCreatedAt]);
+  }, [tag, lastPostCreatedAt, search]);
 
   const onSearch = useCallback(
-    (event: KeyboardEvent<HTMLInputElement>) => {
+    async (event: KeyboardEvent<HTMLInputElement>) => {
       if (event.key === 'Enter') {
-        console.log(search);
-        const searchPosts = async () => {
-          const { data } = await supabase
-            .from('posts')
-            .select('*')
-            .ilike('title', `%${search}%`)
-            .order('created_at', { ascending: false })
-            .eq('is_published', true);
-          if (data?.length !== 0) {
-            setPosts(data as Post[]);
-          }
-        };
-        searchPosts();
+        const { data } = await getPosts({
+          search: search,
+        });
+
+        setPosts(data as Post[]);
+        setLastPostCreatedAt(data?.at(data.length - 1).created_at);
       }
     },
     [search]
@@ -110,16 +106,16 @@ export default function Page() {
 
   const onFilterOff = useCallback(() => {
     const fetchInitialPosts = async () => {
-      const { data } = await getPosts(tag, lastPostCreatedAt);
+      const { data } = await getPosts({});
       setPosts(data as Post[]);
       setLastPostCreatedAt(data?.at(data.length - 1).created_at);
     };
 
-    setTag(null);
-    setSearch(null);
+    setTag(undefined);
+    setSearch(undefined);
     fetchInitialPosts();
     redirect('/');
-  }, [lastPostCreatedAt, tag]);
+  }, []);
 
   return (
     <div>
@@ -162,20 +158,11 @@ export default function Page() {
               onChange={(e) => setSearch(e.target.value)}
               onKeyDown={onSearch}
             ></input>
-            {posts.length > 0 ? (
-              <ul className="mx-auto w-full grid gap-y-2">
-                {posts.map((post) => (
-                  <Thumbnail post={post} key={post.id} />
-                ))}
-              </ul>
-            ) : (
-              <div className="grid grid-cols-4 gap-4">
-                <Skeleton className="aspect-square" />
-                <Skeleton className="aspect-square" />
-                <Skeleton className="aspect-square" />
-                <Skeleton className="aspect-square" />
-              </div>
-            )}
+            <ul className="mx-auto w-full grid gap-y-2">
+              {posts.map((post) => (
+                <Thumbnail post={post} key={post.id} />
+              ))}
+            </ul>
             <div
               className="bg-neutral-800 hover:bg-neutral-700 duration-300 py-2 flex rounded-md"
               onClick={onMorePosts}

@@ -5,7 +5,15 @@ export const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? ''
 );
 
-export const getPosts = async (value: string | null, cursor: string | null) => {
+export const getPosts = async ({
+  value,
+  cursor,
+  search,
+}: {
+  value?: string;
+  cursor?: string;
+  search?: string;
+}) => {
   const query = supabase
     .from('posts')
     .select('*')
@@ -13,7 +21,9 @@ export const getPosts = async (value: string | null, cursor: string | null) => {
     .eq('is_published', true)
     .limit(15);
 
-  if (value) {
+  if (search) {
+    query.ilike('title', `%${search}%`);
+  } else if (value) {
     query.eq('tag', value);
   }
 

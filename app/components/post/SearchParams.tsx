@@ -5,7 +5,7 @@ export default function SearchParams({
   setTag,
   setLoadingSearchParams,
 }: {
-  setTag: Dispatch<SetStateAction<string | null>>;
+  setTag: Dispatch<SetStateAction<string | undefined>>;
   setLoadingSearchParams: Dispatch<SetStateAction<boolean>>;
 }) {
   const searchParams = useSearchParams();
@@ -17,7 +17,7 @@ export default function SearchParams({
     }
 
     setLoadingSearchParams(!!searchParams);
-    setTag(searchParams.get('category'));
+    setTag(searchParams.get('category') ?? undefined);
   }, [searchParams, setLoadingSearchParams, setTag]);
 
   return <></>;
