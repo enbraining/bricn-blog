@@ -5,18 +5,21 @@ export const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? ''
 );
 
-export const getPosts = async (value: string | null, index: number) => {
+export const getPosts = async (value: string | null, cursor: string | null) => {
   const query = supabase
     .from('posts')
     .select('*')
     .order('created_at', { ascending: false })
-    .eq('is_published', true);
+    .eq('is_published', true)
+    .limit(15);
 
   if (value) {
     query.eq('tag', value);
   }
 
-  query.range(index, index + 14);
+  if (cursor) {
+    query.lt('created_at', cursor);
+  }
 
   return query;
 };

@@ -30,7 +30,9 @@ export default function Page() {
   const [tags, setTags] = useState<Tag[]>([]);
   const [tag, setTag] = useState<string | null>(null);
   const [loadingSearchParams, setLoadingSearchParams] = useState(false);
-  const [index, setIndex] = useState(0);
+  const [lastPostCreatedAt, setLastPostCreatedAt] = useState<string | null>(
+    null
+  );
   const [search, setSearch] = useState<string | null>(null);
   const isInitialRender = useRef(true);
 
@@ -39,15 +41,14 @@ export default function Page() {
       const changeTag = tag === changedTag ? null : changedTag;
       setTag(changeTag);
 
-      const INITIAL_INDEX = 0;
       const fetchFilterPosts = async () => {
-        const { data } = await getPosts(changeTag, INITIAL_INDEX);
-        setIndex(data?.length ?? INITIAL_INDEX);
+        const { data } = await getPosts(changeTag, lastPostCreatedAt);
+        setLastPostCreatedAt(data?.at(data.length - 1).created_at);
         setPosts(data as Post[]);
       };
       fetchFilterPosts();
     },
-    [tag]
+    [tag, lastPostCreatedAt]
   );
 
   useEffect(() => {
@@ -66,25 +67,25 @@ export default function Page() {
     }
 
     const fetchInitialPosts = async () => {
-      const { data } = await getPosts(tag, index);
+      const { data } = await getPosts(tag, lastPostCreatedAt);
       setPosts(data as Post[]);
-      setIndex(data?.length ?? 0);
+      setLastPostCreatedAt(data?.at(data.length - 1).created_at);
     };
 
     if (posts.length === 0 && loadingSearchParams) {
       fetchInitialPosts();
     }
-  }, [index, loadingSearchParams, tag]);
+  }, [loadingSearchParams, tag, lastPostCreatedAt]);
 
   const onMorePosts = useCallback(() => {
     const fetchPosts = async () => {
-      const { data } = await getPosts(tag, index);
+      const { data } = await getPosts(tag, lastPostCreatedAt);
       setPosts((prev) => [...prev, ...(data as Post[])]);
-      setIndex((prev) => prev + (data?.length ?? 0));
+      setLastPostCreatedAt(data?.at(data.length - 1).created_at);
     };
 
     fetchPosts();
-  }, [tag, index]);
+  }, [tag, lastPostCreatedAt]);
 
   const onSearch = useCallback(
     (event: KeyboardEvent<HTMLInputElement>) => {
@@ -109,16 +110,16 @@ export default function Page() {
 
   const onFilterOff = useCallback(() => {
     const fetchInitialPosts = async () => {
-      const { data } = await getPosts(tag, index);
+      const { data } = await getPosts(tag, lastPostCreatedAt);
       setPosts(data as Post[]);
-      setIndex(data?.length ?? 0);
+      setLastPostCreatedAt(data?.at(data.length - 1).created_at);
     };
 
     setTag(null);
     setSearch(null);
     fetchInitialPosts();
     redirect('/');
-  }, [index, tag]);
+  }, [lastPostCreatedAt, tag]);
 
   return (
     <div>
