@@ -15,7 +15,7 @@ export default function GiscusComment() {
         reactionsEnabled="1"
         emitMetadata="0"
         inputPosition="bottom"
-        theme="dark"
+        theme="light"
         lang="ko"
       />
     </div>

@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('@/app/css/markdown/github-markdown-dark.css');
+@import url('@/app/css/markdown/github-markdown-white.css');
 
 body {
   color: black;

@@ -11,10 +11,15 @@ import remarkMath from 'remark-math';
 import { Pluggable } from 'unified';
 
 export default function MarkdownContent({ content }: { content: string }) {
+  const rehypePrismPlusWithConfig = [
+    rehypePrismPlus,
+    { defaultLanguage: 'text' },
+  ] as Pluggable;
+
   return (
     <Markdown
       remarkPlugins={[remarkGfm, remarkMath]}
-      rehypePlugins={[rehypeKatex, rehypePrismPlus as Pluggable]}
+      rehypePlugins={[rehypeKatex, rehypePrismPlusWithConfig]}
       className="markdown-body overflow-x-scroll w-full"
     >
       {content}
