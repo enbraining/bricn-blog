@@ -147,7 +147,7 @@ export default function Page() {
         </div>
       </div>
       <div className="grid grid-cols-8 gap-x-6 mt-8">
-        <div className="sm:col-span-6 col-span-7">
+        <div className="md:col-span-6 col-span-8">
           <div className="grid gap-y-2">
             <input
               type="text"
@@ -174,7 +174,7 @@ export default function Page() {
             </div>
           </div>
         </div>
-        <div className="mb-3 sm:grid hidden col-span-2 cursor-grab select-none w-full whitespace-nowrap h-fit sticky top-36">
+        <div className="mb-3 md:grid hidden col-span-2 cursor-grab select-none w-full whitespace-nowrap h-fit sticky top-36">
           <div className="mb-3">
             {tags.map((c) => (
               <div
@@ -182,7 +182,7 @@ export default function Page() {
                 className={`${tag === c.name ? 'text-neutral-900' : 'hover:text-neutral-800 text-neutral-400'} uppercase text-xl font-bold`}
                 key={c.name}
               >
-                <p className="">{c.name}</p>
+                <p className="">{`${c.name.substring(0, 11)}${c.name.length > 12 ? '...' : ''}`}</p>
               </div>
             ))}
           </div>
