@@ -15,9 +15,9 @@ export default function Thumbnail({ post }: { post: Post }) {
     <li key={post.id} className="flex gap-x-3">
       <Link
         href={`/post/${post.id}`}
-        className="group hover:border-bricn-700 hover:pl-9 duration-300 w-full border rounded-md px-7 py-5 border-bricn-800 bg-neutral-950"
+        className="group hover:border-neutral-400 hover:pl-9 duration-300 w-full border rounded-md px-7 py-5 border-neutral-300 bg-neutral-100"
       >
-        <p>{post.tag}</p>
+        <p className="text-neutral-700">{post.tag}</p>
         <H3>{post.title}</H3>
         <div className="gap-x-2 text-bricn-400 text-sm flex">
           <p>{`${formatYearMonthDay(post.created_at)}에 작성됨`}</p>

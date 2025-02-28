@@ -1,3 +1,3 @@
 export default function Hr() {
-  return <hr className="border-bricn-700 mt-2 mb-6" />;
+  return <hr className="border-neutral-400 mt-2 mb-6" />;
 }

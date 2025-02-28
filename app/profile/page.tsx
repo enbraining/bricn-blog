@@ -1,124 +1,44 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import H3 from '../components/basic/H3';
+import {
+  IconBrandGithub,
+  IconBrandLinkedin,
+  IconBrandYoutube,
+} from '@tabler/icons-react';
 import Hr from '../components/basic/Hr';
-import LineTitle from '../components/basic/LineTitle';
-import PortfolioMyself from '../components/profile/Myself';
-import { Post } from '../types/Post';
-import { supabase } from '../lib/supabase';
-import { config } from '../config';
+import Link from 'next/link';
 
 export default function Page() {
-  const [projects, setProjects] = useState<Post[]>();
-
-  useEffect(() => {
-    const fetchPosts = async () => {
-      const { data } = await supabase
-        .from('posts')
-        .select('*')
-        .order('created_at', { ascending: false })
-        .eq('category', '프로젝트');
-      setProjects(data || []);
-    };
-    fetchPosts();
-  }, []);
-
   return (
-    <div>
-      <div className="mb-3 print:hidden">
-        <div
-          onClick={() => {
-            window.print();
-          }}
-        >
-          저장하기
+    <div className="grid">
+      <section className="flex mb-6">
+        <div className="mx-auto flex gap-x-4 text-neutral-700">
+          <Link href={'https://github.com/enbraining'}>
+            <IconBrandGithub size={30} />
+          </Link>
+          <Link href={'https://linkedin.com/in/enbraining'}>
+            <IconBrandLinkedin size={30} />
+          </Link>
+          <Link href={'https://youtube.com/@enbraining'}>
+            <IconBrandYoutube size={30} />
+          </Link>
         </div>
-        <Hr />
-      </div>
-      <div className="grid gap-y-5 items-start">
-        <PortfolioMyself />
-      </div>
-      <div className="mt-12">
-        <H3>자기소개</H3>
-        <Hr />
-        <div className="grid gap-y-3">
-          <p>
-            아키텍쳐와 함께 하는 개발자 김동학입니다. 많은 패러다임과 서비스들을
-            접하면서 역량을 키우고 있습니다.
-          </p>
-          <p>
-            처음으로 프로그래밍을 배우기 시작하면서 스프링으로 입문하여 필요에
-            따라 QueryDSL, Spring Batch 등의 기술을 추가적으로 익혔으며, 그 후
-            타입스크립트 공부를 시작, 토이 프로젝트에서 Nest.js + Next.js 풀스택
-            개발을 하였습니다.
-          </p>
-          <p>
-            광주소프트웨어마이스터고등학교에서 동아리 맛소금의 부장으로
-            참여하여, 후배들과의 커뮤니케이션을 위해서 노력하고, 문서화를 통해
-            진행중인 프로젝트를 쉽게 인수인계할 수 있도록 하였습니다. 또한 링크
-            행사에 참여해서 다른 마이스터고 동아리와의 커뮤니케이션을
-            진행했습니다.
-          </p>
-        </div>
-      </div>
-      <div className="mt-12">
-        <H3>기술 스택</H3>
-        <Hr />
-        <div className="grid md:grid-cols-3 grid-cols-1 gap-y-6">
-          <div className="items-center gap-x-3">
-            <div className=" text-white inline rounded-full font-bold">
-              <div className="bg-green-500 w-[0.8rem] h-[0.8rem] absolute -z-10 rounded-full" />
-              <p className="ml-2">Senior</p>
-            </div>
-            <div className="grid gap-x-1 ml-2">
-              {config.greenStack.map((stack) => (
-                <p key={stack}>{stack}</p>
-              ))}
-            </div>
-          </div>
-          <div className="items-center gap-x-3">
-            <div className="text-white inline rounded-full font-bold">
-              <div className="bg-yellow-400 w-[0.8rem] h-[0.8rem] absolute -z-10 rounded-full" />
-              <p className="ml-2">Middle</p>
-            </div>
-            <div className="grid gap-x-1 ml-2">
-              {config.yellowStack.map((stack) => (
-                <p key={stack}>{stack}</p>
-              ))}
-            </div>
-          </div>
-          <div className="items-center gap-x-3">
-            <div className=" text-white inline rounded-full font-bold">
-              <div className="bg-red-500 w-[0.8rem] h-[0.8rem] absolute -z-10 rounded-full" />
-              <p className="ml-2">Junior</p>
-            </div>
-            <div className="grid gap-x-1 ml-2">
-              {config.redStack.map((stack) => (
-                <p key={stack}>{stack}</p>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="mt-12">
-        <H3>자격증 및 외국어</H3>
-        <Hr />
-        <div className="grid gap-y-2">
-          <LineTitle
-            content="전자산업기사"
-            date="2024년 4차 과정평가형자격 합격"
-          />
-          <LineTitle content="영어" date="단순한 대화 가능" />
-        </div>
-      </div>
-      <div className="mt-12">
-        <H3>프로젝트</H3>
-        <Hr />
-        {projects?.map((project) => (
-          <div key={project.id}>{project.title}</div>
-        ))}
-      </div>
+      </section>
+
+      <Hr />
+
+      <section className="grid gap-y-2">
+        <p>
+          안녕하세요, 저에 대해서 상세한 정보를 원하시면 포트폴리오를 보시는
+          것을 추천드릴게요.
+        </p>
+        <p>
+          저는 다양한 분야에서 새로운 것을 시도해보는 것을 좋아합니다. 홈 서버를
+          직접 다루고, 블로그도 직접 구축해보고, AVR과 ESP 프로그래밍을 통해서
+          직접 임베디드 장비를 작동시키는 것 등..
+        </p>
+        <p>나중에 마저 쓸거에요</p>
+      </section>
     </div>
   );
 }

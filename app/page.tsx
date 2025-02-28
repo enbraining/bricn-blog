@@ -151,7 +151,7 @@ export default function Page() {
           <div className="grid gap-y-2">
             <input
               type="text"
-              className="rounded-md bg-neutral-950 py-2 px-5 focus:w-full duration-200 outline-none border border-bricn-800"
+              className="rounded-md bg-neutral-100 border border-neutral-300 py-2 px-7 focus:w-full duration-200 outline-none "
               placeholder="검색하기"
               name="search"
               value={search ?? ''}
@@ -164,7 +164,7 @@ export default function Page() {
               ))}
             </ul>
             <div
-              className="bg-neutral-800 hover:bg-neutral-700 duration-300 py-2 flex rounded-md"
+              className="bg-neutral-100 border-neutral-300 border hover:bg-neutral-200 duration-300 py-2 flex rounded-md"
               onClick={onMorePosts}
             >
               <div className="flex mx-auto gap-x-3 items-center">
@@ -179,7 +179,7 @@ export default function Page() {
             {tags.map((c) => (
               <div
                 onClick={() => onFiltertag(c.name)}
-                className={`${tag === c.name ? 'text-bricn-100' : 'hover:text-bricn-200 text-bricn-300'} uppercase text-xl font-bold`}
+                className={`${tag === c.name ? 'text-neutral-900' : 'hover:text-neutral-800 text-neutral-400'} uppercase text-xl font-bold`}
                 key={c.name}
               >
                 <p className="">{c.name}</p>
@@ -189,13 +189,13 @@ export default function Page() {
           <div className="flex mt-1 gap-x-1">
             <div
               onClick={onFilterOff}
-              className="bg-neutral-900 border border-neutral-700 p-2 rounded-full hover:bg-neutral-800"
+              className="bg-neutral-100 border border-neutral-300 p-2 rounded-full hover:bg-neutral-200 duration-300"
             >
               <IconFilterOff size={20} />
             </div>
             <Link
               href={'/post/tag'}
-              className="bg-neutral-900 border-neutral-700 border hover:bg-neutral-800 p-2 rounded-full"
+              className="bg-neutral-100 border border-neutral-300 p-2 rounded-full hover:bg-neutral-200 duration-300"
             >
               <IconDots size={20} />
             </Link>

@@ -4,27 +4,9 @@
 
 @import url('@/app/css/markdown/github-markdown-dark.css');
 
-:root {
-  --bricn-0: rgb(255 255 255);
-  --bricn-100: rgb(225 225 225);
-  --bricn-200: rgb(185 185 185);
-  --bricn-300: rgb(165 165 165);
-  --bricn-400: rgb(135 135 135);
-  --bricn-500: rgb(115 115 115);
-  --bricn-600: rgb(95 95 95);
-  --bricn-700: rgb(75 75 75);
-  --bricn-800: rgb(35 35 35);
-  --bricn-900: rgb(0 0 0);
-}
-
 body {
-  color: var(--bricn-200);
-  background: var(--bricn-900);
-}
-
-input {
-  background-color: var(--bricn-800);
-  border-color: var(--bricn-700);
+  color: black;
+  background: white;
 }
 
 ::-webkit-scrollbar-track {

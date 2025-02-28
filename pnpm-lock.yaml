@@ -38,6 +38,9 @@ importers:
       highlighter:
         specifier: link:@types/react-syntax/highlighter
         version: link:@types/react-syntax/highlighter
+      katex:
+        specifier: ^0.16.21
+        version: 0.16.21
       lucide-react:
         specifier: ^0.471.0
         version: 0.471.0(react@19.0.0)
