@@ -17,9 +17,11 @@ export default function Thumbnail({ post }: { post: Post }) {
         href={`/post/${post.id}`}
         className="group hover:border-bricn-700 hover:pl-9 duration-300 w-full border rounded-md px-7 py-5 border-bricn-800 bg-neutral-950"
       >
+        <p>{post.tag}</p>
         <H3>{post.title}</H3>
-        <div className="gap-x-4 text-bricn-400 text-sm">
+        <div className="gap-x-2 text-bricn-400 text-sm flex">
           <p>{`${formatYearMonthDay(post.created_at)}에 작성됨`}</p>
+          <p>/</p>
           <p>{reading}분이면 읽음</p>
         </div>
       </Link>
