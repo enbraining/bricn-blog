@@ -86,20 +86,22 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
   return (
     <Form action={onSubmit} className="grid gap-y-2">
       <div className="grid grid-cols-7 gap-x-2" onKeyDown={onKeyDown}>
-        <Input
-          name="title"
-          placeholder="제목"
-          content={title}
-          setContent={setTitle}
-          colSpan={5}
-        />
-        <Input
-          name="tag"
-          placeholder="태그"
-          content={tag}
-          setContent={setTag}
-          colSpan={2}
-        />
+        <div className="col-span-5">
+          <Input
+            name="title"
+            placeholder="제목"
+            content={title}
+            setContent={setTitle}
+          />
+        </div>
+        <div className="col-span-2">
+          <Input
+            name="tag"
+            placeholder="태그"
+            content={tag}
+            setContent={setTag}
+          />
+        </div>
       </div>
       <Textarea content={content} setContent={setContent} />
       <div>

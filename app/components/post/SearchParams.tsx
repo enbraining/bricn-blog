@@ -17,7 +17,7 @@ export default function SearchParams({
     }
 
     setLoadingSearchParams(!!searchParams);
-    setTag(searchParams.get('category') ?? undefined);
+    setTag(searchParams.get('tag') ?? undefined);
   }, [searchParams, setLoadingSearchParams, setTag]);
 
   return <></>;
