@@ -13,7 +13,7 @@ export default function Button({
     <button
       type={type}
       onClick={onClick}
-      className="px-7 py-3 bg-bricn-800 active:bg-bricn-700 hover:bg-bricn-800 border-bricn-800 border rounded-sm"
+      className="px-7 py-3 bg-neutral-100 active:bg-neutral-200 border-neutral-300 border rounded-sm"
     >
       {children}
     </button>

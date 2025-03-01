@@ -1,15 +1,17 @@
 'use client';
 
 import Button from '@/app/components/form/Button';
+import Input from '@/app/components/form/Input';
+import Textarea from '@/app/components/form/Textarea';
 import { supabase } from '@/app/lib/supabase';
 import Form from 'next/form';
 import { redirect } from 'next/navigation';
-import { useCallback, useEffect, useState } from 'react';
+import { KeyboardEvent, useCallback, useEffect, useState } from 'react';
 
 export default function Page() {
   const [session, setSession] = useState(false);
   const [likeTag, setLikeTag] = useState<string[]>([]);
-  const [tag, setTag] = useState<string>('');
+  const [tag, setTag] = useState<string | undefined>();
 
   useEffect(() => {
     const fetchLikeTag = async () => {
@@ -59,14 +61,11 @@ export default function Page() {
     createPost();
   }, []);
 
-  const onKeyDown = useCallback(
-    (event: React.KeyboardEvent<HTMLInputElement>) => {
-      if (event.key === 'Enter') {
-        event.preventDefault();
-      }
-    },
-    []
-  );
+  const onKeyDown = useCallback((event: KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+    }
+  }, []);
 
   if (!session) {
     return <div>403</div>;
@@ -79,33 +78,18 @@ export default function Page() {
           <p key={index}>{t}</p>
         ))}
       </div>
-      <Form
-        action={onSubmit}
-        onSubmit={() => {
-          return false;
-        }}
-        className="grid gap-y-5"
-      >
-        <div className="grid grid-cols-7 gap-x-3">
-          <input
-            onKeyDown={onKeyDown}
-            name="title"
-            placeholder="제목"
-            className="border w-full p-3 text-lg col-span-5 bg-neutral-900 border-neutral-800"
-          />
-          <input
-            onKeyDown={onKeyDown}
+      <Form action={onSubmit} className="grid gap-y-5">
+        <div className="grid grid-cols-7 gap-x-2" onKeyDown={onKeyDown}>
+          <Input name="title" placeholder="제목" colSpan={5} />
+          <Input
             name="tag"
             placeholder="태그"
-            value={tag}
-            onChange={(e) => setTag(e.target.value)}
-            className="border w-full p-3 text-lg col-span-2 bg-neutral-900 border-neutral-800"
+            content={tag}
+            setContent={setTag}
+            colSpan={2}
           />
         </div>
-        <textarea
-          className="bg-neutral-900 border border-neutral-800 w-full h-[70vh] p-3"
-          name="content"
-        />
+        <Textarea />
         <div>
           <Button type="submit">저장하기</Button>
         </div>

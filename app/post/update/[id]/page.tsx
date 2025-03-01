@@ -1,16 +1,20 @@
 'use client';
 
 import Button from '@/app/components/form/Button';
+import Input from '@/app/components/form/Input';
+import Textarea from '@/app/components/form/Textarea';
 import { supabase } from '@/app/lib/supabase';
 import { Post } from '@/app/types/Post';
 import Form from 'next/form';
 import { redirect } from 'next/navigation';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { KeyboardEvent, useCallback, useEffect, useState } from 'react';
 
 export default function Page({ params }: { params: Promise<{ id: string }> }) {
   const [session, setSession] = useState(false);
   const [id, setId] = useState('');
-  const [post, setPost] = useState<Post>({} as Post);
+  const [content, setContent] = useState<string>();
+  const [title, setTitle] = useState<string>();
+  const [tag, setTag] = useState<string>();
 
   useEffect(() => {
     const fetchSession = async () => {
@@ -32,43 +36,19 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
 
   useEffect(() => {
     const fetchPost = async () => {
-      const { data } = await supabase
+      const { data } = (await supabase
         .from('posts')
         .select('*')
         .eq('id', id)
-        .single();
+        .single()) as { data: Post };
 
-      const title = data.title;
-      const content = data.content;
-      const tag = data.tag;
-
-      setPost((prev) => ({
-        ...prev,
-        title,
-        content,
-        tag,
-      }));
+      setTitle(data.title);
+      setContent(data.content);
+      setTag(data.tag);
     };
 
     if (id) fetchPost();
   }, [id]);
-
-  const onChangeTitle = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setPost((prev) => ({
-        ...prev,
-        title: e.target.value,
-      }));
-    },
-    []
-  );
-
-  const onChangeTag = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    setPost((prev) => ({
-      ...prev,
-      tag: e.target.value,
-    }));
-  }, []);
 
   const onSubmit = useCallback(
     (formData: FormData) => {
@@ -93,33 +73,38 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
     [id]
   );
 
+  const onKeyDown = useCallback((event: KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+    }
+  }, []);
+
   if (!session) {
     return <div>403</div>;
   }
 
   return (
-    <Form action={onSubmit} className="grid gap-y-5">
-      <div className="grid grid-cols-7 gap-x-3">
-        <input
+    <Form action={onSubmit} className="grid gap-y-2">
+      <div className="grid grid-cols-7 gap-x-2" onKeyDown={onKeyDown}>
+        <Input
           name="title"
-          placeholder="제목"
-          className="border w-full p-3 text-lg col-span-4"
-          value={post.title}
-          onChange={onChangeTitle}
+          placeholder="제목"
+          content={title}
+          setContent={setTitle}
+          colSpan={5}
         />
-        <input
+        <Input
           name="tag"
           placeholder="태그"
-          className="border w-full p-3 text-lg col-span-2"
-          value={post.tag}
-          onChange={onChangeTag}
+          content={tag}
+          setContent={setTag}
+          colSpan={2}
         />
+      </div>
+      <Textarea content={content} setContent={setContent} />
+      <div>
         <Button type="submit">저장하기</Button>
       </div>
-      <textarea
-        className="bg-neutral-900 border border-neutral-800 w-full h-[70vh] p-3"
-        name="content"
-      />
     </Form>
   );
 }
