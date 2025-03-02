@@ -4,9 +4,11 @@ import Button from '@/app/components/form/Button';
 import Input from '@/app/components/form/Input';
 import Textarea from '@/app/components/form/Textarea';
 import { supabase } from '@/app/lib/supabase';
+import { Post } from '@/app/types/Post';
 import Form from 'next/form';
 import { redirect } from 'next/navigation';
 import { KeyboardEvent, useCallback, useEffect, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 export default function Page() {
   const [session, setSession] = useState(false);
@@ -45,7 +47,7 @@ export default function Page() {
     const content = formData.get('content');
 
     const createPost = async () => {
-      const { data } = await supabase
+      const { data } = (await supabase
         .from('posts')
         .insert({
           title: title,
@@ -53,7 +55,16 @@ export default function Page() {
           tag: category?.toString().toLocaleLowerCase(),
         })
         .select()
-        .single();
+        .single()) as { data: Post };
+
+      const filename = `${data.id}-${uuidv4()}.json`;
+      const body = JSON.stringify(data);
+
+      await supabase.storage
+        .from('post-history-bucket')
+        .upload(filename, body, {
+          contentType: 'application/json',
+        });
 
       redirect(`/post/${data.id}`);
     };

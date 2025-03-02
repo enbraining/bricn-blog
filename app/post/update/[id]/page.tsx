@@ -8,6 +8,7 @@ import { Post } from '@/app/types/Post';
 import Form from 'next/form';
 import { redirect } from 'next/navigation';
 import React, { KeyboardEvent, useCallback, useEffect, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 export default function Page({ params }: { params: Promise<{ id: string }> }) {
   const [session, setSession] = useState(false);
@@ -57,14 +58,25 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
       const content = formData.get('content') as string;
 
       const updatePost = async () => {
-        await supabase
+        const { data } = (await supabase
           .from('posts')
           .update({
             title: title,
             tag: tag,
             content: content,
           })
-          .eq('id', id);
+          .eq('id', id)
+          .select('*')
+          .single()) as { data: Post };
+
+        const filename = `${data.id}-${uuidv4()}.json`;
+        const body = JSON.stringify(data);
+
+        await supabase.storage
+          .from('post-history-bucket')
+          .upload(filename, body, {
+            contentType: 'application/json',
+          });
       };
 
       updatePost();
