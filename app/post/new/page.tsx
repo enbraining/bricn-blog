@@ -43,7 +43,7 @@ export default function Page() {
 
   const onSubmit = useCallback((formData: FormData) => {
     const title = formData.get('title');
-    const category = formData.get('category');
+    const tag = formData.get('tag');
     const content = formData.get('content');
 
     const createPost = async () => {
@@ -52,7 +52,7 @@ export default function Page() {
         .insert({
           title: title,
           content: content,
-          tag: category?.toString().toLocaleLowerCase(),
+          tag: tag?.toString().toLocaleLowerCase(),
         })
         .select()
         .single()) as { data: Post };

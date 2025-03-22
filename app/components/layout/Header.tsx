@@ -11,7 +11,7 @@ export default function Header() {
   return (
     <header className="print:hidden sticky top-0 py-4 z-10 flex items-center w-full bg-white">
       <Link
-        className="sm:block hidden font-bold text-lg hover:text-bricn-300 duration-300 text-bricn-100 tracking-[0.7em]"
+        className="sm:block hidden font-bold text-lg hover:text-bricn-300 duration-300 text-bricn-100 tracking-[0.4em]"
         href={'/'}
       >
         BRICN
