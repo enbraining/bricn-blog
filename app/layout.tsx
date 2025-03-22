@@ -31,7 +31,7 @@ export default function RootLayout({
         <div className="xl:mx-[18rem] lg:mx-[10rem] mx-[1rem]">
           <div className="min-h-screen">
             <Header />
-            <div className="py-4">{children}</div>
+            <div>{children}</div>
           </div>
           <Footer />
         </div>
