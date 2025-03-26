@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { supabase } from '@/app/lib/supabase';
 import Link from 'next/link';
 import { TagCount } from '@/app/types/TagCount';
+import Image from 'next/image';
 
 export default function Page() {
   const [tagCounts, setTagCounts] = useState<TagCount[]>([]);
@@ -19,14 +20,17 @@ export default function Page() {
 
   return (
     <div>
-      <div className="mb-3 cursor-grab flex-wrap select-none gap-2 whitespace-nowrap">
+      <div className="mb-3 cursor-grab grid sm:grid-cols-5 grid-cols-3 flex-wrap select-none gap-2 whitespace-nowrap">
         {tagCounts.map((c) => (
-          <Link
-            href={`/?tag=${c.name}`}
-            className={`hover:text-bricn-100 text-bricn-300  px-2 py-1 rounded-sm`}
-            key={c.name}
-          >
-            <p className="uppercase">{`${c.name} (${c.count})`}</p>
+          <Link className="grid" href={`/post/?tag=${c.name}`} key={c.name}>
+            <Image
+              src={'/images/macos-folder-blue512x512@2x.svg'}
+              alt="folder"
+              className="mx-auto"
+              width={100}
+              height={100}
+            />
+            <p className="mx-auto">{`${c.name}`}</p>
           </Link>
         ))}
       </div>
