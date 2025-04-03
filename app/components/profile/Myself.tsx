@@ -1,23 +1,22 @@
 import { IconAt, IconSchool } from '@tabler/icons-react';
-import H2 from '../basic/H2';
 
 export default function Myself() {
   return (
-    <div>
-      <div className="mb-3 inline-block">
-        <H2>김동학</H2>
-        <p className="text-base text-bricn-300">Backend Engineer</p>
-      </div>
-      <ul className="text-base grid gap-y-1">
+    <div className="font-semibold">
+      <p className="mb-12 font-black text-4xl text-neutral-500">
+        아키텍쳐와 함께 하는 개발자 김동학입니다. 많은 패러다임과 서비스들을
+        접하면서 역량을 키우고 있습니다
+      </p>
+      <ul className="text-xl grid gap-y-1">
         <li className="flex gap-x-8 items-center">
-          <IconAt size={18} className="text-bricn-300" />
-          <p className="text-bricn-400">me@bricn.net</p>
+          <IconAt size={25} className="text-neutral-600" />
+          <p className="text-neutral-500">me@bricn.net</p>
         </li>
         <li className="flex gap-x-8">
-          <IconSchool size={18} className="text-bricn-300" />
-          <div>
-            <p className="text-bricn-400">광주소프트웨어마이스터고등학교</p>
-            <p className="text-bricn-400">스마트IoT과 재학</p>
+          <IconSchool size={25} className="text-neutral-600" />
+          <div className="text-neutral-500">
+            <p>광주소프트웨어마이스터고등학교</p>
+            <p>스마트IoT과 재학</p>
           </div>
         </li>
       </ul>

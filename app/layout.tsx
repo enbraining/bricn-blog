@@ -28,13 +28,11 @@ export default function RootLayout({
         {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS && (
           <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS} />
         )}
-        <div className="xl:mx-[18rem] lg:mx-[10rem] mx-[1rem]">
-          <div className="min-h-screen">
-            <Header />
-            <div>{children}</div>
-          </div>
-          <Footer />
+        <Header />
+        <div className="xl:mx-[18rem] lg:mx-[10rem] mx-[1rem] min-h-screen">
+          <div>{children}</div>
         </div>
+        <Footer />
       </body>
       {process.env.NEXT_PUBLIC_GOOGLE_PID && (
         <GoogleAds pid={process.env.NEXT_PUBLIC_GOOGLE_PID} />

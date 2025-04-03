@@ -1,28 +1,21 @@
 'use client';
 
-import { IconMenu } from '@tabler/icons-react';
-import { useState } from 'react';
-import HoverLink from '../basic/HoverLink';
+import { IconBlockquote, IconBriefcase, IconHome2 } from '@tabler/icons-react';
 import Link from 'next/link';
 
 export default function Header() {
-  const [isToggle, setToggle] = useState(false);
-
   return (
-    <header className="print:hidden sticky top-0 py-4 z-10 flex items-center w-full bg-white">
-      <Link
-        className="sm:block hidden font-bold text-lg hover:text-bricn-300 duration-300 text-bricn-100 tracking-[0.4em]"
-        href={'/'}
-      >
-        BRICN
-      </Link>
-      <div className="sm:ml-auto sm:w-min w-full ml-0 flex text-bricn-200 items-center gap-x-6">
-        <HoverLink href={'/'}>홈</HoverLink>
-        <HoverLink href={'/post'}>블로그</HoverLink>
-        <HoverLink href={'/portfolio'}>포트폴리오</HoverLink>
-        <div onClick={() => setToggle(!isToggle)} className="ml-auto">
-          <IconMenu size={24} strokeWidth={1.5} />
-        </div>
+    <header className="fixed py-4 flex items-center bottom-0 w-full">
+      <div className="grid grid-flow-col text-bricn-200 items-center gap-x-6 mx-auto px-12 py-3 rounded-full bg-neutral-100 bg-opacity-70">
+        <Link href={'/'}>
+          <IconHome2 />
+        </Link>
+        <Link href={'/post'}>
+          <IconBlockquote />
+        </Link>
+        <Link href={'/portfolio'}>
+          <IconBriefcase />
+        </Link>
       </div>
     </header>
   );
