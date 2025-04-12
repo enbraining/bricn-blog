@@ -146,7 +146,7 @@ export default function Page() {
             </div>
           </div>
         </div>
-        <div className="mb-3 md:grid md:col-span-2 hidden cursor-grab select-none w-full whitespace-nowrap h-fit sticky top-16">
+        <div className="mb-3 md:grid md:col-span-2 md:w-full hidden cursor-grab select-none whitespace-nowrap h-fit sticky top-16">
           <div className="mb-3">
             {tags.map((c) => (
               <div
