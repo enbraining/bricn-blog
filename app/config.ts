@@ -35,7 +35,7 @@ export const config = {
     {
       title: 'GAuth',
       description: '광주소프트웨어마이스터고 통합 소셜 로그인',
-      stacks: ['MariaDB', 'Spring Framework', 'AWS EC2', 'Redis', 'AWS EC2'],
+      stacks: ['MariaDB', 'Spring Framework', 'AWS EC2', 'Redis'],
     },
     {
       title: 'GOGO v2',
