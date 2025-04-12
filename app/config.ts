@@ -23,12 +23,19 @@ export const config = {
     {
       title: 'SMS',
       description: '광주소프트웨어마이스터고 포트폴리오 관리',
-      stacks: ['Hexagonal', 'Spring Framework', 'AWS ECR', 'AWS EC2', 'MySQL'],
+      stacks: [
+        'Hexagonal Architecture',
+        'Spring Framework',
+        'AWS ECR',
+        'AWS EC2',
+        'MySQL',
+        'AWS S3',
+      ],
     },
     {
       title: 'GAuth',
       description: '광주소프트웨어마이스터고 통합 소셜 로그인',
-      stacks: ['MariaDB', 'Spring Framework', 'AWS EC2', 'Redis'],
+      stacks: ['MariaDB', 'Spring Framework', 'AWS EC2', 'Redis', 'AWS EC2'],
     },
     {
       title: 'GOGO v2',
@@ -38,7 +45,7 @@ export const config = {
     {
       title: 'Prisism',
       description: '안정적인 1:1 랜덤채팅',
-      stacks: ['Next.js', 'Spring Framework', 'WebSocket', 'Docker'],
+      stacks: ['Next.js', 'Spring Framework', 'WebSocket', 'Docker', 'Ansible'],
     },
     {
       title: 'GIZ',
