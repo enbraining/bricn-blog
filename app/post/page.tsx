@@ -119,34 +119,32 @@ export default function Page() {
         />
       </Suspense>
       <div className="grid grid-cols-8 gap-x-6 mt-8">
-        <div className="md:col-span-6 col-span-8">
-          <div className="grid gap-y-2">
-            <input
-              type="text"
-              className="rounded-md bg-neutral-100 border border-neutral-300 py-2 px-7 focus:w-full duration-200 outline-none "
-              placeholder="검색하기"
-              name="search"
-              value={search ?? ''}
-              onChange={(e) => setSearch(e.target.value)}
-              onKeyDown={onSearch}
-            ></input>
-            <ul className="mx-auto w-full grid gap-y-2">
-              {posts.map((post) => (
-                <Thumbnail post={post} key={post.id} />
-              ))}
-            </ul>
-            <div
-              className="bg-neutral-100 border-neutral-300 border hover:bg-neutral-200 duration-300 py-2 flex rounded-md"
-              onClick={onMorePosts}
-            >
-              <div className="flex mx-auto gap-x-3 items-center">
-                <p>더보기</p>
-                <IconReload />
-              </div>
+        <div className="md:col-span-6 col-span-8 grid gap-y-2">
+          <input
+            type="text"
+            className="rounded-md bg-neutral-100 border border-neutral-300 py-2 px-7 outline-none"
+            placeholder="검색하기"
+            name="search"
+            value={search ?? ''}
+            onChange={(e) => setSearch(e.target.value)}
+            onKeyDown={onSearch}
+          ></input>
+          <ul className="grid gap-y-2">
+            {posts.map((post) => (
+              <Thumbnail post={post} key={post.id} />
+            ))}
+          </ul>
+          <div
+            className="bg-neutral-100 border-neutral-300 border hover:bg-neutral-200 duration-300 py-2 flex rounded-md"
+            onClick={onMorePosts}
+          >
+            <div className="flex mx-auto gap-x-3 items-center">
+              <p>더보기</p>
+              <IconReload />
             </div>
           </div>
         </div>
-        <div className="mb-3 md:grid md:col-span-2 md:w-full hidden cursor-grab select-none whitespace-nowrap h-fit sticky top-16">
+        <div className="mb-3 md:grid md:col-span-2 hidden cursor-grab select-none whitespace-nowrap h-fit sticky top-16">
           <div className="mb-3">
             {tags.map((c) => (
               <div
