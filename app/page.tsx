@@ -26,6 +26,71 @@ export default function Page() {
         />
       </section>
 
+      <section className="mt-20 w-min grid">
+        <div className="flex items-center gap-4">
+          <div className="shrink-0">
+            <div className="size-2 rounded-full bg-neutral-400" />
+          </div>
+          <div className="flex whitespace-nowrap leading-none gap-x-2">
+            <p className="text-neutral-700 font-semibold">2017 ~ 2022</p>
+            <p>가야금 연주</p>
+          </div>
+        </div>
+        <div className="ml-[0.215rem] border-l h-8 border-neutral-300" />
+
+        <div className="flex items-center gap-4">
+          <div className="shrink-0">
+            <div className="size-2 rounded-full bg-neutral-400" />
+          </div>
+          <div className="flex whitespace-nowrap leading-none gap-x-2">
+            <p className="text-neutral-700 font-semibold">2023</p>
+            <p>광주소프트웨어마이스터고등학교 입학</p>
+          </div>
+        </div>
+        <div className="ml-[0.215em] border-l h-8 border-neutral-300" />
+
+        <div className="flex items-center gap-4">
+          <div className="shrink-0">
+            <div className="size-2 rounded-full bg-neutral-400" />
+          </div>
+          <div className="flex whitespace-nowrap leading-none gap-x-2">
+            <p className="text-neutral-700 font-semibold">2024</p>
+            <p>전자산업기사 과정형평가 합격</p>
+          </div>
+        </div>
+        <div className="ml-[0.215em] border-l h-2 border-neutral-300" />
+        <div className="flex items-center gap-4">
+          <div className="shrink-0">
+            <div className="size-2 rounded-full bg-neutral-400" />
+          </div>
+          <div className="flex whitespace-nowrap leading-none gap-x-2">
+            <p className="text-neutral-700 font-semibold">2024</p>
+            <p>일렉기타 구매</p>
+          </div>
+        </div>
+        <div className="ml-[0.215em] border-l h-8 border-neutral-300" />
+
+        <div className="flex items-center gap-4">
+          <div className="shrink-0">
+            <div className="size-2 rounded-full bg-neutral-400" />
+          </div>
+          <div className="flex whitespace-nowrap leading-none gap-x-2">
+            <p className="text-neutral-700 font-semibold">2025</p>
+            <p>정보처리산업기사 예정</p>
+          </div>
+        </div>
+        <div className="ml-[0.215em] border-l h-16 border-neutral-300" />
+
+        <div className="flex items-center gap-4">
+          <div className="shrink-0">
+            <div className="size-2 rounded-full bg-neutral-400" />
+          </div>
+          <div className="flex whitespace-nowrap leading-none gap-x-2">
+            <p>다음엔 무엇이 있을까요?</p>
+          </div>
+        </div>
+      </section>
+
       <section className="mt-20">
         <div className="font-bold text-2xl">
           <p>
@@ -69,61 +134,6 @@ export default function Page() {
           <a className="text-blue-500">T/C</a> 등의 내장 기능을 이용해서, 원하는
           기능을 구현할 수 있습니다.
         </p>
-      </section>
-
-      <section className="mt-20 w-min grid gap-y-1">
-        <div className="flex items-center gap-4">
-          <div className="shrink-0">
-            <div className="size-2 rounded-full bg-neutral-400" />
-          </div>
-          <div className="flex whitespace-nowrap text-sm leading-none gap-x-2">
-            <p className="text-neutral-700 font-semibold">2017 ~ 2022</p>
-            <p>가야금 연주</p>
-          </div>
-        </div>
-        <div className="ml-[0.15rem] border-l h-8 border-neutral-300" />
-
-        <div className="flex items-center gap-4">
-          <div className="shrink-0">
-            <div className="size-2 rounded-full bg-neutral-400" />
-          </div>
-          <div className="flex whitespace-nowrap text-sm leading-none gap-x-2">
-            <p className="text-neutral-700 font-semibold">2023</p>
-            <p>광주소프트웨어마이스터고등학교 입학</p>
-          </div>
-        </div>
-        <div className="ml-[0.15rem] border-l h-8 border-neutral-300" />
-
-        <div className="flex items-center gap-4">
-          <div className="shrink-0">
-            <div className="size-2 rounded-full bg-neutral-400" />
-          </div>
-          <div className="flex whitespace-nowrap text-sm leading-none gap-x-2">
-            <p className="text-neutral-700 font-semibold">2024</p>
-            <p>전자산업기사 과정형평가 합격</p>
-          </div>
-        </div>
-        <div className="flex items-center gap-4">
-          <div className="shrink-0">
-            <div className="size-2 rounded-full bg-neutral-400" />
-          </div>
-          <div className="flex whitespace-nowrap text-sm leading-none gap-x-2">
-            <p className="text-neutral-700 font-semibold">2024</p>
-            <p>일렉기타 구매</p>
-          </div>
-        </div>
-        <div className="ml-[0.15rem] border-l h-8 border-neutral-300" />
-
-        <div className="flex items-center gap-4">
-          <div className="shrink-0">
-            <div className="size-2 rounded-full bg-neutral-400" />
-          </div>
-          <div className="flex whitespace-nowrap text-sm leading-none gap-x-2">
-            <p className="text-neutral-700 font-semibold">2025</p>
-            <p>정보처리산업기사 예정</p>
-          </div>
-        </div>
-        <div className="ml-[0.15rem] border-l h-16 border-neutral-300" />
       </section>
     </div>
   );
