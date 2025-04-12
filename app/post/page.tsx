@@ -122,7 +122,7 @@ export default function Page() {
         <div className="md:col-span-6 col-span-8 grid gap-y-2">
           <input
             type="text"
-            className="rounded-md bg-neutral-100 border border-neutral-300 py-2 px-7 outline-none"
+            className="rounded-md bg-neutral-100 border border-neutral-300 py-2 pl-7 outline-none"
             placeholder="검색하기"
             name="search"
             value={search ?? ''}
