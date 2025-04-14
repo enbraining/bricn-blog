@@ -7,6 +7,7 @@
 body {
   color: black;
   background: white;
+  overscroll-behavior: none;
 }
 
 ::-webkit-scrollbar-track {
