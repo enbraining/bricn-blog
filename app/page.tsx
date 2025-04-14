@@ -138,6 +138,32 @@ export default function Page() {
           <a className="text-blue-500">T/C</a> 등의 내장 기능을 이용해서, 원하는
           기능을 구현할 수 있습니다.
         </p>
+        <div className="mt-8 flex overflow-x-scroll gap-x-2">
+          <Image
+            src={'/images/oscilloscopse.png'}
+            alt="mc_fnd"
+            width={1600}
+            height={900}
+            priority={true}
+            className="w-3/4 rounded-sm aspect-video object-cover"
+          />
+          <Image
+            src={'/images/serial.png'}
+            alt="mc_fnd"
+            width={1600}
+            height={900}
+            priority={true}
+            className="w-3/4 rounded-sm aspect-video object-cover"
+          />
+          <Image
+            src={'/images/four_fnd.png'}
+            alt="mc_fnd"
+            width={1600}
+            height={900}
+            priority={true}
+            className="w-3/4 rounded-sm aspect-video object-cover"
+          />
+        </div>
       </section>
     </div>
   );
