@@ -5,7 +5,7 @@ import { config } from './config';
 
 export default function Page() {
   return (
-    <div>
+    <div className="mb-20">
       <section>
         <div className="font-bold text-2xl mt-20">
           <h1>
@@ -16,78 +16,82 @@ export default function Page() {
             시도해보기를 즐깁니다.
           </h1>
         </div>
-        <Image
-          src={'/images/mc_fnd.png'}
-          alt="mc_fnd"
-          width={1600}
-          height={900}
-          priority={true}
-          className="mt-8 w-fit rounded-sm aspect-video object-cover"
-        />
       </section>
 
-      <section className="mt-20 w-min grid">
-        <div className="flex items-center gap-4">
-          <div className="shrink-0">
-            <div className="size-2 rounded-full bg-neutral-400" />
+      <section className="mt-10 grid grid-flow-col items-stretch gap-x-16">
+        <div className="mt-3">
+          <div className="flex items-center gap-4">
+            <div className="shrink-0">
+              <div className="size-2 rounded-full bg-neutral-400" />
+            </div>
+            <div className="flex whitespace-nowrap leading-none gap-x-2">
+              <p className="text-neutral-700 font-semibold">2017 ~ 2022</p>
+              <p>가야금 연주</p>
+            </div>
           </div>
-          <div className="flex whitespace-nowrap leading-none gap-x-2">
-            <p className="text-neutral-700 font-semibold">2017 ~ 2022</p>
-            <p>가야금 연주</p>
-          </div>
-        </div>
-        <div className="ml-[0.215rem] border-l h-8 border-neutral-300" />
+          <div className="ml-[0.215rem] border-l h-8 border-neutral-300" />
 
-        <div className="flex items-center gap-4">
-          <div className="shrink-0">
-            <div className="size-2 rounded-full bg-neutral-400" />
+          <div className="flex items-center gap-4">
+            <div className="shrink-0">
+              <div className="size-2 rounded-full bg-neutral-400" />
+            </div>
+            <div className="flex whitespace-nowrap leading-none gap-x-2">
+              <p className="text-neutral-700 font-semibold">2023</p>
+              <p>광주소프트웨어마이스터고등학교 입학</p>
+            </div>
           </div>
-          <div className="flex whitespace-nowrap leading-none gap-x-2">
-            <p className="text-neutral-700 font-semibold">2023</p>
-            <p>광주소프트웨어마이스터고등학교 입학</p>
-          </div>
-        </div>
-        <div className="ml-[0.215em] border-l h-8 border-neutral-300" />
+          <div className="ml-[0.215em] border-l h-8 border-neutral-300" />
 
-        <div className="flex items-center gap-4">
-          <div className="shrink-0">
-            <div className="size-2 rounded-full bg-neutral-400" />
+          <div className="flex items-center gap-4">
+            <div className="shrink-0">
+              <div className="size-2 rounded-full bg-neutral-400" />
+            </div>
+            <div className="flex whitespace-nowrap leading-none gap-x-2">
+              <p className="text-neutral-700 font-semibold">2024</p>
+              <p>전자산업기사 과정형평가 합격</p>
+            </div>
           </div>
-          <div className="flex whitespace-nowrap leading-none gap-x-2">
-            <p className="text-neutral-700 font-semibold">2024</p>
-            <p>전자산업기사 과정형평가 합격</p>
+          <div className="ml-[0.215em] border-l h-2 border-neutral-300" />
+          <div className="flex items-center gap-4">
+            <div className="shrink-0">
+              <div className="size-2 rounded-full bg-neutral-400" />
+            </div>
+            <div className="flex whitespace-nowrap leading-none gap-x-2">
+              <p className="text-neutral-700 font-semibold">2024</p>
+              <p>일렉기타 구매</p>
+            </div>
           </div>
-        </div>
-        <div className="ml-[0.215em] border-l h-2 border-neutral-300" />
-        <div className="flex items-center gap-4">
-          <div className="shrink-0">
-            <div className="size-2 rounded-full bg-neutral-400" />
-          </div>
-          <div className="flex whitespace-nowrap leading-none gap-x-2">
-            <p className="text-neutral-700 font-semibold">2024</p>
-            <p>일렉기타 구매</p>
-          </div>
-        </div>
-        <div className="ml-[0.215em] border-l h-8 border-neutral-300" />
+          <div className="ml-[0.215em] border-l h-8 border-neutral-300" />
 
-        <div className="flex items-center gap-4">
-          <div className="shrink-0">
-            <div className="size-2 rounded-full bg-neutral-400" />
+          <div className="flex items-center gap-4">
+            <div className="shrink-0">
+              <div className="size-2 rounded-full bg-neutral-400" />
+            </div>
+            <div className="flex whitespace-nowrap leading-none gap-x-2">
+              <p className="text-neutral-700 font-semibold">2025</p>
+              <p>정보처리산업기사 예정</p>
+            </div>
           </div>
-          <div className="flex whitespace-nowrap leading-none gap-x-2">
-            <p className="text-neutral-700 font-semibold">2025</p>
-            <p>정보처리산업기사 예정</p>
+          <div className="ml-[0.215em] border-l h-16 border-neutral-300" />
+
+          <div className="flex items-center gap-4">
+            <div className="shrink-0">
+              <div className="size-2 rounded-full bg-neutral-400" />
+            </div>
+            <div className="flex whitespace-nowrap leading-none gap-x-2">
+              <p>다음엔 무엇이 있을까요?</p>
+            </div>
           </div>
         </div>
-        <div className="ml-[0.215em] border-l h-16 border-neutral-300" />
-
-        <div className="flex items-center gap-4">
-          <div className="shrink-0">
-            <div className="size-2 rounded-full bg-neutral-400" />
-          </div>
-          <div className="flex whitespace-nowrap leading-none gap-x-2">
-            <p>다음엔 무엇이 있을까요?</p>
-          </div>
+        <div>
+          <Image
+            src={'/images/mc_fnd.png'}
+            alt="mc_fnd"
+            width={1600}
+            height={900}
+            priority={true}
+            className="w-fit rounded-sm aspect-video object-cover"
+          />
         </div>
       </section>
 

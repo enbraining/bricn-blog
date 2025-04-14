@@ -9,11 +9,11 @@ export default function Header() {
   );
 
   return (
-    <header className="fixed py-4 flex items-center bottom-0 w-full">
-      <div className="items-center mx-auto text-center sm:w-1/2 w-5/6 grid grid-flow-col">
+    <header className="sticky top-0">
+      <div className="items-center mx-auto text-center grid grid-flow-col">
         <Link
           href={'/'}
-          className={`text-center border py-3 bg rounded-l-full ${page === 'HOME' ? 'bg-neutral-200' : 'bg-white'}`}
+          className={`text-center border py-3 bg rounded-es-2xl ${page === 'HOME' ? 'bg-neutral-200' : 'bg-white'}`}
           onClick={() => setPage('HOME')}
         >
           Home
@@ -27,7 +27,7 @@ export default function Header() {
         </Link>
         <Link
           href={'/portfolio'}
-          className={`text-center border rounded-r-full py-3 ${page === 'PORTFOLIO' ? 'bg-neutral-200' : 'bg-white'}`}
+          className={`text-center border rounded-ee-2xl py-3 ${page === 'PORTFOLIO' ? 'bg-neutral-200' : 'bg-white'}`}
           onClick={() => setPage('PORTFOLIO')}
         >
           Portfolio
