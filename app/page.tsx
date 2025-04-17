@@ -165,6 +165,30 @@ export default function Page() {
           />
         </div>
       </section>
+
+      <section className="mt-20 grid grid-cols-2 gap-2">
+        <div className="border rounded-md px-4 py-8 bg-neutral-100">
+          <p className="font-bold text-lg mb-1">항공우주공학</p>
+          <p className="text-neutral-700">
+            로켓을 좋아하고, 고체연료와 화약에 관심이 많습니다. 최근에는 KNSU
+            고체 연료를 만들어보려고 계획했었으나, 법적인 문제로 다른 방안을
+            고민해보고 있습니다.
+          </p>
+        </div>
+        <div className="border rounded-md px-4 py-8 bg-neutral-100">
+          <p className="font-bold text-lg mb-1">아마추어무선</p>
+          <p className="text-neutral-700">
+            모스부호, Q 부호 등의 무선 통신 지식과 무전기, 안테나 등의 기술에
+            관심이 있습니다. 나중에 전파전자통신기능사 공부할 예정입니다.
+          </p>
+        </div>
+        <div className="border rounded-md px-4 py-8 bg-neutral-100 ">
+          <p className="font-bold text-lg mb-1">군대 전술</p>
+          <p className="text-neutral-700">
+            다양한 현대 군대 전술과 무기 체계에 관심이 있습니다.
+          </p>
+        </div>
+      </section>
     </div>
   );
 }
