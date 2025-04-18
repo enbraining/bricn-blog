@@ -96,7 +96,7 @@ export default function Page() {
       </section>
 
       <section className="mt-20">
-        <div className="font-bold text-2xl">
+        <div className="font-semibold text-xl">
           <p>
             다양한 프레임워크, 애플리케이션의{' '}
             <a className="text-blue-500">구조를</a>
@@ -129,7 +129,7 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="font-bold text-2xl mt-20">
+      <section className="font-semibold text-xl mt-20">
         <p>
           AVR 계열의 <a className="text-blue-500">ATmega128</a>을 주로 사용하며,
         </p>
@@ -166,27 +166,40 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="mt-20 grid grid-cols-2 gap-2">
-        <div className="border rounded-md px-4 py-8 bg-neutral-100">
-          <p className="font-bold text-lg mb-1">항공우주공학</p>
-          <p className="text-neutral-700">
-            로켓을 좋아하고, 고체연료와 화약에 관심이 많습니다. 최근에는 KNSU
-            고체 연료를 만들어보려고 계획했었으나, 법적인 문제로 다른 방안을
-            고민해보고 있습니다.
-          </p>
+      <section className="mt-20 grid gap-y-4 gap-x-2">
+        <div className="flex items-baseline gap-x-5">
+          <p className="font-semibold text-lg text-neutral-600">2025</p>
+          <div className="font-medium text-neutral-700"></div>
         </div>
-        <div className="border rounded-md px-4 py-8 bg-neutral-100">
-          <p className="font-bold text-lg mb-1">아마추어무선</p>
-          <p className="text-neutral-700">
-            모스부호, Q 부호 등의 무선 통신 지식과 무전기, 안테나 등의 기술에
-            관심이 있습니다. 나중에 전파전자통신기능사 공부할 예정입니다.
-          </p>
+        <div className="flex items-baseline gap-x-5">
+          <p className="font-semibold text-lg text-neutral-600">2024</p>
+          <div className="font-medium text-neutral-700">
+            <p>Google I/O</p>
+            <p>흑백개발자 해커톤</p>
+            <p>마이스터고 4개교 해커톤</p>
+            <p>Link 데모데이</p>
+            <p>드로이드나이츠</p>
+          </div>
         </div>
-        <div className="border rounded-md px-4 py-8 bg-neutral-100 ">
-          <p className="font-bold text-lg mb-1">군대 전술</p>
-          <p className="text-neutral-700">
-            다양한 현대 군대 전술과 무기 체계에 관심이 있습니다.
-          </p>
+        <div className="flex items-baseline gap-x-5">
+          <p className="font-bold text-lg text-neutral-600">2023</p>
+          <div className="font-medium text-neutral-700">
+            <p>SK DevOcean</p>
+            <p>K-DEVCON</p>
+            <p>마이스터고 4개교 해커톤</p>
+            <p>Link 데모데이</p>
+            <p>드로이드나이츠</p>
+            <p>대한민국 소프트웨어대전</p>
+            <p>싱가포르 ATxSG</p>
+            <p>인포그랩 방문</p>
+            <p>인프랩 방문</p>
+          </div>
+        </div>
+        <div className="flex items-baseline gap-x-5">
+          <p className="font-semibold text-lg text-neutral-600">2022</p>
+          <div className="font-medium text-neutral-700">
+            <p>지스타</p>
+          </div>
         </div>
       </section>
     </div>
