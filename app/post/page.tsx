@@ -118,7 +118,7 @@ export default function Page() {
           setLoadingSearchParams={setLoadingSearchParams}
         />
       </Suspense>
-      <div className="grid grid-cols-8 gap-x-6 mt-8">
+      <div className="grid grid-cols-8 gap-x-6 mt-20">
         <div className="md:col-span-6 col-span-8 grid gap-y-2">
           <input
             type="text"
