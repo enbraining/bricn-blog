@@ -40,7 +40,7 @@ export default async function Page({
     .single();
 
   return (
-    <div>
+    <div className="mt-20">
       <ContentBio
         title={post?.title || ''}
         createdAt={formatYearMonthDay(post?.created_at)}
