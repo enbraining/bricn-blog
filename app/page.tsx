@@ -16,7 +16,7 @@ export default function Page() {
             시도해보기를 즐깁니다.
           </h1>
         </div>
-        <div className="flex mt-6 gap-x-2 overflow-x-auto">
+        <div className="flex mt-6 gap-x-2 overflow-x-auto whitespace-nowrap">
           {config.hobbies.map((hobby, index) => (
             <div
               key={index}
@@ -28,7 +28,7 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="mt-10 grid grid-flow-col items-stretch gap-x-16">
+      <section className="mt-10 grid grid-flow-col items-stretch gap-x-16 overflow-x-auto">
         <div className="mt-3">
           <div className="flex items-center gap-4">
             <div className="shrink-0">
