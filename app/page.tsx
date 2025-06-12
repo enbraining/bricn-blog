@@ -16,6 +16,26 @@ export default function Page() {
             시도해보기를 즐깁니다.
           </h1>
         </div>
+        <div className="flex mt-6 gap-x-2">
+          <div className="rounded-full px-4 py-1 text-sm bg-neutral-100 border">
+            <p>가야금 마스터</p>
+          </div>
+          <div className="rounded-full px-4 py-1 text-sm bg-neutral-100 border">
+            <p>모스부호 25WPM</p>
+          </div>
+          <div className="rounded-full px-4 py-1 text-sm bg-neutral-100 border">
+            <p>일렉기타 초보</p>
+          </div>
+          <div className="rounded-full px-4 py-1 text-sm bg-neutral-100 border">
+            <p>로켓 고체연료</p>
+          </div>
+          <div className="rounded-full px-4 py-1 text-sm bg-neutral-100 border">
+            <p>초보 디자이너</p>
+          </div>
+          <div className="rounded-full px-4 py-1 text-sm bg-neutral-100 border">
+            <p>풀스택 개발자</p>
+          </div>
+        </div>
       </section>
 
       <section className="mt-10 grid grid-flow-col items-stretch gap-x-16">
@@ -89,8 +109,8 @@ export default function Page() {
             alt="mc_fnd"
             width={1600}
             height={900}
-            priority={true}
             className="w-fit rounded-sm aspect-video object-cover"
+            priority
           />
         </div>
       </section>
@@ -144,7 +164,6 @@ export default function Page() {
             alt="mc_fnd"
             width={1600}
             height={900}
-            priority={true}
             className="w-3/4 rounded-sm aspect-video object-cover"
           />
           <Image
@@ -152,7 +171,6 @@ export default function Page() {
             alt="mc_fnd"
             width={1600}
             height={900}
-            priority={true}
             className="w-3/4 rounded-sm aspect-video object-cover"
           />
           <Image
@@ -160,7 +178,6 @@ export default function Page() {
             alt="mc_fnd"
             width={1600}
             height={900}
-            priority={true}
             className="w-3/4 rounded-sm aspect-video object-cover"
           />
         </div>
@@ -186,9 +203,6 @@ export default function Page() {
           <div className="font-medium text-neutral-700">
             <p>SK DevOcean</p>
             <p>K-DEVCON</p>
-            <p>마이스터고 4개교 해커톤</p>
-            <p>Link 데모데이</p>
-            <p>드로이드나이츠</p>
             <p>대한민국 소프트웨어대전</p>
             <p>싱가포르 ATxSG</p>
             <p>인포그랩 방문</p>
