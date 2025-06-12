@@ -14,6 +14,15 @@ export const config = {
     'C++',
     'Rust',
   ],
+  hobbies: [
+    '가야금 마스터',
+    '모스부호 25WPM',
+    '일렉기타 초보',
+    '로켓 고체연료',
+    '초보 디자이너',
+    '풀스택 개발자',
+    '라디오헤드 음악광',
+  ],
   projects: [
     {
       title: 'GOMS',

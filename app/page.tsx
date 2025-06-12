@@ -16,25 +16,15 @@ export default function Page() {
             시도해보기를 즐깁니다.
           </h1>
         </div>
-        <div className="flex mt-6 gap-x-2">
-          <div className="rounded-full px-4 py-1 text-sm bg-neutral-100 border">
-            <p>가야금 마스터</p>
-          </div>
-          <div className="rounded-full px-4 py-1 text-sm bg-neutral-100 border">
-            <p>모스부호 25WPM</p>
-          </div>
-          <div className="rounded-full px-4 py-1 text-sm bg-neutral-100 border">
-            <p>일렉기타 초보</p>
-          </div>
-          <div className="rounded-full px-4 py-1 text-sm bg-neutral-100 border">
-            <p>로켓 고체연료</p>
-          </div>
-          <div className="rounded-full px-4 py-1 text-sm bg-neutral-100 border">
-            <p>초보 디자이너</p>
-          </div>
-          <div className="rounded-full px-4 py-1 text-sm bg-neutral-100 border">
-            <p>풀스택 개발자</p>
-          </div>
+        <div className="flex mt-6 gap-x-2 overflow-x-auto">
+          {config.hobbies.map((hobby, index) => (
+            <div
+              key={index}
+              className="rounded-full px-4 py-1 text-sm bg-neutral-100 border"
+            >
+              <p>{hobby}</p>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -72,15 +62,6 @@ export default function Page() {
             </div>
           </div>
           <div className="ml-[0.215em] border-l h-2 border-neutral-300" />
-          <div className="flex items-center gap-4">
-            <div className="shrink-0">
-              <div className="size-2 rounded-full bg-neutral-400" />
-            </div>
-            <div className="flex whitespace-nowrap leading-none gap-x-2">
-              <p className="text-neutral-700 font-semibold">2024</p>
-              <p>일렉기타 구매</p>
-            </div>
-          </div>
           <div className="ml-[0.215em] border-l h-8 border-neutral-300" />
 
           <div className="flex items-center gap-4">
