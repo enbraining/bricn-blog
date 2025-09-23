@@ -29,9 +29,6 @@ importers:
       astro-og-canvas:
         specifier: ^0.7.0
         version: 0.7.0(astro@5.13.10(@netlify/blobs@10.0.10)(@types/node@24.5.2)(jiti@2.6.0)(rollup@4.52.0)(tsx@4.20.5)(typescript@5.9.2)(yaml@2.8.1))
-      canvaskit-wasm:
-        specifier: ^0.40.0
-        version: 0.40.0
       feed:
         specifier: ^5.1.0
         version: 5.1.0
@@ -84,6 +81,9 @@ importers:
       '@typescript-eslint/parser':
         specifier: ^8.44.0
         version: 8.44.0(eslint@9.36.0(jiti@2.6.0))(typescript@5.9.2)
+      canvaskit-wasm:
+        specifier: ^0.40.0
+        version: 0.40.0
       eslint:
         specifier: ^9.36.0
         version: 9.36.0(jiti@2.6.0)
